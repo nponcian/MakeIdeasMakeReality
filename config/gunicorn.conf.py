@@ -24,7 +24,7 @@ daemon = False
 
 # The Access log file to write to.
 # '-' means log to stdout.
-# Logs details of each HTTP Request made.
+# Logs details of each HTTP Request made. The path is relative to where gunicorn will be invoked.
 accesslog = 'log/accesslog.log'
 
 # The access log format.
