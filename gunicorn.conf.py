@@ -1,7 +1,7 @@
 import multiprocessing
 
 # The socket to bind.
-# host IP address and the corresponding port to listen to
+# These are the host IP addresses and their corresponding ports to listen to.
 bind = [
     "0.0.0.0:8000",
 ]
@@ -16,6 +16,10 @@ raw_env = [
 workers = multiprocessing.cpu_count() * 2 + 1
 
 # Detaches the server from the controlling terminal and enters the background.
+# Make sure that when using either of these service monitors you do not enable the Gunicorn’s daemon
+# mode. These monitors expect that the process they launch will be the process they need to monitor.
+# Daemonizing will fork-exec which creates an unmonitored process and generally just confuses the
+# monitor services.
 daemon = False
 
 # The Access log file to write to.
@@ -38,8 +42,31 @@ errorlog = 'log/errorlog.log'
 #     warning
 #     error
 #     critical
-loglevel = 'debug'
+loglevel = 'info'
 
 # Redirect stdout/stderr to specified file in errorlog.
 # This catches prints made within Python code.
 capture_output = True
+
+# It is recommended to pass protocol information to Gunicorn. Many web frameworks use this information
+# to generate URLs. Without this information, the application may mistakenly generate ‘http’ URLs in
+# ‘https’ responses, leading to mixed content warnings or broken applications. To configure Nginx to
+# pass an appropriate header, add a proxy_set_header directive to your location block:
+#     ...
+#     proxy_set_header X-Forwarded-Proto $scheme;
+#     ...
+# If you are running Nginx on a different host than Gunicorn you need to tell Gunicorn to trust the
+# X-Forwarded-* headers sent by Nginx. By default, Gunicorn will only trust these headers if the
+# connection comes from localhost. This is to prevent a malicious client from forging these headers:
+#     $ gunicorn -w 3 --forwarded-allow-ips="10.170.3.217,10.170.3.220" test:app
+# Front-end’s IPs from which allowed to handle set secure headers. (comma separate).
+# Set to * to disable checking of Front-end IPs (useful for setups where you don’t know in advance the
+# IP address of Front-end, but you still trust the environment). By default, the value of the
+# FORWARDED_ALLOW_IPS environment variable. When the Gunicorn host is completely firewalled from the
+# external network such that all connections come from a trusted proxy (e.g. Heroku) this value can be
+# set to ‘*’. Using this value is potentially dangerous if connections to Gunicorn may come from
+# untrusted proxies or directly from clients since the application may be tricked into serving SSL-only
+# content over an insecure connection.
+# If it is not defined, the default is "127.0.0.1".
+# For multiple IPs, separate by comma such as "10.170.3.217,10.170.3.220"
+forwarded_allow_ips = "127.0.0.1"
