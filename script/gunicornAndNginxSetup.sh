@@ -18,7 +18,8 @@ PROJECT_PATH=$(readlink -f "${BASH_SOURCE}" | xargs dirname | xargs dirname)
 CONFIG_PATH="${PROJECT_PATH}/config"
 
 GUNICORN_SERVICE="${CONFIG_PATH}/gunicorn.service"
-GUNICORN_SOCKET="${CONFIG_PATH}/gunicorn.socket"
+GUNICORN_SOCKET_NAME="gunicorn.socket"
+GUNICORN_SOCKET="${CONFIG_PATH}/${GUNICORN_SOCKET_NAME}"
 
 NGINX_CONF_NAME="makeIdeasMakeRealityNginx.conf"
 NGINX_CONF="${CONFIG_PATH}/${NGINX_CONF_NAME}"
@@ -28,18 +29,20 @@ SITES_AVAILABLE_PATH="/etc/nginx/sites-available/"
 SITES_ENABLED_PATH="/etc/nginx/sites-enabled/"
 DEFAULT_AVAILABLE_NGINX_CONF="/etc/nginx/sites-available/default"
 DEFAULT_ENABLED_NGINX_CONF="/etc/nginx/sites-enabled/default"
+NGINX="nginx"
+NGINX_SERVICE="${NGINX}.service"
 
 ORIGINAL_PORT="8000"
 UPDATED_PORT="80"
 
 sudo ln -s ${GUNICORN_SERVICE} ${SYSTEMD_PATH}
 sudo ln -s ${GUNICORN_SOCKET} ${SYSTEMD_PATH}
-sudo systemctl enable --now gunicorn.socket
+sudo systemctl enable --now ${GUNICORN_SOCKET_NAME}
 
 sudo ln -s ${NGINX_CONF} ${SITES_AVAILABLE_PATH}
 sudo ln -s ${SITES_AVAILABLE_PATH}/${NGINX_CONF_NAME} ${SITES_ENABLED_PATH}
-sudo systemctl enable nginx.service
-sudo systemctl start nginx
+sudo systemctl enable ${NGINX_SERVICE}
+sudo systemctl start ${NGINX}
 
 if [[ $# -eq 1 && "${1}" == "--changedefault" ]]; then
     sed -i 's/listen '${ORIGINAL_PORT}';/listen '${UPDATED_PORT}';/' ${NGINX_CONF}
@@ -49,4 +52,4 @@ else
     sudo ln -s ${DEFAULT_AVAILABLE_NGINX_CONF} ${DEFAULT_ENABLED_NGINX_CONF}
 fi
 
-sudo systemctl restart nginx
+sudo systemctl restart ${NGINX}
