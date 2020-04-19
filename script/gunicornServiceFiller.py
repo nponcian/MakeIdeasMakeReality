@@ -3,7 +3,7 @@
 import fileinput
 
 ENVIRONMENT_VARIABLES_FILE = "config/environmentVariables"
-ENVIRONMENT_VARIABLES_PREFIX = "MIMR"
+ENVIRONMENT_VARIABLES_PREFIX = "MIMR_GUNICORN_"
 ENVIRONMENT_VARIABLES_SEP = "="
 
 GUNICORN_SERVICE_FILE = "config/gunicorn.service"
@@ -26,9 +26,8 @@ with open(ENVIRONMENT_VARIABLES_FILE) as envVariablesFile:
         envVariablesDict[key] = value
 
 for line in fileinput.input(GUNICORN_SERVICE_FILE, inplace = True):
-    if shouldIgnoreLine(line):
-        print(line, end = "")
-    else:
+    if not shouldIgnoreLine(line):
         for key, value in envVariablesDict.items():
             line = line.replace(key, value)
-        print(line, end = "")
+
+    print(line, end = "")

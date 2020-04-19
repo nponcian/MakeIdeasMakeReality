@@ -1,3 +1,10 @@
 MIMR_GUNICORN_ENV=/path/to/makeIdeasMakeReality/config/environmentVariables
 MIMR_GUNICORN_PROJECTDIR=/path/to/makeIdeasMakeReality
 MIMR_GUNICORN_USER=user
+
+MIMR_SETTINGS_SECRET_KEY='secret_key_here'
+MIMR_SETTINGS_DB_NAME=databaseName
+MIMR_SETTINGS_DB_USER=databaseUser
+MIMR_SETTINGS_DB_PASSWORD=databasePassword
+MIMR_SETTINGS_DB_HOST=databaseHostIP
+MIMR_SETTINGS_DB_PORT=databasePort

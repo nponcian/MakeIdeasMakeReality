@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = os.environ['MIMR_SETTINGS_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'makeIdeasMakeReality.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'makeIdeasMakeRealityDb',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.environ['MIMR_SETTINGS_DB_NAME'],
+        'USER': os.environ['MIMR_SETTINGS_DB_USER'],
+        'PASSWORD': os.environ['MIMR_SETTINGS_DB_PASSWORD'],
+        'HOST': os.environ['MIMR_SETTINGS_DB_HOST'],
+        'PORT': os.environ['MIMR_SETTINGS_DB_PORT'],
     }
 }
 
