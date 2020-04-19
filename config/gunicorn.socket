@@ -1,0 +1,41 @@
+# Symlink this file to /etc/systemd/system/gunicorn.socket
+
+# A tool that is starting to be common on linux systems is Systemd. It is a system services manager
+# that allows for strict process management, resources and permissions control.
+
+# Below are configurations files and instructions for using systemd to create a unix socket for
+# incoming Gunicorn requests. Systemd will listen on this socket and start gunicorn automatically in
+# response to traffic. Later in this section are instructions for configuring Nginx to forward web
+# traffic to the newly created unix socket
+
+# Next enable and start the socket (it will autostart at boot too):
+#     systemctl enable --now gunicorn.socket
+
+# In the rare case that you need to find out the service main pid, you can use
+#     systemctl show --value -p MainPID gunicorn.service
+# or simply one in the list of (normally the first)
+#     ps aux | grep gunicorn
+# but if you only want to send a signal an even better option is
+#     systemctl kill -s HUP gunicorn.service.
+
+# www-data is the default nginx user in debian, other distriburions use different users (for
+# example: http or nginx).
+
+# You must now configure your web proxy to send traffic to the new Gunicorn socket. Edit your
+# nginx.conf to include the following:
+#     proxy_pass http://unix:/run/gunicorn.sock;
+
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+# Our service won't need permissions for the socket, since it
+# inherits the file descriptor by socket activation
+# only the nginx daemon will need access to the socket
+User=www-data
+# Optionally restrict the socket permissions even more.
+# Mode=600
+
+[Install]
+WantedBy=sockets.target
