@@ -7,7 +7,8 @@
 # on the environment variables which are only set when using Gunicorn server.
 
 # USAGE
-#     cd path/containing/config/directory/ && source path/to/this/file
+#     cd /path/to/makeIdeasMakeReality/
+#     source script/environmentVariablesExporter.sh
 # This should be sourced <source file> from target shell instance. Running this as a child shell
 # such as commands <./file> or <bash file> would not have any effects since the exported variables
 # would not reflect on the calling (parent) shell.

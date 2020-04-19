@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
+# PURPOSE
+# Fill-up the config/gunicorn.service with the missing values from the available variables set within
+# the file config/environmentVariables.
+
+# USAGE
+#     cd /path/to/makeIdeasMakeReality/
+#     python3 script/gunicornServiceFiller.py
+
 import fileinput
 
 ENVIRONMENT_VARIABLES_FILE = "config/environmentVariables"
