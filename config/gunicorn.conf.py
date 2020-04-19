@@ -11,7 +11,9 @@ bind = [
 
 # Set environment variable (key=value).
 # Pass variables to the execution environment.
+# To put everything in 1 place, all environment variables are in EnvironmentFile of gunicorn.service file
 raw_env = [
+    # "SOME_VAR=SOME_VALUE",
 ]
 
 # The number of worker processes for handling requests.

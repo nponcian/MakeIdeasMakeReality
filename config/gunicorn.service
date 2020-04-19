@@ -1,4 +1,9 @@
+# Run script/gunicornServiceFiller.py to fill up values from the defined environment variables
 # Symlink this file to /etc/systemd/system/gunicorn.service
+
+# Since it is not currently possible to incorporate environment variables for assignment to the
+# fields here, a workaround that I have made is to run the script which changes all instances
+# of "MIMR" substring to its corresponding value in the config/environmentVariables.
 
 [Unit]
 Description=gunicorn daemon
@@ -6,16 +11,20 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
+EnvironmentFile=MIMR_GUNICORN_ENV
+
 Type=notify
 # the specific user that our service will run as
-User=SET_USER
-Group=SET_GROUP
+User=MIMR_GUNICORN_USER
+Group=www-data
 # another option for an even more restricted service is
 # DynamicUser=yes
 # see http://0pointer.net/blog/dynamic-users-with-systemd.html
 RuntimeDirectory=gunicorn
-WorkingDirectory=/set/path/to/makeIdeasMakeReality
-ExecStart=/set/path/to/makeIdeasMakeReality/venv/bin/gunicorn --config /set/path/to/makeIdeasMakeReality/config/gunicorn.conf.py makeIdeasMakeReality.wsgi
+WorkingDirectory=MIMR_GUNICORN_PROJECTDIR
+# /bin/bash is used to be able to use environment variables. Thus the workaround script does not
+# need to touch this part.
+ExecStart=/bin/bash -c '${MIMR_GUNICORN_PROJECTDIR}/venv/bin/gunicorn --config ${MIMR_GUNICORN_PROJECTDIR}/config/gunicorn.conf.py makeIdeasMakeReality.wsgi'
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
