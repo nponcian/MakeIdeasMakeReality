@@ -1,0 +1,3 @@
+MIMR_GUNICORN_ENV=/path/to/makeIdeasMakeReality/config/environmentVariables
+MIMR_GUNICORN_PROJECTDIR=/path/to/makeIdeasMakeReality
+MIMR_GUNICORN_USER=user
