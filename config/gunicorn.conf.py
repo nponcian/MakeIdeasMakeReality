@@ -1,9 +1,12 @@
 import multiprocessing
 
-# The socket to bind.
-# These are the host IP addresses and their corresponding ports to listen to.
+# The socket to bind. A string of the form: HOST, HOST:PORT, unix:PATH, fd://FD
+# If gunicorn is run using systemd, take note that whatever is set here will be overriden by whatever
+# is set in the ListenStream within the file gunicorn.socket.
 bind = [
-    "0.0.0.0:8000",
+    # 'unix:/run/gunicorn.sock',
+    # '0.0.0.0:8000',
+    # '0.0.0.0:8001',
 ]
 
 # Set environment variable (key=value).
@@ -16,10 +19,11 @@ raw_env = [
 workers = multiprocessing.cpu_count() * 2 + 1
 
 # Detaches the server from the controlling terminal and enters the background.
-# Make sure that when using either of these service monitors you do not enable the Gunicorn’s daemon
-# mode. These monitors expect that the process they launch will be the process they need to monitor.
-# Daemonizing will fork-exec which creates an unmonitored process and generally just confuses the
-# monitor services.
+# Similar effect with nohup or screen.
+# Make sure that when using either of these service monitors (such as systemd) you do not enable the
+# Gunicorn’s daemon mode. These monitors expect that the process they launch will be the process they
+# need to monitor. Daemonizing will fork-exec which creates an unmonitored process and generally just
+# confuses the monitor services.
 daemon = False
 
 # The Access log file to write to.
@@ -69,4 +73,4 @@ capture_output = True
 # content over an insecure connection.
 # If it is not defined, the default is "127.0.0.1".
 # For multiple IPs, separate by comma such as "10.170.3.217,10.170.3.220"
-forwarded_allow_ips = "127.0.0.1"
+forwarded_allow_ips = '127.0.0.1'

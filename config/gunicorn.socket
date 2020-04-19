@@ -29,7 +29,14 @@
 Description=gunicorn socket
 
 [Socket]
+# These options may be specified more than once, in which case incoming traffic on any of the sockets
+# will trigger service activation, and all listed sockets will be passed to the service, regardless of
+# whether there is incoming traffic on them or not.
+# More than 1 ListenStream could be active at the same time. Here I have disabled listening to
+# port 8002 to avoid direct access to Gunicorn server as all requests should go to Nginx first.
 ListenStream=/run/gunicorn.sock
+# ListenStream=0.0.0.0:8002
+
 # Our service won't need permissions for the socket, since it
 # inherits the file descriptor by socket activation
 # only the nginx daemon will need access to the socket
