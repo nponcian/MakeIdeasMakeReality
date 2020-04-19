@@ -29,5 +29,4 @@ for line in fileinput.input(GUNICORN_SERVICE_FILE, inplace = True):
     if not shouldIgnoreLine(line):
         for key, value in envVariablesDict.items():
             line = line.replace(key, value)
-
     print(line, end = "")
