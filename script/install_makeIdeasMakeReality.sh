@@ -10,13 +10,23 @@ PYTHON3="python3"
 PYTHON3_LOC=$(command -v ${PYTHON3})
 PYTHON3_PIP="python3-pip"
 PYTHON3_VENV="python3-venv"
-PIP3="pip3"
 PIP="pip"
+PIP3="pip3"
 PIP3_LOC=$(command -v ${PIP3})
+PIP3_REQUIREMENTS="config/pip3Requirements.txt"
 VENV="venv"
 VENV_ACTIVATE="${VENV}/bin/activate"
 
-PIP3_REQUIREMENTS="config/pip3Requirements.txt"
+POSTGRESQL="postgresql"
+POSTGRESQL_CONTRIB="postgresql-contrib"
+LIBPQ_DEV="libpq-dev"
+PSQL="psql"
+PSQL_LOC=$(command -v ${PSQL})
+
+NGINX="nginx"
+NGINX_LOC=$(command -v ${NGINX})
+
+BASH="bash"
 
 func_printAndExecuteCommand()
 {
@@ -40,7 +50,7 @@ func_acceptInput()
     read ${1}
 }
 
-func_upgradeApt()
+func_setupApt()
 {
     func_acceptInput SHOULD_UPGRADE "Upgrade package manager? (advisable if using new machine) [y/n]"
     if [[ "${SHOULD_UPGRADE}" == "y" || "${SHOULD_UPGRADE}" == "Y" ]]; then
@@ -69,7 +79,9 @@ func_setupGit()
     func_acceptInput PROJECT_DIR "Enter target path to ${APP_NAME} (e.g. ../../Documents)"
     eval PROJECT_DIR="${PROJECT_DIR}" # Substitutes special character for home "~" to absolute path
 
-    func_printAndExecuteCommand "cd ${PROJECT_DIR}"
+    if [[ ! -z "${PROJECT_DIR}" ]]; then
+        func_printAndExecuteCommand "cd ${PROJECT_DIR}"
+    fi
 
     if [[ ! -d "${APP_NAME}" ]]; then
         func_printAndExecuteCommand "git clone ${GIT_REPO}"
@@ -90,10 +102,28 @@ func_setupPython()
     fi
 
     func_printAndExecuteCommand "source ${VENV_ACTIVATE}"
-
     func_printAndExecuteCommand "${PYTHON3} -m ${PIP} install -r ${PIP3_REQUIREMENTS}"
 }
 
-func_upgradeApt
+func_setupPostgreSql()
+{
+    func_aptInstall "${PSQL_LOC}" "${POSTGRESQL} ${POSTGRESQL_CONTRIB} ${LIBPQ_DEV}"
+}
+
+func_setupNginx()
+{
+    func_aptInstall "${NGINX_LOC}" "${NGINX}"
+}
+
+func_setupApt
 func_setupGit
 func_setupPython
+func_setupPostgreSql
+func_setupNginx
+
+# ${PYTHON3} gunicornServiceFiller.py
+# ${BASH} gunicornAndNginxSetup.sh
+echo
+echo 'For local development, you have to invoke:'
+echo "    source `readlink -f script/environmentVariablesExporter.sh`"
+# or echo "    source $(readlink -f script/environmentVariablesExporter.sh)"
