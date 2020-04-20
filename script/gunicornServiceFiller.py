@@ -27,6 +27,7 @@ def shouldIgnoreLine(line):
 
 envVariablesDict = dict()
 
+changedPairs = list()
 with open(ENVIRONMENT_VARIABLES_FILE) as envVariablesFile:
     for line in envVariablesFile.readlines():
         line = line.strip()
@@ -34,7 +35,17 @@ with open(ENVIRONMENT_VARIABLES_FILE) as envVariablesFile:
         envVariablesDict[key] = value
 
 for line in fileinput.input(GUNICORN_SERVICE_FILE, inplace = True):
+    originalLine = line
     if not shouldIgnoreLine(line):
         for key, value in envVariablesDict.items():
             line = line.replace(key, value)
+    if line != originalLine:
+        pair = (originalLine, line)
+        changedPairs.append(pair)
     print(line, end = "")
+
+print("Count of updated lines in", GUNICORN_SERVICE_FILE, ":", len(changedPairs))
+for ctr, pair in enumerate(changedPairs, 1):
+    print(ctr, end = ".\n")
+    print("\tFrom:", pair[0].strip())
+    print("\tTo:  ", pair[1].strip())
