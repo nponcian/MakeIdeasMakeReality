@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# PURPOSE
+# Automate the process of installations and deployment of this django project. With this script, you
+# don't have to worry about what software would be needed, what are the configuration files that are
+# needed to be set, what are the information needed by the django app to work, and most importantly
+# you don't have to worry about missing any step with the deployment of the app. All you need is a
+# computer running GNU/Linux-Ubuntu (other distros might need tweaks with the way these scripts are
+# written), an internet connection, a copy of this script (just this script alone is enough, not
+# necessarily the whole project), and some snacks to eat while watching the beautiful logs scrolling
+# through the screen, with you consciously thinking that you don't have to think about anything!
+
+# USAGE
+#     bash /absolute/path/from/literally/anywhere/to/script/install_makeIdeasMakeReality.sh
+#     or
+#     bash ../relative/path/from/literally/anywhere/to/script/install_makeIdeasMakeReality.sh
+
 APP_NAME="makeIdeasMakeReality"
 
 GIT="git"
@@ -138,9 +153,18 @@ func_additionalNotes()
     echo "ADDITIONAL NOTES"
     echo "================"
     echo
-    echo "Setup PostgreSQL roles and database."
+    echo "PostgreSQL and its necessary dependencies that would be used to run with the project are"
+    echo "already installed. The django settings to connect to the database are already functional."
+    echo "But it should be noted that this script hasn't touched any database, and there are no"
+    echo "plans to touch it in anyway due to its delicate nature. Thus, it is required to setup"
+    echo "PostgreSQL roles and the database to be used for the project separately. The details"
+    echo "should be the same with those configured in the environmentVariables file that was used"
+    echo "to configure this project."
     echo
-    echo 'For local development, you have to invoke:'
+    echo "For local development and deployment where you would not use Gunicorn as the WSGI server,"
+    echo "lets say you would be using the default Django provided WSGI server (the one used when you"
+    echo "use <python3 manage.py runserver>), then you have to set environment variables for the"
+    echo "configurations in settings.py by invoking:"
     echo "    source `readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER}`"
     # or # echo "    source $(readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER})"
 }
