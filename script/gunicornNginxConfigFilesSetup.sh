@@ -8,10 +8,6 @@
 #     bash /absolute/path/from/literally/anywhere/to/script/gunicornNginxConfigFilesSetup.sh
 #     or
 #     bash ../relative/path/from/literally/anywhere/to/script/gunicornNginxConfigFilesSetup.sh
-# Flags
-#     --changedefault
-#         Replace the Nginx listener to the default port 80 to this web application.
-#         Without this flag, ports used are reset to the original values.
 
 PROJECT_PATH=$(readlink -f "${BASH_SOURCE}" | xargs dirname | xargs dirname)
 CONFIG_PATH="${PROJECT_PATH}/config"
@@ -38,10 +34,17 @@ sudo ln -s ${MIMR_NGINX_SITES_AVAILABLE_PATH}/${NGINX_CONF_NAME} ${MIMR_NGINX_SI
 sudo systemctl enable ${MIMR_NGINX_SERVICE}
 sudo systemctl start ${MIMR_NGINX}
 
-if [[ $# -eq 1 && "${1}" == "--changedefault" ]]; then
+echo "Use port ${UPDATED_PORT}? [y/n]"
+echo -n "---> Input: "
+read shouldUseUpdatedPort
+
+# if [[ $# -eq 1 && "${1}" == "--changedefault" ]]; then
+if [[ "${shouldUseUpdatedPort}" == "y" || "${shouldUseUpdatedPort}" == "Y" ]]; then
+    echo "Port ${UPDATED_PORT} would be used"
     sed -i 's/listen '${ORIGINAL_PORT}';/listen '${UPDATED_PORT}';/' ${NGINX_CONF}
     sudo rm -rf ${MIMR_NGINX_ENABLED_DEFAULT_CONF}
 else
+    echo "Port ${ORIGINAL_PORT} would be used"
     sed -i 's/listen '${UPDATED_PORT}';/listen '${ORIGINAL_PORT}';/' ${NGINX_CONF}
     sudo ln -s ${MIMR_NGINX_AVAILABLE_DEFAULT_CONF} ${MIMR_NGINX_ENABLED_DEFAULT_CONF}
 fi

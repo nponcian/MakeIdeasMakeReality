@@ -119,33 +119,37 @@ func_setupNginx()
     func_aptInstall "${NGINX_LOC}" "${NGINX}"
 }
 
+func_setupScripts()
+{
+    func_printAndExecuteCommand "chmod u+x ${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}\
+                                            ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}\
+                                            ${SCRIPT_GUNICORN_SERVICE_FILLER}\
+                                            ${SCRIPT_INSTALL_MAKEIDEASMAKEREALITY}"
+
+    func_printAndExecuteCommand "./${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}"
+    func_printAndExecuteCommand "./${SCRIPT_GUNICORN_SERVICE_FILLER}"
+    func_printAndExecuteCommand "./${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}"
+}
+
+func_additionalNotes()
+{
+    echo
+    echo "================"
+    echo "ADDITIONAL NOTES"
+    echo "================"
+    echo
+    echo "Setup PostgreSQL roles and database."
+    echo
+    echo 'For local development, you have to invoke:'
+    echo "    source `readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER}`"
+    # or # echo "    source $(readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER})"
+}
+
 func_setupApt
 func_setupGit
 func_setupPython
 func_setupPostgreSql
 func_setupNginx
+func_setupScripts
 
-SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER="script/environmentVariablesExporter.sh"
-SCRIPT_ENVIRONMENT_VARIABLES_FILLER="script/environmentVariablesFiller.py"
-SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP="script/gunicornNginxConfigFilesSetup.sh"
-SCRIPT_GUNICORN_SERVICE_FILLER="script/gunicornServiceFiller.py"
-SCRIPT_INSTALL_MAKEIDEASMAKEREALITY="script/install_makeIdeasMakeReality.sh"
-func_printAndExecuteCommand "chmod u+x ${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}\
-                                        ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}\
-                                        ${SCRIPT_GUNICORN_SERVICE_FILLER}\
-                                        ${SCRIPT_INSTALL_MAKEIDEASMAKEREALITY}"
-
-# func_printAndExecuteCommand "./${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}"
-# func_printAndExecuteCommand "./${SCRIPT_GUNICORN_SERVICE_FILLER}"
-# func_printAndExecuteCommand "./${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}"
-
-echo
-echo "================"
-echo "ADDITIONAL NOTES"
-echo "================"
-echo
-echo "Setup PostgreSQL roles and database."
-echo
-echo 'For local development, you have to invoke:'
-echo "    source `readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER}`"
-# or # echo "    source $(readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER})"
+func_additionalNotes
