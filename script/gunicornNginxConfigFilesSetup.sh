@@ -13,8 +13,9 @@ PROJECT_PATH=$(readlink -f "${BASH_SOURCE}" | xargs dirname | xargs dirname)
 CONFIG_PATH="${PROJECT_PATH}/config"
 ENVIRONMENT_VARIABLES_PATH="${CONFIG_PATH}/environmentVariables"
 
-GUNICORN_SERVICE="${CONFIG_PATH}/gunicorn.service"
-GUNICORN_SOCKET_NAME="gunicorn.socket"
+GUNICORN="gunicorn"
+GUNICORN_SERVICE="${CONFIG_PATH}/${GUNICORN}.service"
+GUNICORN_SOCKET_NAME="${GUNICORN}.socket"
 GUNICORN_SOCKET="${CONFIG_PATH}/${GUNICORN_SOCKET_NAME}"
 
 NGINX_CONF_NAME="makeIdeasMakeRealityNginx.conf"
@@ -27,12 +28,16 @@ source ${ENVIRONMENT_VARIABLES_PATH}
 
 sudo ln -s ${GUNICORN_SERVICE} ${MIMR_SYSTEMD_PATH}
 sudo ln -s ${GUNICORN_SOCKET} ${MIMR_SYSTEMD_PATH}
+echo "Done linking ${GUNICORN} config files"
 sudo systemctl enable --now ${GUNICORN_SOCKET_NAME}
+echo "Done processing ${GUNICORN} service"
 
 sudo ln -s ${NGINX_CONF} ${MIMR_NGINX_SITES_AVAILABLE_PATH}
 sudo ln -s ${MIMR_NGINX_SITES_AVAILABLE_PATH}/${NGINX_CONF_NAME} ${MIMR_NGINX_SITES_ENABLED_PATH}
+echo "Done linking ${MIMR_NGINX} config files"
 sudo systemctl enable ${MIMR_NGINX_SERVICE}
 sudo systemctl start ${MIMR_NGINX}
+echo "Done processing ${MIMR_NGINX} service"
 
 echo "Use port ${UPDATED_PORT}? [y/n]"
 echo -n "---> Input: "
@@ -50,3 +55,4 @@ else
 fi
 
 sudo systemctl restart ${MIMR_NGINX}
+echo "Done restarting ${MIMR_NGINX} service"
