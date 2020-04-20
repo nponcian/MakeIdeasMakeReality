@@ -35,8 +35,25 @@ func_acceptInput()
     read ${1}
 }
 
+func_upgradeApt()
+{
+    func_acceptInput SHOULD_UPGRADE "Upgrade package manager? (advisable if using new machine) [y/n]"
+    if [[ "${SHOULD_UPGRADE}" == "y" || "${SHOULD_UPGRADE}" == "Y" ]]; then
+        func_printAndExecuteCommand "sudo apt update && sudo apt upgrade"
+    else
+        echo "Package manager not upgraded"
+    fi
+}
+
 func_setupGit()
 {
+    # If ${GIT_LOC} is empty while ${GIT} isn't:
+    #     If everything is enclosed in quotes "", it will be translated to:
+    #         func_install "" value_of_git_here
+    #         - still passing on 2 variables to func_install
+    #     Else if no quotes:
+    #         func_install value_of_git_here
+    #         - only 1 variable is passed to func_install
     func_install "${GIT_LOC}" "${GIT}"
 
     func_acceptInput PROJECT_DIR "Enter target path to ${APP_NAME} (e.g. ../../Documents)"
@@ -59,5 +76,6 @@ func_setupPython()
     func_install "${PIP3_LOC}" "${PYTHON3_PIP}" "${PYTHON3_VENV}"
 }
 
+func_upgradeApt
 func_setupGit
 func_setupPython
