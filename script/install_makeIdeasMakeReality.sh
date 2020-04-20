@@ -13,7 +13,6 @@ PYTHON3_VENV="python3-venv"
 PIP="pip"
 PIP3="pip3"
 PIP3_LOC=$(command -v ${PIP3})
-PIP3_REQUIREMENTS="config/pip3Requirements.txt"
 VENV="venv"
 VENV_ACTIVATE="${VENV}/bin/activate"
 
@@ -26,7 +25,10 @@ PSQL_LOC=$(command -v ${PSQL})
 NGINX="nginx"
 NGINX_LOC=$(command -v ${NGINX})
 
-BASH="bash"
+PIP3_REQUIREMENTS="config/pip3Requirements.txt"
+SCRIPT_GUNICORN_SERVICE_FILLER="script/gunicornServiceFiller.py"
+SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP="script/gunicornNginxConfigFilesSetup.sh"
+SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER="script/environmentVariablesExporter.sh"
 
 func_printAndExecuteCommand()
 {
@@ -121,9 +123,10 @@ func_setupPython
 func_setupPostgreSql
 func_setupNginx
 
-# ${PYTHON3} gunicornServiceFiller.py
-# ${BASH} gunicornAndNginxSetup.sh
+chmod u+x ${SCRIPT_GUNICORN_SERVICE_FILLER} ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}
+# func_printAndExecuteCommand "./${SCRIPT_GUNICORN_SERVICE_FILLER}"
+# func_printAndExecuteCommand "./${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}"
 echo
 echo 'For local development, you have to invoke:'
-echo "    source `readlink -f script/environmentVariablesExporter.sh`"
-# or echo "    source $(readlink -f script/environmentVariablesExporter.sh)"
+echo "    source `readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER}`"
+# or # echo "    source $(readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER})"

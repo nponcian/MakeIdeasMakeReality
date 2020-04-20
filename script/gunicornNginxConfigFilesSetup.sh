@@ -5,9 +5,9 @@
 # and Nginx.
 
 # USAGE
-#     bash /absolute/path/from/literally/anywhere/to/script/gunicornAndNginxSetup.sh
+#     bash /absolute/path/from/literally/anywhere/to/script/gunicornNginxConfigFilesSetup.sh
 #     or
-#     bash ../relative/path/from/literally/anywhere/to/script/gunicornAndNginxSetup.sh
+#     bash ../relative/path/from/literally/anywhere/to/script/gunicornNginxConfigFilesSetup.sh
 # Flags
 #     --changedefault
 #         Replace the Nginx listener to the default port 80 to this web application.

@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # PURPOSE
 # Exports all environment variables defined within the config file, making them available within the
 # current shell and all the spawned child shells. Useful if running the django app through the
