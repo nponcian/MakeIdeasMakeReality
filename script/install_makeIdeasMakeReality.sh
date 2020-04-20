@@ -29,6 +29,7 @@ PIP3_REQUIREMENTS="config/pip3Requirements.txt"
 SCRIPT_GUNICORN_SERVICE_FILLER="script/gunicornServiceFiller.py"
 SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP="script/gunicornNginxConfigFilesSetup.sh"
 SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER="script/environmentVariablesExporter.sh"
+SCRIPT_INSTALL_MAKEIDEASMAKEREALITY="script/install_makeIdeasMakeReality.sh"
 
 func_printAndExecuteCommand()
 {
@@ -123,7 +124,7 @@ func_setupPython
 func_setupPostgreSql
 func_setupNginx
 
-chmod u+x ${SCRIPT_GUNICORN_SERVICE_FILLER} ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}
+func_printAndExecuteCommand "chmod u+x ${SCRIPT_GUNICORN_SERVICE_FILLER} ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP} ${SCRIPT_INSTALL_MAKEIDEASMAKEREALITY}"
 # func_printAndExecuteCommand "./${SCRIPT_GUNICORN_SERVICE_FILLER}"
 # func_printAndExecuteCommand "./${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}"
 echo
