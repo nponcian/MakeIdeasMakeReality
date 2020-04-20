@@ -15,7 +15,7 @@ PIP3_LOC=$(command -v ${PIP3})
 
 func_printAndExecuteCommand()
 {
-    echo "${@}"
+    echo "---> Command: ${@}"
     ${@}
 }
 
@@ -31,7 +31,7 @@ func_install()
 func_acceptInput()
 {
     echo "${2}"
-    echo -n "Input: "
+    echo -n "---> Input: "
     read ${1}
 }
 
