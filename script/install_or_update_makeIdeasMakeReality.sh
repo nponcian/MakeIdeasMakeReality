@@ -206,6 +206,8 @@ func_additionalNotes()
     echo "configurations in settings.py by invoking:"
     echo "    source `readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER}`"
     # or # echo "    source $(readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER})"
+    echo "Activate the created virtual environment:"
+    echo "    source ${VENV_ACTIVATE}"
 }
 
 func_setupApt
