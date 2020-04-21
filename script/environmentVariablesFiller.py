@@ -9,7 +9,7 @@
 
 import os
 
-ENVIRONMENT_VARIABLES_PATH="config/environmentVariables"
+ENVIRONMENT_VARIABLES_FILE="config/environmentVariables"
 ENVIRONMENT_VARIABLES_SEP = "="
 
 NEW_LINE = "\n"
@@ -18,11 +18,11 @@ INPUT_REQUEST_PREFIX = "---> Input:"
 YES = "y"
 
 def updateEnvVariables():
-    temporaryFilePath = ENVIRONMENT_VARIABLES_PATH + "_temp"
+    temporaryFileName = ENVIRONMENT_VARIABLES_FILE + "_temp"
     print("Leave blank to retain current value")
 
-    with open(ENVIRONMENT_VARIABLES_PATH) as envVariablesFile:
-        with open(temporaryFilePath, 'w') as temporaryFile:
+    with open(ENVIRONMENT_VARIABLES_FILE) as envVariablesFile:
+        with open(temporaryFileName, 'w') as temporaryFile:
             for line in envVariablesFile.readlines():
                 line = line.strip()
                 if len(line) == 0:
@@ -34,22 +34,22 @@ def updateEnvVariables():
                 if len(updatedValue) != 0: value = updatedValue
                 temporaryFile.write(key + sep + value + NEW_LINE)
 
-    os.replace(temporaryFilePath, ENVIRONMENT_VARIABLES_PATH)
+    os.replace(temporaryFileName, ENVIRONMENT_VARIABLES_FILE)
 
 def displayEnvVariables():
-    with open(ENVIRONMENT_VARIABLES_PATH) as envVariablesFile:
-        print("Environment variables in", ENVIRONMENT_VARIABLES_PATH)
+    with open(ENVIRONMENT_VARIABLES_FILE) as envVariablesFile:
+        print("Environment variables in", ENVIRONMENT_VARIABLES_FILE)
         for line in envVariablesFile.readlines():
             print(TAB + line.strip())
 
 displayEnvVariables()
 print("Do you wish to update these environment variables? [y/n]")
 print(INPUT_REQUEST_PREFIX, end = " ")
-response = input().strip()
+response = input().strip().casefold()
 
-if response.casefold() == YES:
+if response == YES:
     updateEnvVariables()
-    print("Successfully updated environment variables in", ENVIRONMENT_VARIABLES_PATH)
+    print("Successfully updated environment variables in", ENVIRONMENT_VARIABLES_FILE)
     displayEnvVariables()
 else:
-    print("Environment variables left unchanged in", ENVIRONMENT_VARIABLES_PATH)
+    print("Environment variables left unchanged in", ENVIRONMENT_VARIABLES_FILE)
