@@ -15,6 +15,29 @@
 #     or
 #     bash ../relative/path/from/literally/anywhere/to/script/install_or_update_makeIdeasMakeReality.sh
 
+# NOTE
+# For future extensions to this script (just this script, not including those called within this
+# script), always keep in mind to never use the path of this script to reference the project, such as
+# the command readlink. It has to be emphasized that this script is technically not part of this
+# project! The idea is that this could be run as a standalone script or as part of an existing
+# project. This is just written to install a project or update an existing project. An example
+# scenario that would result to hard-to-find failures is:
+# 1. You have a checkout of the whole makeIdeasMakeReality project in /home/user1/Documents/
+# 2. This script is in /home/user1/Documents/makeIdeasMakeReality/script/install_or_update_makeIdeasMakeReality.sh
+# 3. You decided to deploy another instance of the project in /home/user1/Downloads/ using this script
+#    located in Documents/makeIdeasMakeReality/script/
+# 4. During execution of script, you will be asked where to deploy a new instance, you responded
+#    /home/user1/Downloads/
+# 5. New checkout is cloned in /home/user1/Downloads/makeIdeasMakeReality
+# 6. Now, you want to locate and update config/environmentVariables within this script
+# 7. Here will be the start of the problem
+# 8. If you located that file by simply getting the path to the currently running script (which is in
+#    Documents/) and simply did a cd ../config, you are accessing Documents/makeIdeasMakeReality/config,
+#    not Downloads/makeIdeasMakeReality/config, which is the actual copy for the new instance.
+# This scipt works by changing directory to the target project, and then invoking the other scripts
+# located in the target project. Thus from the perspective of the other scripts, it is safe to use
+# their path to reference the project, since they are technically part of the project.
+
 APP_NAME="makeIdeasMakeReality"
 
 GIT="git"
@@ -186,7 +209,7 @@ func_additionalNotes()
 }
 
 func_setupApt
-func_setupGit
+func_setupGit # this changes directory to the location of the target makeIdeasMakeReality repository
 func_setupPython
 func_setupPostgreSql
 func_setupNginx
