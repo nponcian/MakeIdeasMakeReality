@@ -22,8 +22,8 @@ GUNICORN_SOCKET="${CONFIG_PATH}/${GUNICORN_SOCKET_NAME}"
 NGINX_CONF_NAME="makeIdeasMakeRealityNginx.conf"
 NGINX_CONF="${CONFIG_PATH}/${NGINX_CONF_NAME}"
 
-ORIGINAL_PORT="8000"
-UPDATED_PORT="80"
+DEFAULT_PORT="8000"
+NEW_PORT="80"
 
 printAndExecuteCommand()
 {
@@ -79,18 +79,18 @@ setupNginx()
     printAndExecuteCommand "sudo systemctl enable --now ${MIMR_NGINX_SERVICE}"
     echo "Done enabling ${MIMR_NGINX} to automatically start on boot"
 
-    echo "Use port ${UPDATED_PORT}? [y/n]"
+    echo "Use port ${NEW_PORT}? [y/n]"
     echo -n "---> Input: "
-    read shouldUseUpdatedPort
+    read shouldUseNewPort
 
     # if [[ $# -eq 1 && "${1}" == "--changedefault" ]]; then
-    if [[ "${shouldUseUpdatedPort}" == "y" || "${shouldUseUpdatedPort}" == "Y" ]]; then
-        echo "Port ${UPDATED_PORT} would be used"
-        printAndExecuteCommand "sed -i 's/listen '${ORIGINAL_PORT}';/listen '${UPDATED_PORT}';/' ${NGINX_CONF}"
+    if [[ "${shouldUseNewPort}" == "y" || "${shouldUseNewPort}" == "Y" ]]; then
+        echo "Port ${NEW_PORT} would be used"
+        printAndExecuteCommand "sed -i 's/listen '${DEFAULT_PORT}';/listen '${NEW_PORT}';/' ${NGINX_CONF}"
         printAndExecuteCommand "sudo rm -rf ${MIMR_NGINX_ENABLED_DEFAULT_CONF}"
     else
-        echo "Port ${ORIGINAL_PORT} would be used"
-        printAndExecuteCommand "sed -i 's/listen '${UPDATED_PORT}';/listen '${ORIGINAL_PORT}';/' ${NGINX_CONF}"
+        echo "Port ${DEFAULT_PORT} would be used"
+        printAndExecuteCommand "sed -i 's/listen '${NEW_PORT}';/listen '${DEFAULT_PORT}';/' ${NGINX_CONF}"
         printAndExecuteCommand "sudo ln -s -f ${MIMR_NGINX_AVAILABLE_DEFAULT_CONF} ${MIMR_NGINX_ENABLED_DEFAULT_CONF}"
     fi
 
