@@ -11,17 +11,17 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
-EnvironmentFile=MIMR_GUNICORN_ENV
+EnvironmentFile=/path/to/makeIdeasMakeReality/config/environmentVariables
 
 Type=notify
 # the specific user that our service will run as
-User=MIMR_GUNICORN_USER
+User=user
 Group=www-data
 # another option for an even more restricted service is
 # DynamicUser=yes
 # see http://0pointer.net/blog/dynamic-users-with-systemd.html
 RuntimeDirectory=gunicorn
-WorkingDirectory=MIMR_GUNICORN_PROJECTDIR
+WorkingDirectory=/path/to/makeIdeasMakeReality
 # /bin/bash is used to be able to use environment variables. Thus the workaround script does not
 # need to touch this part.
 ExecStart=/bin/bash -c '${MIMR_GUNICORN_PROJECTDIR}/venv/bin/gunicorn --config ${MIMR_GUNICORN_PROJECTDIR}/config/gunicorn.conf.py makeIdeasMakeReality.wsgi'

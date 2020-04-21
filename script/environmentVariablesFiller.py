@@ -13,6 +13,7 @@ ENVIRONMENT_VARIABLES_PATH="config/environmentVariables"
 ENVIRONMENT_VARIABLES_SEP = "="
 
 NEW_LINE = "\n"
+TAB = "    "
 INPUT_REQUEST_PREFIX = "---> Input:"
 YES = "y"
 
@@ -39,15 +40,16 @@ def displayEnvVariables():
     with open(ENVIRONMENT_VARIABLES_PATH) as envVariablesFile:
         print("Environment variables in", ENVIRONMENT_VARIABLES_PATH)
         for line in envVariablesFile.readlines():
-            print("    ", line.strip())
+            print(TAB + line.strip())
 
 displayEnvVariables()
 print("Do you wish to update these environment variables? [y/n]")
 print(INPUT_REQUEST_PREFIX, end = " ")
 response = input().strip()
+
 if response.casefold() == YES:
     updateEnvVariables()
     print("Successfully updated environment variables in", ENVIRONMENT_VARIABLES_PATH)
     displayEnvVariables()
 else:
-    print("Environment variables unchanged in", ENVIRONMENT_VARIABLES_PATH)
+    print("Environment variables left unchanged in", ENVIRONMENT_VARIABLES_PATH)
