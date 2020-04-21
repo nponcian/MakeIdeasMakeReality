@@ -40,12 +40,25 @@ PSQL_LOC=$(command -v ${PSQL})
 NGINX="nginx"
 NGINX_LOC=$(command -v ${NGINX})
 
+CONFIG="config"
+SCRIPT="script"
 PIP3_REQUIREMENTS="config/pip3Requirements.txt"
 SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER="script/environmentVariablesExporter.sh"
 SCRIPT_ENVIRONMENT_VARIABLES_FILLER="script/environmentVariablesFiller.py"
 SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP="script/gunicornNginxConfigFilesSetup.sh"
 SCRIPT_GUNICORN_SERVICE_FILLER="script/gunicornServiceFiller.py"
 SCRIPT_INSTALL_MAKEIDEASMAKEREALITY="script/install_makeIdeasMakeReality.sh"
+
+func_printConfigPaths()
+{
+    # This assumes you are in the root project directory
+    echo "For your reference, here are some useful configuration paths of the current project:"
+    echo "    $(pwd)"
+    echo "    $(pwd)/${CONFIG}"
+    echo "    $(pwd)/${SCRIPT}"
+    echo -n "Press enter key to continue... "
+    read TEMP
+}
 
 func_printAndExecuteCommand()
 {
@@ -136,10 +149,13 @@ func_setupNginx()
 
 func_setupScripts()
 {
-    func_printAndExecuteCommand "chmod u+x ${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}\
-                                            ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}\
-                                            ${SCRIPT_GUNICORN_SERVICE_FILLER}\
-                                            ${SCRIPT_INSTALL_MAKEIDEASMAKEREALITY}"
+    func_printAndExecuteCommand "chmod u+x\
+        ${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}\
+        ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}\
+        ${SCRIPT_GUNICORN_SERVICE_FILLER}\
+        ${SCRIPT_INSTALL_MAKEIDEASMAKEREALITY}"
+
+    func_printConfigPaths
 
     func_printAndExecuteCommand "./${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}"
     func_printAndExecuteCommand "./${SCRIPT_GUNICORN_SERVICE_FILLER}"

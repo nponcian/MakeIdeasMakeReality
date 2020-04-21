@@ -9,9 +9,9 @@ MIMR_SETTINGS_DB_PASSWORD=databasePassword
 MIMR_SETTINGS_DB_HOST=databaseHostIP
 MIMR_SETTINGS_DB_PORT=databasePort
 
-MIMR_SYSTEMD_PATH=/etc/systemd/system/
-MIMR_NGINX_SITES_AVAILABLE_PATH=/etc/nginx/sites-available/
-MIMR_NGINX_SITES_ENABLED_PATH=/etc/nginx/sites-enabled/
+MIMR_SYSTEMD_PATH=/etc/systemd/system
+MIMR_NGINX_SITES_AVAILABLE_PATH=/etc/nginx/sites-available
+MIMR_NGINX_SITES_ENABLED_PATH=/etc/nginx/sites-enabled
 MIMR_NGINX_AVAILABLE_DEFAULT_CONF=/etc/nginx/sites-available/default
 MIMR_NGINX_ENABLED_DEFAULT_CONF=/etc/nginx/sites-enabled/default
 MIMR_NGINX=nginx
