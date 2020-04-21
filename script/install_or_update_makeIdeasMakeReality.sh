@@ -11,9 +11,9 @@
 # through the screen, with you consciously thinking that you don't have to think about anything!
 
 # USAGE
-#     bash /absolute/path/from/literally/anywhere/to/script/install_makeIdeasMakeReality.sh
+#     bash /absolute/path/from/literally/anywhere/to/script/install_or_update_makeIdeasMakeReality.sh
 #     or
-#     bash ../relative/path/from/literally/anywhere/to/script/install_makeIdeasMakeReality.sh
+#     bash ../relative/path/from/literally/anywhere/to/script/install_or_update_makeIdeasMakeReality.sh
 
 APP_NAME="makeIdeasMakeReality"
 
@@ -47,7 +47,7 @@ SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER="script/environmentVariablesExporter.sh"
 SCRIPT_ENVIRONMENT_VARIABLES_FILLER="script/environmentVariablesFiller.py"
 SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP="script/gunicornNginxConfigFilesSetup.sh"
 SCRIPT_GUNICORN_SERVICE_FILLER="script/gunicornServiceFiller.py"
-SCRIPT_INSTALL_MAKEIDEASMAKEREALITY="script/install_makeIdeasMakeReality.sh"
+SCRIPT_INSTALL_OR_UPDATE_MAKEIDEASMAKEREALITY="script/install_or_update_makeIdeasMakeReality.sh"
 
 func_printConfigPaths()
 {
@@ -153,7 +153,7 @@ func_setupScripts()
         ${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}\
         ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}\
         ${SCRIPT_GUNICORN_SERVICE_FILLER}\
-        ${SCRIPT_INSTALL_MAKEIDEASMAKEREALITY}"
+        ${SCRIPT_INSTALL_OR_UPDATE_MAKEIDEASMAKEREALITY}"
 
     func_printConfigPaths
 
