@@ -25,49 +25,59 @@ NGINX_CONF="${CONFIG_PATH}/${NGINX_CONF_NAME}"
 ORIGINAL_PORT="8000"
 UPDATED_PORT="80"
 
+printAndExecuteCommand()
+{
+    echo "---> Command: ${@}"
+    eval "${@}"
+}
+
 restartGunicorn()
 {
     sudo systemctl daemon-reload
-    sudo systemctl stop ${GUNICORN_SERVICE_NAME} # or simply # ${GUNICORN}
-    sudo systemctl stop ${GUNICORN_SOCKET_NAME}
-    sudo systemctl start ${GUNICORN_SERVICE_NAME}
-    sudo systemctl start ${GUNICORN_SOCKET_NAME}
-    sudo systemctl restart ${GUNICORN_SERVICE_NAME}
-    sudo systemctl restart ${GUNICORN_SOCKET_NAME}
+
+    # sudo systemctl stop "${GUNICORN_SERVICE_NAME}"
+    # sudo systemctl stop "${GUNICORN_SOCKET_NAME}"
+    # sudo systemctl start "${GUNICORN_SERVICE_NAME}"
+    # sudo systemctl start "${GUNICORN_SOCKET_NAME}"
+
+    sudo systemctl restart "${GUNICORN_SERVICE_NAME}" # Stop and start, or just start if not running yet
+    sudo systemctl restart "${GUNICORN_SOCKET_NAME}"
 }
 
 restartNginx()
 {
     sudo systemctl daemon-reload
-    sudo systemctl stop ${MIMR_NGINX}
-    sudo systemctl start ${MIMR_NGINX}
-    sudo systemctl restart ${MIMR_NGINX}
+
+    # sudo systemctl stop "${MIMR_NGINX}"
+    # sudo systemctl start "${MIMR_NGINX}"
+
+    sudo systemctl restart "${MIMR_NGINX}"
 }
 
 setupGunicorn()
 {
-    sudo ln -s -f ${GUNICORN_SERVICE} ${MIMR_SYSTEMD_PATH}
-    sudo ln -s -f ${GUNICORN_SOCKET} ${MIMR_SYSTEMD_PATH}
-    echo "Done linking ${GUNICORN} config files"
+    printAndExecuteCommand "sudo ln -s -f ${GUNICORN_SERVICE} ${MIMR_SYSTEMD_PATH}"
+    printAndExecuteCommand "sudo ln -s -f ${GUNICORN_SOCKET} ${MIMR_SYSTEMD_PATH}"
+    echo "Done linking config files of ${GUNICORN}"
 
-    sudo systemctl enable --now ${GUNICORN_SOCKET_NAME}
+    printAndExecuteCommand "sudo systemctl enable --now ${GUNICORN_SOCKET_NAME}" # --now starts the units
     echo "Done enabling ${GUNICORN} to automatically start on boot"
 
     restartGunicorn # Not necessary, but to always be sure that all changes would reflect
     echo "Done restarting ${GUNICORN}"
 
-    echo -n "${GUNICORN_SERVICE_NAME} MainPID: "
-    systemctl show --value -p MainPID ${GUNICORN_SERVICE_NAME}
-    echo "Done processing ${GUNICORN} service"
+    echo "MainPID of ${GUNICORN_SERVICE_NAME}:"
+    printAndExecuteCommand "systemctl show --value -p MainPID ${GUNICORN_SERVICE_NAME}"
+    echo "Done processing service of ${GUNICORN}"
 }
 
 setupNginx()
 {
-    sudo ln -s -f ${NGINX_CONF} ${MIMR_NGINX_SITES_AVAILABLE_PATH}
-    sudo ln -s -f ${MIMR_NGINX_SITES_AVAILABLE_PATH}/${NGINX_CONF_NAME} ${MIMR_NGINX_SITES_ENABLED_PATH}
-    echo "Done linking ${MIMR_NGINX} config files"
+    printAndExecuteCommand "sudo ln -s -f ${NGINX_CONF} ${MIMR_NGINX_SITES_AVAILABLE_PATH}"
+    printAndExecuteCommand "sudo ln -s -f ${MIMR_NGINX_SITES_AVAILABLE_PATH}/${NGINX_CONF_NAME} ${MIMR_NGINX_SITES_ENABLED_PATH}"
+    echo "Done linking config files of ${MIMR_NGINX}"
 
-    sudo systemctl enable ${MIMR_NGINX_SERVICE}
+    printAndExecuteCommand "sudo systemctl enable --now ${MIMR_NGINX_SERVICE}"
     echo "Done enabling ${MIMR_NGINX} to automatically start on boot"
 
     echo "Use port ${UPDATED_PORT}? [y/n]"
@@ -77,20 +87,35 @@ setupNginx()
     # if [[ $# -eq 1 && "${1}" == "--changedefault" ]]; then
     if [[ "${shouldUseUpdatedPort}" == "y" || "${shouldUseUpdatedPort}" == "Y" ]]; then
         echo "Port ${UPDATED_PORT} would be used"
-        sed -i 's/listen '${ORIGINAL_PORT}';/listen '${UPDATED_PORT}';/' ${NGINX_CONF}
-        sudo rm -rf ${MIMR_NGINX_ENABLED_DEFAULT_CONF}
+        printAndExecuteCommand "sed -i 's/listen '${ORIGINAL_PORT}';/listen '${UPDATED_PORT}';/' ${NGINX_CONF}"
+        printAndExecuteCommand "sudo rm -rf ${MIMR_NGINX_ENABLED_DEFAULT_CONF}"
     else
         echo "Port ${ORIGINAL_PORT} would be used"
-        sed -i 's/listen '${UPDATED_PORT}';/listen '${ORIGINAL_PORT}';/' ${NGINX_CONF}
-        sudo ln -s -f ${MIMR_NGINX_AVAILABLE_DEFAULT_CONF} ${MIMR_NGINX_ENABLED_DEFAULT_CONF}
+        printAndExecuteCommand "sed -i 's/listen '${UPDATED_PORT}';/listen '${ORIGINAL_PORT}';/' ${NGINX_CONF}"
+        printAndExecuteCommand "sudo ln -s -f ${MIMR_NGINX_AVAILABLE_DEFAULT_CONF} ${MIMR_NGINX_ENABLED_DEFAULT_CONF}"
     fi
 
     restartNginx
-    echo "Done restarting ${MIMR_NGINX} service"
+    echo "Done restarting ${MIMR_NGINX}"
 
-    echo "Done processing ${MIMR_NGINX} service"
+    echo "Done processing service of ${MIMR_NGINX}"
+}
+
+displayStatus()
+{
+    printAndExecuteCommand "sudo systemctl status ${GUNICORN_SERVICE_NAME} | head -n 5"
+    printAndExecuteCommand "sudo systemctl status ${GUNICORN_SOCKET_NAME} | head -n 5"
+    printAndExecuteCommand "sudo systemctl status ${MIMR_NGINX} | head -n 5"
+
+    printAndExecuteCommand "ls -al ${MIMR_SYSTEMD_PATH} | grep ${GUNICORN}"
+
+    AVAILABLE_DEFAULT_CONF_NAME=$(basename "${MIMR_NGINX_AVAILABLE_DEFAULT_CONF}")
+    ENABLED_DEFAULT_CONF_NAME=$(basename "${MIMR_NGINX_ENABLED_DEFAULT_CONF}")
+    printAndExecuteCommand "ls -al ${MIMR_NGINX_SITES_AVAILABLE_PATH} | grep '${NGINX_CONF_NAME}\|${AVAILABLE_DEFAULT_CONF_NAME}'"
+    printAndExecuteCommand "ls -al ${MIMR_NGINX_SITES_ENABLED_PATH} | grep '${NGINX_CONF_NAME}\|${ENABLED_DEFAULT_CONF_NAME}'"
 }
 
 source ${ENVIRONMENT_VARIABLES_PATH}
 setupGunicorn
 setupNginx
+displayStatus
