@@ -56,6 +56,7 @@ setupGunicorn()
     restartGunicorn # Not necessary, but to always be sure that all changes would reflect
     echo "Done restarting ${GUNICORN}"
 
+    echo -n "${GUNICORN_SERVICE_NAME} MainPID: "
     systemctl show --value -p MainPID ${GUNICORN_SERVICE_NAME}
     echo "Done processing ${GUNICORN} service"
 }

@@ -24,7 +24,7 @@ RuntimeDirectory=gunicorn
 WorkingDirectory=/path/to/makeIdeasMakeReality
 # /bin/bash is used to be able to use environment variables. Thus the workaround script does not
 # need to touch this part.
-ExecStart=/bin/bash -c '${MIMR_GUNICORN_PROJECTDIR}/venv/bin/gunicorn --config ${MIMR_GUNICORN_PROJECTDIR}/config/gunicorn.conf.py makeIdeasMakeReality.wsgi'
+ExecStart=/bin/bash -c '${MIMR_GUNICORN_WORKINGDIRECTORY}/venv/bin/gunicorn --config ${MIMR_GUNICORN_WORKINGDIRECTORY}/config/gunicorn.conf.py makeIdeasMakeReality.wsgi'
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
 TimeoutStopSec=5
