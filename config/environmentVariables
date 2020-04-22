@@ -2,6 +2,7 @@ MIMR_GUNICORN_ENVIRONMENTFILE=/path/to/makeIdeasMakeReality/config/environmentVa
 MIMR_GUNICORN_WORKINGDIRECTORY=/path/to/makeIdeasMakeReality
 MIMR_GUNICORN_USER=user
 
+MIMR_SETTINGS_DEBUG=True
 MIMR_SETTINGS_SECRET_KEY='secret_key_here'
 MIMR_SETTINGS_DB_NAME=databaseName
 MIMR_SETTINGS_DB_USER=databaseUser
