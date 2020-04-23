@@ -172,11 +172,7 @@ func_setupNginx()
 
 func_setupScripts()
 {
-    func_printAndExecuteCommand "chmod u+x\
-        ${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}\
-        ${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}\
-        ${SCRIPT_GUNICORN_SERVICE_FILLER}\
-        ${SCRIPT_INSTALL_OR_UPDATE_MAKEIDEASMAKEREALITY}"
+    func_printAndExecuteCommand "ls -d ${SCRIPT}/* | xargs echo | xargs chmod u+x" # echo removes \n
 
     func_printConfigPaths
 
