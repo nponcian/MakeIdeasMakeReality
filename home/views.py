@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("Hallo, Willkommen!")
+    template = "home/home.html"
+    context = {}
+    return render(request, template, context)
 
 def notFound(request):
     print("Page not found for request", request)
