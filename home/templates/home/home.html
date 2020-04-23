@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    {% load static %}
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,30 +11,44 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'home/css/homeStyle.css' %}">
+
     <title>Home | MakeIdeasMakeReality</title>
 </head>
 
 <body>
     <section>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">MakeIdeasMakeReality</a>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="/">MakeIdeasMakeReality</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Services <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blogs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">$(whoami)</a>
-                    </li>
-                </ul>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/service/">Services<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="/blog/">Blogs</a>
+                    <a class="nav-item nav-link disabled" href="/whoami/" tabindex="-1" aria-disabled="true">$(whoami)</a>
+                </div>
             </div>
         </nav>
+    </section>
+
+    <section>
+        <div class="jumbotron jumbotron-fluid" id="homeJumbotron">
+            <div class="container pt-5 text-center">
+                <div class="display-3 pt-xs-3 pt-sm-5">
+                    make
+                    <span class="text-warning blur">IDEAS,</span>
+                    <br>
+                    make
+                    <span class="text-warning blur">REALITY!</span>
+                </h1>
+            </div>
+        </div>
     </section>
 
     <!-- Optional JavaScript -->

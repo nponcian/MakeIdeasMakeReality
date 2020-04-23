@@ -1,0 +1,10 @@
+#homeJumbotron
+{
+    background-image: url('/static/home/assets/img/homeJumbotron.jpg');
+    background-size: cover;
+    background-position: center; /* bottom center; */
+    background-attachment: fixed;
+    min-height: 80vh;
+    font-family: 'Permanent Marker', cursive;
+    text-shadow: 0 0 20px rgba(0,255,0,1);
+}

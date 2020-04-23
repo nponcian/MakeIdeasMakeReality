@@ -14,6 +14,7 @@ import sys
 
 INPUT_REQUEST_PREFIX = "---> Input:"
 INPUT_TERMINATOR = "\\q"
+NEW_LINE = "\n"
 TAB_CHAR = " "
 TAB_MULTIPLIER = 2
 
@@ -34,7 +35,11 @@ def processInputLines(targetMultiplier):
     print("If done, press:", INPUT_TERMINATOR)
     print("      or press: Enter + Ctrl-D")
     for line in sys.stdin: # sys.stdin.readlines()
-        if line.strip() == INPUT_TERMINATOR: break
+        if line.strip() == INPUT_TERMINATOR:
+            break
+        elif len(line.strip()) == 0:
+            formattedString += NEW_LINE
+            continue
 
         currentTabLength = len(line) - len(line.lstrip())
         updatedTabLength = int(currentTabLength * targetMultiplier)
