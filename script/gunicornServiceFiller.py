@@ -2,7 +2,10 @@
 
 # PURPOSE
 # Fill-up the config/gunicorn.service with the missing values from the available variables set within
-# the file config/environmentVariables.
+# the file config/environmentVariables. The script works by reading the configured environment
+# variables, substituting the value of MIMR_GUNICORN_<NAME_OF_FIELD_HERE> where <NAME_OF_FIELD_HERE>
+# is the name of the field (excluding the < >) in the gunicorn.service file. The names should be
+# identical, not necessarily the case but the contents, including underscores if present.
 
 # USAGE
 #     cd /path/to/makeIdeasMakeReality/

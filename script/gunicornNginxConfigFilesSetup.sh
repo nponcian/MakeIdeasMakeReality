@@ -22,8 +22,7 @@ GUNICORN_SOCKET="${CONFIG_PATH}/${GUNICORN_SOCKET_NAME}"
 NGINX_CONF_NAME="makeIdeasMakeRealityNginx.conf"
 NGINX_CONF="${CONFIG_PATH}/${NGINX_CONF_NAME}"
 
-DEFAULT_PORT="8000"
-NEW_PORT="80"
+DEFAULT_PORT="80"
 
 printAndExecuteCommand()
 {
@@ -79,19 +78,19 @@ setupNginx()
     printAndExecuteCommand "sudo systemctl enable --now ${MIMR_NGINX_SERVICE}"
     echo "Done enabling ${MIMR_NGINX} to automatically start on boot"
 
-    echo "Use port ${NEW_PORT}? [y/n]"
-    echo -n "---> Input: "
-    read shouldUseNewPort
+    printAndExecuteCommand "sed -i 's|alias .*; # MIMR_SCRIPT_TAG MIMR_SETTINGS_STATIC_ROOT|alias '${MIMR_SETTINGS_STATIC_ROOT}'; # MIMR_SCRIPT_TAG MIMR_SETTINGS_STATIC_ROOT|' ${NGINX_CONF}"
+    echo "Set location of static files to ${MIMR_SETTINGS_STATIC_ROOT}"
+    printAndExecuteCommand "sed -i 's/listen .*; # MIMR_SCRIPT_TAG MIMR_NGINX_PORT/listen '${MIMR_NGINX_PORT}'; # MIMR_SCRIPT_TAG MIMR_NGINX_PORT/' ${NGINX_CONF}"
+    echo "Port ${MIMR_NGINX_PORT} would be used for the application"
 
     # if [[ $# -eq 1 && "${1}" == "--changedefault" ]]; then
-    if [[ "${shouldUseNewPort}" == "y" || "${shouldUseNewPort}" == "Y" ]]; then
-        echo "Port ${NEW_PORT} would be used"
-        printAndExecuteCommand "sed -i 's/listen '${DEFAULT_PORT}';/listen '${NEW_PORT}';/' ${NGINX_CONF}"
+    # if [[ "${shouldUseNewPort}" == "y" || "${shouldUseNewPort}" == "Y" ]]; then
+    if [[ "${MIMR_NGINX_PORT}" == "${DEFAULT_PORT}" ]]; then
         printAndExecuteCommand "sudo rm -rf ${MIMR_NGINX_ENABLED_DEFAULT_CONF}"
+        echo "Disabled current nginx default configuration that uses port ${DEFAULT_PORT}"
     else
-        echo "Port ${DEFAULT_PORT} would be used"
-        printAndExecuteCommand "sed -i 's/listen '${NEW_PORT}';/listen '${DEFAULT_PORT}';/' ${NGINX_CONF}"
         printAndExecuteCommand "sudo ln -s -f ${MIMR_NGINX_AVAILABLE_DEFAULT_CONF} ${MIMR_NGINX_ENABLED_DEFAULT_CONF}"
+        echo "Enabled nginx default configuration that uses port ${DEFAULT_PORT}"
     fi
 
     restartNginx
