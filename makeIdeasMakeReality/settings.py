@@ -154,4 +154,6 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, "home", "templates"),
+    os.path.join(BASE_DIR, "service", "templates"),
+    os.path.join(BASE_DIR, "text", "templates"),
 ]
