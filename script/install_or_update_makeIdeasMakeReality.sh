@@ -180,7 +180,7 @@ func_setupScripts()
     func_printAndExecuteCommand "./${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}"
     func_printAndExecuteCommand "./${SCRIPT_GUNICORN_SERVICE_FILLER}"
     func_printAndExecuteCommand "./${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}"
-    func_printAndExecuteCommand "sudo bash ${SCRIPT_STATIC_FILES_PROCESSOR}"
+    func_printAndExecuteCommand "sudo ./${SCRIPT_STATIC_FILES_PROCESSOR}"
 }
 
 func_additionalNotes()
