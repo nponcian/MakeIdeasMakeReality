@@ -125,7 +125,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.environ['MIMR_SETTINGS_STATIC_ROOT']
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    # os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "home", "templates"),
 ]

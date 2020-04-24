@@ -9,6 +9,7 @@ MIMR_SETTINGS_DB_USER=databaseUser
 MIMR_SETTINGS_DB_PASSWORD=databasePassword
 MIMR_SETTINGS_DB_HOST=databaseHostIP
 MIMR_SETTINGS_DB_PORT=databasePort
+MIMR_SETTINGS_STATIC_ROOT=/var/www/makeIdeasMakeReality/
 
 MIMR_SYSTEMD_PATH=/etc/systemd/system
 MIMR_NGINX_SITES_AVAILABLE_PATH=/etc/nginx/sites-available
