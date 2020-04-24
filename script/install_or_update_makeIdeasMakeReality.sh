@@ -65,12 +65,13 @@ NGINX_LOC=$(command -v ${NGINX})
 
 CONFIG="config"
 SCRIPT="script"
-PIP3_REQUIREMENTS="config/pip3Requirements.txt"
-SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER="script/environmentVariablesExporter.sh"
-SCRIPT_ENVIRONMENT_VARIABLES_FILLER="script/environmentVariablesFiller.py"
-SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP="script/gunicornNginxConfigFilesSetup.sh"
-SCRIPT_GUNICORN_SERVICE_FILLER="script/gunicornServiceFiller.py"
-SCRIPT_INSTALL_OR_UPDATE_MAKEIDEASMAKEREALITY="script/install_or_update_makeIdeasMakeReality.sh"
+PIP3_REQUIREMENTS="${CONFIG}/pip3Requirements.txt"
+SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER="${SCRIPT}/environmentVariablesExporter.sh"
+SCRIPT_ENVIRONMENT_VARIABLES_FILLER="${SCRIPT}/environmentVariablesFiller.py"
+SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP="${SCRIPT}/gunicornNginxConfigFilesSetup.sh"
+SCRIPT_GUNICORN_SERVICE_FILLER="${SCRIPT}/gunicornServiceFiller.py"
+SCRIPT_INSTALL_OR_UPDATE_MAKEIDEASMAKEREALITY="${SCRIPT}/install_or_update_makeIdeasMakeReality.sh"
+SCRIPT_STATIC_FILES_PROCESSOR="${SCRIPT}/staticFilesProcessor.sh"
 
 func_printConfigPaths()
 {
@@ -179,6 +180,7 @@ func_setupScripts()
     func_printAndExecuteCommand "./${SCRIPT_ENVIRONMENT_VARIABLES_FILLER}"
     func_printAndExecuteCommand "./${SCRIPT_GUNICORN_SERVICE_FILLER}"
     func_printAndExecuteCommand "./${SCRIPT_GUNICORN_NGINX_CONFIG_FILES_SETUP}"
+    func_printAndExecuteCommand "sudo bash ${SCRIPT_STATIC_FILES_PROCESSOR}"
 }
 
 func_additionalNotes()

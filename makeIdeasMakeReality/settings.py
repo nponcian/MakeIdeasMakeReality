@@ -123,10 +123,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# The base url to access the static files
+# ex.
+#     http://35.192.166.203:8003/static/home/assets/img/homeJumbotron.jpg
 STATIC_URL = '/static/'
 
+# The location in the local directory of the server serving static files to where the static files
+# are stored
+# ex.
+#     /var/www/makeIdeasMakeReality/
+# Thus, based on the above URL, the file should be located in:
+#     /var/www/makeIdeasMakeReality/home/assets/img/homeJumbotron.jpg
 STATIC_ROOT = os.environ['MIMR_SETTINGS_STATIC_ROOT']
 
+# The locations in the local directory to where the different static files to be served are located.
+# 1. If running with manage.py-runserver (with DEBUG=True and django.contrib.staticfiles), then these
+#    locations are automatically functional to serve the static files inside them.
+# 2. If running with Gunicorn or Nginx, these locations aren't automatically searched. The Nginx
+#    server should be informed first about the location to where the static files are. This is only 1
+#    location, which is the one indicated in STATIC_ROOT, such as /var/www/makeIdeasMakeReality/. Now
+#    we have a single location to where every static file should come from. Next is we should put all
+#    current static files that are possibly located in multiple locations (the locations indicated in
+#    STATICFILES_DIRS) to the target single location by running <./manage.py collectstatic>. As the
+#    name suggests, what it does is put all the files and directories located in each of the
+#    STATICFILES_DIRS and copy them (not move) to the STATIC_ROOT location, ready to be served by
+#    Nginx (if configured to read from the location stated in STATIC_ROOT).
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "home", "templates"),
