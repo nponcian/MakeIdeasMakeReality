@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'home',
+    'service',
+    'text',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'makeIdeasMakeReality.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,5 +152,6 @@ STATIC_ROOT = os.environ['MIMR_SETTINGS_STATIC_ROOT']
 #    Nginx (if configured to read from the location stated in STATIC_ROOT).
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, "home", "templates"),
 ]

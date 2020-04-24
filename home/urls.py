@@ -7,7 +7,7 @@ app_name = 'home'
 urlpatterns = [
     re_path('^home/?$', views.home, name = "home"),
     re_path('^index/?$', views.home, name = "index"),
-    path('', views.home, name = "root"),
+    path('', views.home, name = "homeRoot"),
 
     re_path('^.*$', views.notFound, name = "notFound"),
 ]
