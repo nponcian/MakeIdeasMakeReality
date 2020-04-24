@@ -1,16 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 def home(request):
     template = "home/home.html"
     context = {}
     return render(request, template, context)
 
-def notFound(request):
-    print("Page not found for request", request)
-    return HttpResponse("\
-        Ooops, tut mir leid!<br>\
-        The resource you are looking for cannot be found.<br>\
-        <br>\
-        Go to <a href='/'>home</a> instead.\
+def notFound(request, exception=None):
+    print("Page not found for request", request, "with exception", exception)
+    return HttpResponseNotFound("\
+        <style>\
+            .black{color:black;}\
+            .red{color:red;}\
+            .gold{color:gold;}\
+        </style>\
+        <h1><em class='black'>Ooops, tut mir leid, amigo!</em></h1>\
+        <h2><code class='red'>We've already looked at the corners but can't find your request.</code></h2>\
+        <h3><strong class='gold'>You could perhaps find something else interesting at <a href='/'>home</a>.</strong></h3>\
     ")
