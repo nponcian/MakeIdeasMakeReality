@@ -12,6 +12,11 @@ def text(request):
     context = {}
     return render(request, template, context)
 
+def formatTab(request):
+    template = "text/formatTab.html"
+    context = {}
+    return render(request, template, context)
+
 def generatePassword(request):
     template = "text/generatePassword.html"
     context = {}
