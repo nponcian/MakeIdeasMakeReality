@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 from text.cipherMessage import (
-    keycodeParser
+    encryption,
+    keycodeParser,
 )
 
 from text.formatTabIndent import (
@@ -26,8 +27,12 @@ def cipherMessage(request):
 
     if request.method == "POST":
         keycode = request.POST.get("keycode", "")
-        differences = keycodeParser.getDifferencesBetweenChars(keycode)
-        print(differences)
+        textToCipher = request.POST.get("textToCipher", "")
+        keycodeDifferences = keycodeParser.getDifferencesBetweenChars(keycode)
+        print(keycodeDifferences)
+
+        encryptedText = encryption.encrypt(textToCipher, keycodeDifferences)
+        print(encryptedText)
 
     return render(request, template, context)
 

@@ -31,6 +31,7 @@
 <form method="POST" action="."> {% csrf_token %}
     <button class="btn btn-info">Encrypt</button><br>
     Keycode: <input type="text" name="keycode" value="{{ keycode }}"><br>
+    Text to format: <textarea type="text" name="textToCipher" style="resize: both;">{{ textToCipher }}</textarea><br>
 </form>
 
 {% endblock %}
