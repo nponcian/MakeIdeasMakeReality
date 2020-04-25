@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from text.cipherMessage import (
     encryption,
+    decryption,
     keycodeParser,
 )
 
@@ -28,11 +29,16 @@ def cipherMessage(request):
     if request.method == "POST":
         keycode = request.POST.get("keycode", "")
         textToCipher = request.POST.get("textToCipher", "")
-        keycodeDifferences = keycodeParser.getDifferencesBetweenChars(keycode)
-        print(keycodeDifferences)
 
-        encryptedText = encryption.encrypt(textToCipher, keycodeDifferences)
-        print(encryptedText)
+        keycodeDifferences = keycodeParser.getDifferencesBetweenChars(keycode)
+
+        isAnEncryptOperation = "encryptButton" in request.POST
+        cipheredText = encryption.encrypt(textToCipher, keycodeDifferences) if isAnEncryptOperation\
+                        else decryption.decrypt(textToCipher, keycodeDifferences)
+
+        context['keycode'] = keycode
+        context['textToCipher'] = textToCipher
+        context['cipheredText'] = cipheredText
 
     return render(request, template, context)
 
