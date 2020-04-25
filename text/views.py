@@ -22,6 +22,8 @@ def generatePassword(request):
     remainingChars = characterGroup.getCharsFromRandomGroups(groups,
                                                             charCountDivisionPerGroup,
                                                             remainingCharsCount)
+    result = characterGroup.shuffleIntoString(charsFromTheGroups, remainingChars)
+
     template = "text/generatePassword.html"
     context = {}
     return render(request, template, context)

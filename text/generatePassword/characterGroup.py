@@ -1,3 +1,4 @@
+import itertools
 import random
 
 from text.generatePassword import ascii
@@ -40,3 +41,8 @@ def getCharsFromRandomGroups(characterGroups, initialGroupsCharIndex, targetChar
         groupIdAndCharIndex[chosenGroupId] += 1
 
     return randomChars
+
+def shuffleIntoString(*args):
+    combinedList = list(itertools.chain(*args))
+    random.shuffle(combinedList)
+    return "".join(combinedList)
