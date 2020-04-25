@@ -1,11 +1,13 @@
+import random
+
 REPEAT_COUNT = 2
 DISALLOWED_CHARS = [" ", '"', "'", "/", "\\", "`", "|"]
 SYMBOL_CODE_RANGES = [(32, 47), (58, 64), (91, 96), (123, 126)]
 
-def getAsciiDecimalValue(variable):
+def _getAsciiDecimalValue(variable):
     return variable if isinstance(variable, int) else ord(variable)
 
-def repeat(repeatCount):
+def _repeat(repeatCount):
     def decorator(func):
         def wrapper(*args, **kwargs):
             result = func(*args, **kwargs)
@@ -14,19 +16,23 @@ def repeat(repeatCount):
         return wrapper
     return decorator
 
-@repeat(2)
-def getChars(start, end):
-    start = getAsciiDecimalValue(start)
-    end = getAsciiDecimalValue(end)
+@_repeat(REPEAT_COUNT)
+def _getChars(start, end):
+    start = _getAsciiDecimalValue(start)
+    end = _getAsciiDecimalValue(end)
     return [chr(current) for current in range(start, end + 1) if chr(current) not in DISALLOWED_CHARS]
 
-def getCharsSymbols():
-    return [ch for minMaxRange in SYMBOL_CODE_RANGES for ch in getChars(*minMaxRange)]
+def _getCharsSymbols():
+    return [ch for minMaxRange in SYMBOL_CODE_RANGES for ch in _getChars(*minMaxRange)]
 
 def getCharacterGroups():
     characterGroups = list()
-    characterGroups.append(getCharsSymbols())
-    characterGroups.append(getChars("0", "9"))
-    characterGroups.append(getChars("A", "Z"))
-    characterGroups.append(getChars("a", "z"))
+    characterGroups.append(_getCharsSymbols())
+    characterGroups.append(_getChars("0", "9"))
+    characterGroups.append(_getChars("A", "Z"))
+    characterGroups.append(_getChars("a", "z"))
     return characterGroups
+
+def shuffleCharacterGroups(characterGroups):
+    for group in characterGroups:
+        random.shuffle(group)

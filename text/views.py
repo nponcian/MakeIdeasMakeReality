@@ -13,8 +13,9 @@ def text(request):
     return render(request, template, context)
 
 def generatePassword(request):
-    print(characterGroups.getCharacterGroups())
-    print(passwordLength.getPasswordLength())
+    groups = characterGroups.getCharacterGroups()
+    characterGroups.shuffleCharacterGroups(groups)
+    length = passwordLength.getTargetLength()
 
     template = "text/generatePassword.html"
     context = {}
