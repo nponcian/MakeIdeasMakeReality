@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 from text.generatePassword import (
-    characterGroups,
-    passwordLength,
+    characterGroup,
+    characterLength,
 )
 
 # Create your views here.
@@ -13,9 +13,11 @@ def text(request):
     return render(request, template, context)
 
 def generatePassword(request):
-    groups = characterGroups.getCharacterGroups()
-    characterGroups.shuffleCharacterGroups(groups)
-    length = passwordLength.getTargetLength()
+    groups = characterGroup.getCharacterGroups()
+    characterGroup.shuffleCharacterGroups(groups)
+    targetLength = characterLength.getTargetLength()
+    charCountLengthPerGroup = characterLength.getCharCountLengthPerGroup(targetLength, groups)
+    charsFromTheGroups = characterGroup.getCharsPerGroup(groups, charCountLengthPerGroup)
 
     template = "text/generatePassword.html"
     context = {}
