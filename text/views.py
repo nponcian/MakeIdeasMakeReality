@@ -1,8 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
+from text.generatePassword import (
+    characterGroups,
+    passwordLength,
+)
 
-from text.generatePassword import characterGroups
+# Create your views here.
 
 def text(request):
     template = "text/text.html"
@@ -11,6 +14,8 @@ def text(request):
 
 def generatePassword(request):
     print(characterGroups.getCharacterGroups())
+    print(passwordLength.getPasswordLength())
+
     template = "text/generatePassword.html"
     context = {}
     return render(request, template, context)

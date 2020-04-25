@@ -2,7 +2,7 @@ REPEAT_COUNT = 2
 DISALLOWED_CHARS = [" ", '"', "'", "/", "\\", "`", "|"]
 SYMBOL_CODE_RANGES = [(32, 47), (58, 64), (91, 96), (123, 126)]
 
-def getDecimalValue(variable):
+def getAsciiDecimalValue(variable):
     return variable if isinstance(variable, int) else ord(variable)
 
 def repeat(repeatCount):
@@ -16,8 +16,8 @@ def repeat(repeatCount):
 
 @repeat(2)
 def getChars(start, end):
-    start = getDecimalValue(start)
-    end = getDecimalValue(end)
+    start = getAsciiDecimalValue(start)
+    end = getAsciiDecimalValue(end)
     return [chr(current) for current in range(start, end + 1) if chr(current) not in DISALLOWED_CHARS]
 
 def getCharsSymbols():
