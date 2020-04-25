@@ -28,8 +28,10 @@
 {% block body %}
 
 <form method="POST" action="."> {% csrf_token %}
-    <button class="btn btn-info">Generate</button>
-    <input type="text" placeholder="Click my friend!" value="{{ generatedPassword }}" readonly>
+    <button class="btn btn-info">Format</button><br>
+    Tab multiplier: <input type="text" name="tabMultiplier" value="{{ tabMultiplier }}"><br>
+    Text to format: <textarea type="text" name="textToFormat" style="resize: both;">{{ textToFormat }}</textarea><br>
+    Formatted text: <textarea type="text" name="formattedText" style="resize: both;">{{ formattedText }}</textarea>
 </form>
 
 {% endblock %}

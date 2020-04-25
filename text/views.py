@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+from text.formatTab import (
+    formatter,
+)
+
 from text.generatePassword import (
     characterGroup,
     characterLength,
@@ -14,7 +18,19 @@ def text(request):
 
 def formatTab(request):
     template = "text/formatTab.html"
-    context = {}
+    context = {
+        "tabMultiplier" : formatter.DEFAULT_TAB_MULTIPLIER
+    }
+
+    if request.method== "POST":
+        tabMultiplier = request.POST.get("tabMultiplier", "wala!")
+        textToFormat = request.POST.get("textToFormat", "wala2!")
+        formattedText = formatter.formatTab(tabMultiplier, textToFormat)
+
+        context["tabMultiplier"] = tabMultiplier
+        context["textToFormat"] = textToFormat
+        context["formattedText"] = formattedText
+
     return render(request, template, context)
 
 def generatePassword(request):
