@@ -16,6 +16,11 @@ def text(request):
     context = {}
     return render(request, template, context)
 
+def cipherMessage(request):
+    template = "text/cipherMessage.html"
+    context = {}
+    return render(request, template, context)
+
 def formatTabIndent(request):
     template = "text/formatTabIndent.html"
     context = {
