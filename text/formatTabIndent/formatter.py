@@ -1,9 +1,9 @@
-DEFAULT_TAB_MULTIPLIER = 2
+DEFAULT_TAB_INDENT_MULTIPLIER = 2
 TAB_CHAR = " "
 
 def _floatOrDefault(targetMultiplier):
     try:              return float(targetMultiplier)
-    except Exception: return DEFAULT_TAB_MULTIPLIER
+    except Exception: return DEFAULT_TAB_INDENT_MULTIPLIER
 
 def formatTab(targetMultiplier, textToFormat):
     targetMultiplier = _floatOrDefault(targetMultiplier)

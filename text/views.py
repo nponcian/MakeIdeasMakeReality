@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from text.formatTab import (
+from text.formatTabIndent import (
     formatter,
 )
 
@@ -16,10 +16,10 @@ def text(request):
     context = {}
     return render(request, template, context)
 
-def formatTab(request):
-    template = "text/formatTab.html"
+def formatTabIndent(request):
+    template = "text/formatTabIndent.html"
     context = {
-        "tabMultiplier" : formatter.DEFAULT_TAB_MULTIPLIER
+        "tabMultiplier" : formatter.DEFAULT_TAB_INDENT_MULTIPLIER
     }
 
     if request.method== "POST":
