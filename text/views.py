@@ -13,17 +13,20 @@ def text(request):
     return render(request, template, context)
 
 def generatePassword(request):
-    groups = characterGroup.getCharacterGroups()
-    characterGroup.shuffleCharacterGroups(groups)
-    targetLength = characterLength.getTargetLength()
-    charCountDivisionPerGroup = characterLength.getCharCountDivisionPerGroup(groups, targetLength)
-    charsFromTheGroups = characterGroup.getCharsPerGroup(groups, charCountDivisionPerGroup)
-    remainingCharsCount = characterLength.getRemainingCharsCount(targetLength, charsFromTheGroups)
-    remainingChars = characterGroup.getCharsFromRandomGroups(groups,
-                                                            charCountDivisionPerGroup,
-                                                            remainingCharsCount)
-    result = characterGroup.shuffleIntoString(charsFromTheGroups, remainingChars)
-
     template = "text/generatePassword.html"
     context = {}
+
+    if request.method== "POST":
+        groups = characterGroup.getCharacterGroups()
+        characterGroup.shuffleCharacterGroups(groups)
+        targetLength = characterLength.getTargetLength()
+        charCountDivisionPerGroup = characterLength.getCharCountDivisionPerGroup(groups, targetLength)
+        charsFromTheGroups = characterGroup.getCharsPerGroup(groups, charCountDivisionPerGroup)
+        remainingCharsCount = characterLength.getRemainingCharsCount(targetLength, charsFromTheGroups)
+        remainingChars = characterGroup.getCharsFromRandomGroups(groups,
+                                                                charCountDivisionPerGroup,
+                                                                remainingCharsCount)
+        result = characterGroup.shuffleIntoString(charsFromTheGroups, remainingChars)
+        context["generatedPassword"] = result
+
     return render(request, template, context)
