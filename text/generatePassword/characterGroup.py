@@ -14,8 +14,29 @@ def shuffleCharacterGroups(characterGroups):
     for group in characterGroups:
         random.shuffle(group)
 
-def getCharsPerGroup(characterGroups, charCountLengthPerGroup):
+def getCharsPerGroup(characterGroups, targetCharCountPerGroup):
     charsFromTheGroups = list()
     for group in characterGroups:
-        charsFromTheGroups += group[:charCountLengthPerGroup]
+        charsFromTheGroups += group[:targetCharCountPerGroup]
     return charsFromTheGroups
+
+def getCharsFromRandomGroups(characterGroups, initialGroupsCharIndex, targetCharCount):
+    randomChars = list()
+    groupIdAndCharIndex = dict()
+    for id, _ in enumerate(characterGroups):
+        groupIdAndCharIndex[id] = initialGroupsCharIndex
+
+    while len(randomChars) != targetCharCount:
+        chosenGroupId = random.choice(list(groupIdAndCharIndex.keys()))
+        chosenGroupCharacters = characterGroups[chosenGroupId]
+
+        if groupIdAndCharIndex[chosenGroupId] >= len(chosenGroupCharacters):
+            random.shuffle(chosenGroupCharacters) # shuffles characterGroups[chosenGroupId]
+            groupIdAndCharIndex[chosenGroupId] = 0
+
+        targetChar = chosenGroupCharacters[groupIdAndCharIndex[chosenGroupId]]
+        randomChars.append(targetChar)
+
+        groupIdAndCharIndex[chosenGroupId] += 1
+
+    return randomChars

@@ -16,9 +16,12 @@ def generatePassword(request):
     groups = characterGroup.getCharacterGroups()
     characterGroup.shuffleCharacterGroups(groups)
     targetLength = characterLength.getTargetLength()
-    charCountLengthPerGroup = characterLength.getCharCountLengthPerGroup(targetLength, groups)
-    charsFromTheGroups = characterGroup.getCharsPerGroup(groups, charCountLengthPerGroup)
-
+    charCountDivisionPerGroup = characterLength.getCharCountDivisionPerGroup(groups, targetLength)
+    charsFromTheGroups = characterGroup.getCharsPerGroup(groups, charCountDivisionPerGroup)
+    remainingCharsCount = characterLength.getRemainingCharsCount(targetLength, charsFromTheGroups)
+    remainingChars = characterGroup.getCharsFromRandomGroups(groups,
+                                                            charCountDivisionPerGroup,
+                                                            remainingCharsCount)
     template = "text/generatePassword.html"
     context = {}
     return render(request, template, context)

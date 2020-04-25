@@ -6,5 +6,8 @@ MIN_MAX_LENGTH = (12, 15)
 def getTargetLength():
     return random.randint(*MIN_MAX_LENGTH)
 
-def getCharCountLengthPerGroup(targetLength, characterGroups):
+def getCharCountDivisionPerGroup(characterGroups, targetLength):
     return targetLength // len(characterGroups)
+
+def getRemainingCharsCount(targetLength, currentChars):
+    return targetLength - len(currentChars)
