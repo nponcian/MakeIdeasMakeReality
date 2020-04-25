@@ -32,15 +32,22 @@
         </nav>
     </section>
 
-    {% block body %}
-        <h3 class="mt-5 pt-5">Cooking in the background...</h3>
-        <br>
-        <br>
-        <br>
-        <h3>I mean, in the <mark>*backend</mark>...</h3>
-    {% endblock %}
+    <section>
+        {% block pageLabel %}
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container-fluid pt-5">
+                    <div class="display-4">
+                        Cooking in the background...<br>
+                        <br>
+                        I mean, in the
+                        <span class="bg-success text-warning border border-dark rounded-top">*backend</span>
+                    </h1>
+                </div>
+            </div>
+        {% endblock %}
+    </section>
 
-    {% block body_end%}
+    {% block body %}
     {% endblock %}
 
     <!-- Optional JavaScript -->
