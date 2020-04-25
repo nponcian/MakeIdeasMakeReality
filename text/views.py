@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+from text.cipherMessage import (
+    keycodeParser
+)
+
 from text.formatTabIndent import (
     formatter,
 )
@@ -19,6 +23,12 @@ def text(request):
 def cipherMessage(request):
     template = "text/cipherMessage.html"
     context = {}
+
+    if request.method == "POST":
+        keycode = request.POST.get("keycode", "")
+        differences = keycodeParser.getDifferencesBetweenChars(keycode)
+        print(differences)
+
     return render(request, template, context)
 
 def formatTabIndent(request):
@@ -27,9 +37,9 @@ def formatTabIndent(request):
         "tabMultiplier" : formatter.DEFAULT_TAB_INDENT_MULTIPLIER
     }
 
-    if request.method== "POST":
-        tabMultiplier = request.POST.get("tabMultiplier", "wala!")
-        textToFormat = request.POST.get("textToFormat", "wala2!")
+    if request.method == "POST":
+        tabMultiplier = request.POST.get("tabMultiplier", "")
+        textToFormat = request.POST.get("textToFormat", "")
         formattedText = formatter.formatTab(tabMultiplier, textToFormat)
 
         context["tabMultiplier"] = tabMultiplier
@@ -42,7 +52,7 @@ def generatePassword(request):
     template = "text/generatePassword.html"
     context = {}
 
-    if request.method== "POST":
+    if request.method == "POST":
         groups = characterGroup.getCharacterGroups()
         characterGroup.shuffleCharacterGroups(groups)
         targetLength = characterLength.getTargetLength()
