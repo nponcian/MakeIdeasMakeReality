@@ -43,7 +43,7 @@ def formatTabIndent(request):
     if request.method == "POST":
         tabMultiplier = request.POST.get("tabMultiplier", "")
         textToFormat = request.POST.get("textToFormat", "")
-        formattedText = tabIndentFormatter.formatTab(tabMultiplier, textToFormat)
+        formattedText = tabIndentFormatter.formatTab(textToFormat, tabMultiplier)
 
         context["tabMultiplier"] = tabMultiplier
         context["textToFormat"] = textToFormat
@@ -77,4 +77,17 @@ def limitLineLength(request):
         "rotationPoint" : lineLengthFormatter.DEFAULT_ROTATION_POINT,
         "textToFormatPlaceholder" : lineLengthFormatter.EXAMPLE_TEXT_TO_FORMAT
     }
+
+    if request.method == "POST":
+        targetLineLength = request.POST.get("targetLineLength", "")
+        rotationPoint = request.POST.get("rotationPoint", "")
+        textToFormat = request.POST.get("textToFormat", "")
+
+        formattedText = lineLengthFormatter.formatLength(textToFormat, targetLineLength, rotationPoint)
+
+        context["targetLineLength"] = targetLineLength
+        context["rotationPoint"] = rotationPoint
+        context["textToFormat"] = textToFormat
+        context["formattedText"] = formattedText
+
     return render(request, template, context)

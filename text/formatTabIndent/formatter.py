@@ -1,22 +1,22 @@
 DEFAULT_TAB_INDENT_MULTIPLIER = 2
 TAB_CHAR = " "
 
-def _floatOrDefault(targetMultiplier):
-    try:              return float(targetMultiplier)
+def _floatOrDefault(tabMultiplier):
+    try:              return float(tabMultiplier)
     except Exception: return DEFAULT_TAB_INDENT_MULTIPLIER
 
-def formatTab(targetMultiplier, textToFormat):
-    targetMultiplier = _floatOrDefault(targetMultiplier)
-    formattedString = str()
+def formatTab(textToFormat, tabMultiplier):
+    tabMultiplier = _floatOrDefault(tabMultiplier)
+    formattedText = str()
 
     for line in textToFormat.splitlines(keepends = True): # for line in sys.stdin: # sys.stdin.readlines()
         if len(line.strip()) == 0:
-            formattedString += line
+            formattedText += line
             continue
         currentTabLength = len(line) - len(line.lstrip())
-        updatedTabLength = int(currentTabLength * targetMultiplier)
+        updatedTabLength = int(currentTabLength * tabMultiplier)
         updatedTab = TAB_CHAR * updatedTabLength
         updatedLine = updatedTab + line[currentTabLength:]
-        formattedString += updatedLine
+        formattedText += updatedLine
 
-    return formattedString
+    return formattedText
