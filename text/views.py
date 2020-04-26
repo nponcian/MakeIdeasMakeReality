@@ -74,3 +74,8 @@ def generateCode(request):
         context["generatedCode"] = result
 
     return render(request, template, context)
+
+def limitLineLength(request):
+    template = "text/limitLineLength.html"
+    context = {}
+    return render(request, template, context)

@@ -8,5 +8,6 @@ urlpatterns = [
     path('ciphermessage/', views.cipherMessage, name = "cipherMessage"),
     path('formattabindent/', views.formatTabIndent, name = "formatTabIndent"),
     path('generatecode/', views.generateCode, name = "generateCode"),
+    path('limitlinelength/', views.limitLineLength, name = "limitLineLength"),
     path('', views.text, name = "textRoot"),
 ]

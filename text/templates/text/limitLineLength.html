@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'text/css/text.css' %}">
 
-<title>Cipher Message | MakeIdeasMakeReality</title>
+<title>Limit Line Length | MakeIdeasMakeReality</title>
 
 {% endblock %}
 
@@ -18,7 +18,7 @@
 <div class="jumbotron jumbotron-fluid" id="pageLabel">
     <div class="container pt-5 text-center">
         <div class="display-3 pt-xs-3 pt-sm-5">
-            Cipher Message
+            Limit Line Length
         </h1>
     </div>
 </div>
@@ -28,11 +28,11 @@
 {% block body %}
 
 <form method="POST" action="."> {% csrf_token %}
-    <button class="btn btn-info" name="encryptButton">Encrypt</button>
-    <button class="btn btn-danger" name="decryptButton">Decrypt</button><br>
-    Keycode: <input type="text" name="keycode" value="{{ keycode }}"><br>
-    Text to cipher: <textarea type="text" name="textToCipher" style="resize: both;">{{ textToCipher }}</textarea><br>
-    Ciphered text: <textarea type="text" name="cipheredText" style="resize: both;">{{ cipheredText }}</textarea>
+    <button class="btn btn-info">Format</button><br>
+    Target line length: <input type="text" name="targetLineLength" value="{{ targetLineLength }}"><br>
+    Rotation point: <input type="text" name="rotationPoint" value="{{ rotationPoint }}"><br>
+    Text to format: <textarea type="text" name="textToFormat" style="resize: both;">{{ textToFormat }}</textarea><br>
+    Formatted text: <textarea type="text" name="formattedText" style="resize: both;">{{ formattedText }}</textarea>
 </form>
 
 {% endblock %}
