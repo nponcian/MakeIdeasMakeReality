@@ -21,7 +21,7 @@ def _prepareLine(rotationPointChars, prevOverflowingChars, line = ""):
         prevOverflowingChars += SPACE
     return rotationPointChars + prevOverflowingChars + line[rotationPoint:]
 
-def _updateLine(line, targetLineLength, rotationPoint, shouldTerminateUnderflowingLines = True):
+def _updateLine(line, targetLineLength, rotationPoint, shouldCompress):
     updatedLine = str()
     overflowingChars = str()
     underflowingCount = 0
@@ -29,7 +29,7 @@ def _updateLine(line, targetLineLength, rotationPoint, shouldTerminateUnderflowi
     if len(line) <= targetLineLength:
         updatedLine = line.rstrip()
         underflowingCount = targetLineLength - len(updatedLine) - 1 # 1 is for space
-        if shouldTerminateUnderflowingLines or underflowingCount <= 0: updatedLine += NEW_LINE
+        if not shouldCompress or underflowingCount <= 0: updatedLine += NEW_LINE
     else:
         lastPossibleChar = line[targetLineLength - 1]
         firstOverflowingChar = line[targetLineLength]
@@ -48,13 +48,11 @@ def _updateLine(line, targetLineLength, rotationPoint, shouldTerminateUnderflowi
     return updatedLine, overflowingChars, underflowingCount
 
 def _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount):
-    if prevUnderflowingCount <= 0:  return line, "", 0
-
     appendToPrevLine = str()
     underflowingCount = 0
 
-    underflowStart = rotationPoint
-    underflowEnd = rotationPoint + prevUnderflowingCount
+    if prevUnderflowingCount <= 0:  return line, appendToPrevLine, underflowingCount
+
     lineFromRotationPointToEnd = line[rotationPoint:].strip()
 
     if len(lineFromRotationPointToEnd) <= prevUnderflowingCount:
@@ -63,6 +61,9 @@ def _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount):
         if underflowingCount <= 0: appendToPrevLine += NEW_LINE
         line = str()
     else:
+        underflowStart = rotationPoint
+        underflowEnd = rotationPoint + prevUnderflowingCount
+
         lastPossibleChar = line[underflowEnd - 1]
         firstOverflowingChar = line[underflowEnd]
 
@@ -80,31 +81,7 @@ def _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount):
 
     return line, appendToPrevLine, underflowingCount
 
-def limitLength(textToFormat, targetLineLength, rotationPoint):
-    targetLineLength = int(targetLineLength)
-    targetLineLength = targetLineLength if targetLineLength > 0 else DEFAULT_TARGET_LINE_LENGTH
-    rotationPoint = int(rotationPoint) - 1 # base 0
-    rotationPoint = rotationPoint if rotationPoint >= 0 else DEFAULT_ROTATION_POINT
-
-    formattedText = str()
-    prevOverflowingChars = str()
-
-    for line in textToFormat.splitlines():
-        line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
-        updatedLine, overflowingChars, _ = _updateLine(line, targetLineLength, rotationPoint)
-        formattedText += updatedLine
-        prevOverflowingChars = overflowingChars
-
-    rotationPointChars = textToFormat[:rotationPoint]
-    while len(prevOverflowingChars) != 0:
-        prevOverflowingChars = _prepareLine(rotationPointChars, prevOverflowingChars)
-        updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint)
-        formattedText += updatedLine
-        prevOverflowingChars = overflowingChars
-
-    return formattedText
-
-def limitAndCompressLength(textToFormat, targetLineLength, rotationPoint):
+def processLines(textToFormat, targetLineLength, rotationPoint, shouldCompress):
     targetLineLength = int(targetLineLength)
     targetLineLength = targetLineLength if targetLineLength > 0 else DEFAULT_TARGET_LINE_LENGTH
     rotationPoint = int(rotationPoint) - 1 # base 0
@@ -115,13 +92,14 @@ def limitAndCompressLength(textToFormat, targetLineLength, rotationPoint):
     prevUnderflowingCount = 0
 
     for line in textToFormat.splitlines():
-        line, appendToPrevLine, underflowingCount = _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount)
-        formattedText += appendToPrevLine
-        prevUnderflowingCount = underflowingCount
-        if len(line) == 0: continue
+        if shouldCompress:
+            line, appendToPrevLine, underflowingCount = _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount)
+            formattedText += appendToPrevLine
+            prevUnderflowingCount = underflowingCount
+            if len(line) == 0: continue
 
         line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
-        updatedLine, overflowingChars, underflowingCount = _updateLine(line, targetLineLength, rotationPoint, False)
+        updatedLine, overflowingChars, underflowingCount = _updateLine(line, targetLineLength, rotationPoint, shouldCompress)
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
         prevUnderflowingCount = underflowingCount

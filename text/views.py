@@ -82,10 +82,12 @@ def limitLineLength(request):
         targetLineLength = request.POST.get("targetLineLength", "")
         rotationPoint = request.POST.get("rotationPoint", "")
         textToFormat = request.POST.get("textToFormat", "")
-        isLimitOnlyOperation = "limitButton" in request.POST
+        shouldCompress = "limitAndCompressButton" in request.POST
 
-        formattedText = lineLengthLimiter.limitLength(textToFormat, targetLineLength, rotationPoint) if isLimitOnlyOperation\
-                        else lineLengthLimiter.limitAndCompressLength(textToFormat, targetLineLength, rotationPoint)
+        formattedText = lineLengthLimiter.processLines(textToFormat,
+                                                        targetLineLength,
+                                                        rotationPoint,
+                                                        shouldCompress)
 
         context["targetLineLength"] = targetLineLength
         context["rotationPoint"] = rotationPoint
