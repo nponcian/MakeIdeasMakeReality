@@ -1,17 +1,12 @@
 from django.shortcuts import render
 
-from text.cipherMessage import (
-    algorithmsFactory,
-)
-
-from text.formatTabIndent import (
-    formatter,
-)
-
+from text.cipherMessage import algorithmsFactory
+from text.formatTabIndent import formatter as tabIndentFormatter
 from text.generateCode import (
     characterGroup,
     characterLength,
 )
+from text.limitLineLength import formatter as lineLengthFormatter
 
 # Create your views here.
 
@@ -42,13 +37,13 @@ def cipherMessage(request):
 def formatTabIndent(request):
     template = "text/formatTabIndent.html"
     context = {
-        "tabMultiplier" : formatter.DEFAULT_TAB_INDENT_MULTIPLIER
+        "tabMultiplier" : tabIndentFormatter.DEFAULT_TAB_INDENT_MULTIPLIER
     }
 
     if request.method == "POST":
         tabMultiplier = request.POST.get("tabMultiplier", "")
         textToFormat = request.POST.get("textToFormat", "")
-        formattedText = formatter.formatTab(tabMultiplier, textToFormat)
+        formattedText = tabIndentFormatter.formatTab(tabMultiplier, textToFormat)
 
         context["tabMultiplier"] = tabMultiplier
         context["textToFormat"] = textToFormat
@@ -77,5 +72,9 @@ def generateCode(request):
 
 def limitLineLength(request):
     template = "text/limitLineLength.html"
-    context = {}
+    context = {
+        "targetLineLength" : lineLengthFormatter.DEFAULT_TARGET_LINE_LENGTH,
+        "rotationPoint" : lineLengthFormatter.DEFAULT_ROTATION_POINT,
+        "textToFormatPlaceholder" : lineLengthFormatter.EXAMPLE_TEXT_TO_FORMAT
+    }
     return render(request, template, context)
