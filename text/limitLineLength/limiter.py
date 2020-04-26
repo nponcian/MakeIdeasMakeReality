@@ -86,21 +86,29 @@ def limitAndCompressLength(textToFormat, targetLineLength, rotationPoint):
         if prevUnderflowingCount > 0:
             underflowStart = rotationPoint
             underflowEnd = rotationPoint + prevUnderflowingCount
+            lineFromRotationPointToEnd = line[rotationPoint:].strip()
 
-            lastPossibleChar = line[underflowEnd - 1]
-            firstOverflowingChar = line[underflowEnd]
-
-            if lastPossibleChar.isspace() or firstOverflowingChar.isspace():
-                formattedText += SPACE + line[underflowStart:underflowEnd].strip() + NEW_LINE
-                line = line[:underflowStart] + line[underflowEnd:].strip()
+            if len(lineFromRotationPointToEnd) <= prevUnderflowingCount:
+                updatedLine = lineFromRotationPointToEnd.strip()
+                prevUnderflowingCount = prevUnderflowingCount - len(updatedLine) - 1 # 1 is for space
+                formattedText += SPACE + updatedLine
+                if prevUnderflowingCount <= 0: updatedLine += NEW_LINE
+                continue
             else:
-                lineBreaker = line[:underflowEnd].rfind(SPACE, underflowStart + 1)
+                lastPossibleChar = line[underflowEnd - 1]
+                firstOverflowingChar = line[underflowEnd]
 
-                if lineBreaker > 0:
-                    formattedText += SPACE + line[underflowStart:lineBreaker].strip()
-                    line = line[:underflowStart] + line[lineBreaker:].strip()
+                if lastPossibleChar.isspace() or firstOverflowingChar.isspace():
+                    formattedText += SPACE + line[underflowStart:underflowEnd].strip() + NEW_LINE
+                    line = line[:underflowStart] + line[underflowEnd:].strip()
+                else:
+                    lineBreaker = line[:underflowEnd].rfind(SPACE, underflowStart + 1)
 
-                formattedText += NEW_LINE
+                    if lineBreaker > 0:
+                        formattedText += SPACE + line[underflowStart:lineBreaker].strip()
+                        line = line[:underflowStart] + line[lineBreaker:].strip()
+
+                    formattedText += NEW_LINE
 
         line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
 
