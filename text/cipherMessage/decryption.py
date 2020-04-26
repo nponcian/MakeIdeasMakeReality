@@ -17,7 +17,7 @@ def decrypt(textToCipher, keycodeDifferences):
     decrypted = str()
     for ch in textToCipher:
         if not _isCharInRangeToProcess(ch):
-            encrypted += ch
+            decrypted += ch
             continue
 
         differenceToUse = keycodeDifferences.popleft()
@@ -25,8 +25,12 @@ def decrypt(textToCipher, keycodeDifferences):
 
         oldChValue = ord(ch) - differenceToUse
         while not _isCharInRangeToProcess(oldChValue):
-            toShift = ASCII_RANGE_TO_PROCESS.min - oldChValue
-            oldChValue = (ASCII_RANGE_TO_PROCESS.max + 1) - toShift
+            if oldChValue > ASCII_RANGE_TO_PROCESS.max:
+                toShift = oldChValue - ASCII_RANGE_TO_PROCESS.max
+                oldChValue = (ASCII_RANGE_TO_PROCESS.min - 1) + toShift
+            else:
+                toShift = ASCII_RANGE_TO_PROCESS.min - oldChValue
+                oldChValue = (ASCII_RANGE_TO_PROCESS.max + 1) - toShift
 
         decrypted += chr(oldChValue)
 

@@ -25,8 +25,12 @@ def encrypt(textToCipher, keycodeDifferences):
 
         newChValue = ord(ch) + differenceToUse
         while not _isCharInRangeToProcess(newChValue):
-            toShift = newChValue - ASCII_RANGE_TO_PROCESS.max
-            newChValue = (ASCII_RANGE_TO_PROCESS.min - 1) + toShift
+            if newChValue > ASCII_RANGE_TO_PROCESS.max:
+                toShift = newChValue - ASCII_RANGE_TO_PROCESS.max
+                newChValue = (ASCII_RANGE_TO_PROCESS.min - 1) + toShift
+            else:
+                toShift = ASCII_RANGE_TO_PROCESS.min - newChValue
+                newChValue = (ASCII_RANGE_TO_PROCESS.max + 1) - toShift
 
         encrypted += chr(newChValue)
 
