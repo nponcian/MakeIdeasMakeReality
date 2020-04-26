@@ -107,7 +107,7 @@ def processLines(textToFormat, targetLineLength, rotationPoint, shouldCompress):
     rotationPointChars = textToFormat[:rotationPoint]
     while len(prevOverflowingChars) != 0:
         prevOverflowingChars = _prepareLine(rotationPointChars, prevOverflowingChars)
-        updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint)
+        updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint, shouldCompress)
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
 
