@@ -20,7 +20,7 @@ class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
         return self.ASCII_RANGE_TO_PROCESS.min <= charAsciiCode\
             and charAsciiCode <= self.ASCII_RANGE_TO_PROCESS.max
 
-    def __adjustCharValueToAllowedRange(self, chValue):
+    def __shiftCharValueToAllowedRange(self, chValue):
         while not self.__isCharInRangeToProcess(chValue):
             if chValue > self.ASCII_RANGE_TO_PROCESS.max:
                 toShift = chValue - self.ASCII_RANGE_TO_PROCESS.max
@@ -47,40 +47,28 @@ class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
 
         return differencesDeque
 
-    def encrypt(self, textToCipher, keycode):
+    def __cipher(self, textToCipher, keycode, cipherOperation):
         keycodeDifferences = self.__getDifferencesBetweenChars(keycode)
 
-        encrypted = str()
+        ciphered = str()
         for ch in textToCipher:
             if not self.__isCharInRangeToProcess(ch):
-                encrypted += ch
+                ciphered += ch
                 continue
 
             differenceToUse = keycodeDifferences.popleft() # or use deque.rotate()
             keycodeDifferences.append(differenceToUse)
 
-            newChValue = ord(ch) + differenceToUse
-            newChValue = self.__adjustCharValueToAllowedRange(newChValue)
+            expression = str("ord(ch) " + cipherOperation + " differenceToUse")
+            chValue = eval(expression)
+            chValue = self.__shiftCharValueToAllowedRange(chValue)
 
-            encrypted += chr(newChValue)
+            ciphered += chr(chValue)
 
-        return encrypted
+        return ciphered
+
+    def encrypt(self, textToCipher, keycode):
+        return self.__cipher(textToCipher, keycode, "+")
 
     def decrypt(self, textToCipher, keycode):
-        keycodeDifferences = self.__getDifferencesBetweenChars(keycode)
-
-        decrypted = str()
-        for ch in textToCipher:
-            if not self.__isCharInRangeToProcess(ch):
-                decrypted += ch
-                continue
-
-            differenceToUse = keycodeDifferences.popleft()
-            keycodeDifferences.append(differenceToUse)
-
-            oldChValue = ord(ch) - differenceToUse
-            oldChValue = self.__adjustCharValueToAllowedRange(oldChValue)
-
-            decrypted += chr(oldChValue)
-
-        return decrypted
+        return self.__cipher(textToCipher, keycode, "-")
