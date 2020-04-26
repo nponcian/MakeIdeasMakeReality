@@ -6,7 +6,7 @@ from text.generateCode import (
     characterGroup,
     characterLength,
 )
-from text.limitLineLength import formatter as lineLengthFormatter
+from text.limitLineLength import limiter as lineLengthLimiter
 
 # Create your views here.
 
@@ -73,9 +73,9 @@ def generateCode(request):
 def limitLineLength(request):
     template = "text/limitLineLength.html"
     context = {
-        "targetLineLength" : lineLengthFormatter.DEFAULT_TARGET_LINE_LENGTH,
-        "rotationPoint" : lineLengthFormatter.DEFAULT_ROTATION_POINT,
-        "textToFormatPlaceholder" : lineLengthFormatter.EXAMPLE_TEXT_TO_FORMAT
+        "targetLineLength" : lineLengthLimiter.DEFAULT_TARGET_LINE_LENGTH,
+        "rotationPoint" : lineLengthLimiter.DEFAULT_ROTATION_POINT,
+        "textToFormatPlaceholder" : lineLengthLimiter.EXAMPLE_TEXT_TO_FORMAT
     }
 
     if request.method == "POST":
@@ -83,7 +83,7 @@ def limitLineLength(request):
         rotationPoint = request.POST.get("rotationPoint", "")
         textToFormat = request.POST.get("textToFormat", "")
 
-        formattedText = lineLengthFormatter.formatLength(textToFormat, targetLineLength, rotationPoint)
+        formattedText = lineLengthLimiter.limitLength(textToFormat, targetLineLength, rotationPoint)
 
         context["targetLineLength"] = targetLineLength
         context["rotationPoint"] = rotationPoint
