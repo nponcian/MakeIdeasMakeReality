@@ -11,6 +11,16 @@ def _isCharInRangeToProcess(value):
     return ASCII_RANGE_TO_PROCESS.min <= charAsciiCode\
         and charAsciiCode <= ASCII_RANGE_TO_PROCESS.max
 
+def _adjustCharValueToAllowedRange(chValue):
+    while not _isCharInRangeToProcess(chValue):
+        if chValue > ASCII_RANGE_TO_PROCESS.max:
+            toShift = chValue - ASCII_RANGE_TO_PROCESS.max
+            chValue = (ASCII_RANGE_TO_PROCESS.min - 1) + toShift
+        else:
+            toShift = ASCII_RANGE_TO_PROCESS.min - chValue
+            chValue = (ASCII_RANGE_TO_PROCESS.max + 1) - toShift
+    return chValue
+
 def decrypt(textToCipher, keycodeDifferences):
     keycodeDifferences = deque(keycodeDifferences)
 
@@ -24,13 +34,7 @@ def decrypt(textToCipher, keycodeDifferences):
         keycodeDifferences.append(differenceToUse)
 
         oldChValue = ord(ch) - differenceToUse
-        while not _isCharInRangeToProcess(oldChValue):
-            if oldChValue > ASCII_RANGE_TO_PROCESS.max:
-                toShift = oldChValue - ASCII_RANGE_TO_PROCESS.max
-                oldChValue = (ASCII_RANGE_TO_PROCESS.min - 1) + toShift
-            else:
-                toShift = ASCII_RANGE_TO_PROCESS.min - oldChValue
-                oldChValue = (ASCII_RANGE_TO_PROCESS.max + 1) - toShift
+        oldChValue = _adjustCharValueToAllowedRange(oldChValue)
 
         decrypted += chr(oldChValue)
 
