@@ -1,4 +1,4 @@
-from text.cipherMessage import (
+from text.cipherMessage.algorithm import (
     keycodeAddition,
 )
 

@@ -3,7 +3,7 @@ from collections import (
     namedtuple,
 )
 
-from text.cipherMessage import cipherAlgorithm
+from text.cipherMessage.algorithm import cipherAlgorithm
 
 class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
     def __init__(self):
