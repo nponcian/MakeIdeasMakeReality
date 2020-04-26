@@ -3,11 +3,9 @@ from collections import (
     namedtuple,
 )
 
-class CipherProcessor:
-    def __init__(self):
-        pass
+from text.cipherMessage import cipherAlgorithm
 
-class KeycodeAddition(CipherProcessor):
+class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
     def __init__(self):
         super().__init__()
 

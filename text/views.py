@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from text.cipherMessage import (
-    encryption,
+    algorithmsFactory,
 )
 
 from text.formatTabIndent import (
@@ -27,10 +27,9 @@ def cipherMessage(request):
     if request.method == "POST":
         keycode = request.POST.get("keycode", "")
         textToCipher = request.POST.get("textToCipher", "")
-
-        algorithm = encryption.KeycodeAddition()
-
         isAnEncryptOperation = "encryptButton" in request.POST
+
+        algorithm = algorithmsFactory.getChosenAlgorithm()
         cipheredText = algorithm.encrypt(textToCipher, keycode) if isAnEncryptOperation\
                         else algorithm.decrypt(textToCipher, keycode)
 
