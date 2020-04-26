@@ -21,7 +21,7 @@ def _prepareLine(rotationPointChars, prevOverflowingChars, line = ""):
         prevOverflowingChars += SPACE
     return rotationPointChars + prevOverflowingChars + line[rotationPoint:]
 
-def _updateLine(line, targetLineLength, rotationPoint):
+def _updateLine(line, targetLineLength, rotationPoint, shouldTerminateUnderflowingLines = True):
     updatedLine = str()
     overflowingChars = str()
     underflowingCount = 0
@@ -29,7 +29,7 @@ def _updateLine(line, targetLineLength, rotationPoint):
     if len(line) <= targetLineLength:
         updatedLine = line.rstrip()
         underflowingCount = targetLineLength - len(updatedLine) - 1 # 1 is for space
-        if underflowingCount <= 0: updatedLine += NEW_LINE
+        if shouldTerminateUnderflowingLines or underflowingCount <= 0: updatedLine += NEW_LINE
     else:
         lastPossibleChar = line[targetLineLength - 1]
         firstOverflowingChar = line[targetLineLength]
@@ -44,7 +44,41 @@ def _updateLine(line, targetLineLength, rotationPoint):
             updatedLine = line[:lineBreaker].rstrip() + NEW_LINE
             overflowingChars = line[lineBreaker:].strip()
 
+    # note that either overflow or underflow variable would be filled up at a time, but not both
     return updatedLine, overflowingChars, underflowingCount
+
+def _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount):
+    if prevUnderflowingCount <= 0:  return line, "", 0
+
+    appendToPrevLine = str()
+    underflowingCount = 0
+
+    underflowStart = rotationPoint
+    underflowEnd = rotationPoint + prevUnderflowingCount
+    lineFromRotationPointToEnd = line[rotationPoint:].strip()
+
+    if len(lineFromRotationPointToEnd) <= prevUnderflowingCount:
+        appendToPrevLine = SPACE + lineFromRotationPointToEnd.strip()
+        underflowingCount = prevUnderflowingCount - len(appendToPrevLine)
+        if underflowingCount <= 0: appendToPrevLine += NEW_LINE
+        line = str()
+    else:
+        lastPossibleChar = line[underflowEnd - 1]
+        firstOverflowingChar = line[underflowEnd]
+
+        if lastPossibleChar.isspace() or firstOverflowingChar.isspace():
+            appendToPrevLine = SPACE + line[underflowStart:underflowEnd].strip() + NEW_LINE
+            line = line[:underflowStart] + line[underflowEnd:].strip()
+        else:
+            lineBreaker = line[:underflowEnd].rfind(SPACE, underflowStart + 1)
+
+            if lineBreaker > 0:
+                appendToPrevLine = SPACE + line[underflowStart:lineBreaker].strip()
+                line = line[:underflowStart] + line[lineBreaker:].strip()
+
+            appendToPrevLine += NEW_LINE
+
+    return line, appendToPrevLine, underflowingCount
 
 def limitLength(textToFormat, targetLineLength, rotationPoint):
     targetLineLength = int(targetLineLength)
@@ -58,7 +92,6 @@ def limitLength(textToFormat, targetLineLength, rotationPoint):
     for line in textToFormat.splitlines():
         line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
         updatedLine, overflowingChars, _ = _updateLine(line, targetLineLength, rotationPoint)
-
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
 
@@ -66,7 +99,6 @@ def limitLength(textToFormat, targetLineLength, rotationPoint):
     while len(prevOverflowingChars) != 0:
         prevOverflowingChars = _prepareLine(rotationPointChars, prevOverflowingChars)
         updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint)
-
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
 
@@ -83,39 +115,22 @@ def limitAndCompressLength(textToFormat, targetLineLength, rotationPoint):
     prevUnderflowingCount = 0
 
     for line in textToFormat.splitlines():
-        if prevUnderflowingCount > 0:
-            underflowStart = rotationPoint
-            underflowEnd = rotationPoint + prevUnderflowingCount
-            lineFromRotationPointToEnd = line[rotationPoint:].strip()
-
-            if len(lineFromRotationPointToEnd) <= prevUnderflowingCount:
-                updatedLine = lineFromRotationPointToEnd.strip()
-                prevUnderflowingCount = prevUnderflowingCount - len(updatedLine) - 1 # 1 is for space
-                formattedText += SPACE + updatedLine
-                if prevUnderflowingCount <= 0: updatedLine += NEW_LINE
-                continue
-            else:
-                lastPossibleChar = line[underflowEnd - 1]
-                firstOverflowingChar = line[underflowEnd]
-
-                if lastPossibleChar.isspace() or firstOverflowingChar.isspace():
-                    formattedText += SPACE + line[underflowStart:underflowEnd].strip() + NEW_LINE
-                    line = line[:underflowStart] + line[underflowEnd:].strip()
-                else:
-                    lineBreaker = line[:underflowEnd].rfind(SPACE, underflowStart + 1)
-
-                    if lineBreaker > 0:
-                        formattedText += SPACE + line[underflowStart:lineBreaker].strip()
-                        line = line[:underflowStart] + line[lineBreaker:].strip()
-
-                    formattedText += NEW_LINE
+        line, appendToPrevLine, underflowingCount = _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount)
+        formattedText += appendToPrevLine
+        prevUnderflowingCount = underflowingCount
+        if len(line) == 0: continue
 
         line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
-
-        updatedLine, overflowingChars, underflowingCount = _updateLine(line, targetLineLength, rotationPoint)
-
+        updatedLine, overflowingChars, underflowingCount = _updateLine(line, targetLineLength, rotationPoint, False)
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
         prevUnderflowingCount = underflowingCount
+
+    rotationPointChars = textToFormat[:rotationPoint]
+    while len(prevOverflowingChars) != 0:
+        prevOverflowingChars = _prepareLine(rotationPointChars, prevOverflowingChars)
+        updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint)
+        formattedText += updatedLine
+        prevOverflowingChars = overflowingChars
 
     return formattedText
