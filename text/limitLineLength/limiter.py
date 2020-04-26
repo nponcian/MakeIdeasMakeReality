@@ -12,7 +12,9 @@ NEW_LINE = "\n"
 
 def limitLength(textToFormat, targetLineLength, rotationPoint):
     targetLineLength = int(targetLineLength)
+    targetLineLength = targetLineLength if targetLineLength > 0 else DEFAULT_TARGET_LINE_LENGTH
     rotationPoint = int(rotationPoint) - 1 # base 0
+    rotationPoint = rotationPoint if rotationPoint > 0 else DEFAULT_ROTATION_POINT
 
     formattedText = str()
     overflowingChars = str()
@@ -23,6 +25,7 @@ def limitLength(textToFormat, targetLineLength, rotationPoint):
         if len(overflowingChars) > 0:
             lineList[rotationPoint:] = list(overflowingChars) + [SPACE] + lineList[rotationPoint:]
 
+        updatedLine = str()
         if len(lineList) <= targetLineLength:
             updatedLine = "".join(lineList).rstrip() + NEW_LINE
             overflowingChars = str()
@@ -40,6 +43,31 @@ def limitLength(textToFormat, targetLineLength, rotationPoint):
 
                 updatedLine = "".join(lineList[:lineBreaker]).rstrip() + NEW_LINE
                 overflowingChars = "".join(lineList[lineBreaker:]).strip()
+
+        formattedText += updatedLine
+
+    rotationPointChars = textToFormat[:rotationPoint]
+    while len(overflowingChars) != 0:
+        overflowingChars = rotationPointChars + overflowingChars
+
+        updatedLine = str()
+        if len(overflowingChars) <= targetLineLength:
+            updatedLine = overflowingChars
+            overflowingChars = str()
+        else:
+            lastPossibleChar = overflowingChars[targetLineLength - 1]
+            firstOverflowingChar = overflowingChars[targetLineLength]
+
+            if lastPossibleChar.isspace() or firstOverflowingChar.isspace():
+                updatedLine = overflowingChars[:targetLineLength].rstrip() + NEW_LINE
+                overflowingChars = overflowingChars[targetLineLength:].strip()
+            else:
+                updatedLine = overflowingChars[:targetLineLength]
+                lastSpaceIndex = updatedLine.rfind(SPACE, rotationPoint + 1)
+                lineBreaker = lastSpaceIndex if lastSpaceIndex > rotationPoint else targetLineLength
+
+                updatedLine = overflowingChars[:lineBreaker].rstrip() + NEW_LINE
+                overflowingChars = overflowingChars[lineBreaker:].strip()
 
         formattedText += updatedLine
 
