@@ -28,7 +28,8 @@
 {% block body %}
 
 <form method="POST" action="."> {% csrf_token %}
-    <button class="btn btn-info">Format</button><br>
+    <button class="btn btn-info" name="limitButton">Limit</button><br>
+    <button class="btn btn-danger" name="limitAndCompressButton">Limit & Compress</button><br>
     Target line length: <input type="text" name="targetLineLength" value="{{ targetLineLength }}"><br>
     Rotation point: <input type="text" name="rotationPoint" value="{{ rotationPoint }}"><br>
     Text to format: <textarea type="text" name="textToFormat" style="resize: both;" placeholder="{{ textToFormatPlaceholder }}">{{ textToFormat }}</textarea><br>

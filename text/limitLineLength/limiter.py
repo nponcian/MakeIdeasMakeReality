@@ -1,5 +1,10 @@
+# Note: Line strips only happen if chars are to be moved to the next line. Any tabbing or spacing
+# made within a line would not be affected unless the words that they separate (specifically the
+# word on the right side) is moved to the next line, in which case the spacing in between is
+# stripped.
+
 DEFAULT_TARGET_LINE_LENGTH = 100
-DEFAULT_ROTATION_POINT = 3 # for Python comments
+DEFAULT_ROTATION_POINT = 1 # 3 for for Python comments
 EXAMPLE_TEXT_TO_FORMAT = "\
 # Sample line:\n\
 # This is a line containing one hundred characters horizontally within this line ending in 3, 2, 111\n\
@@ -19,9 +24,12 @@ def _prepareLine(rotationPointChars, prevOverflowingChars, line = ""):
 def _updateLine(line, targetLineLength, rotationPoint):
     updatedLine = str()
     overflowingChars = str()
+    underflowingCount = 0
 
     if len(line) <= targetLineLength:
-        updatedLine = line.rstrip() + NEW_LINE
+        updatedLine = line.rstrip()
+        underflowingCount = targetLineLength - len(updatedLine) - 1 # 1 is for space
+        if underflowingCount <= 0: updatedLine += NEW_LINE
     else:
         lastPossibleChar = line[targetLineLength - 1]
         firstOverflowingChar = line[targetLineLength]
@@ -30,14 +38,13 @@ def _updateLine(line, targetLineLength, rotationPoint):
             updatedLine = line[:targetLineLength].rstrip() + NEW_LINE
             overflowingChars = line[targetLineLength:].strip()
         else:
-            updatedLine = line[:targetLineLength]
-            lastSpaceIndex = updatedLine.rfind(SPACE, rotationPoint + 1)
-            lineBreaker = lastSpaceIndex if lastSpaceIndex > rotationPoint else targetLineLength
+            lastSpaceIndex = line[:targetLineLength].rfind(SPACE, rotationPoint + 1)
+            lineBreaker = lastSpaceIndex if lastSpaceIndex > 0 else targetLineLength
 
             updatedLine = line[:lineBreaker].rstrip() + NEW_LINE
             overflowingChars = line[lineBreaker:].strip()
 
-    return updatedLine, overflowingChars
+    return updatedLine, overflowingChars, underflowingCount
 
 def limitLength(textToFormat, targetLineLength, rotationPoint):
     targetLineLength = int(targetLineLength)
@@ -50,7 +57,7 @@ def limitLength(textToFormat, targetLineLength, rotationPoint):
 
     for line in textToFormat.splitlines():
         line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
-        updatedLine, overflowingChars = _updateLine(line, targetLineLength, rotationPoint)
+        updatedLine, overflowingChars, _ = _updateLine(line, targetLineLength, rotationPoint)
 
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
@@ -58,9 +65,49 @@ def limitLength(textToFormat, targetLineLength, rotationPoint):
     rotationPointChars = textToFormat[:rotationPoint]
     while len(prevOverflowingChars) != 0:
         prevOverflowingChars = _prepareLine(rotationPointChars, prevOverflowingChars)
-        updatedLine, overflowingChars = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint)
+        updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint)
 
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
+
+    return formattedText
+
+def limitAndCompressLength(textToFormat, targetLineLength, rotationPoint):
+    targetLineLength = int(targetLineLength)
+    targetLineLength = targetLineLength if targetLineLength > 0 else DEFAULT_TARGET_LINE_LENGTH
+    rotationPoint = int(rotationPoint) - 1 # base 0
+    rotationPoint = rotationPoint if rotationPoint >= 0 else DEFAULT_ROTATION_POINT
+
+    formattedText = str()
+    prevOverflowingChars = str()
+    prevUnderflowingCount = 0
+
+    for line in textToFormat.splitlines():
+        if prevUnderflowingCount > 0:
+            underflowStart = rotationPoint
+            underflowEnd = rotationPoint + prevUnderflowingCount
+
+            lastPossibleChar = line[underflowEnd - 1]
+            firstOverflowingChar = line[underflowEnd]
+
+            if lastPossibleChar.isspace() or firstOverflowingChar.isspace():
+                formattedText += SPACE + line[underflowStart:underflowEnd].strip() + NEW_LINE
+                line = line[:underflowStart] + line[underflowEnd:].strip()
+            else:
+                lineBreaker = line[:underflowEnd].rfind(SPACE, underflowStart + 1)
+
+                if lineBreaker > 0:
+                    formattedText += SPACE + line[underflowStart:lineBreaker].strip()
+                    line = line[:underflowStart] + line[lineBreaker:].strip()
+
+                formattedText += NEW_LINE
+
+        line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
+
+        updatedLine, overflowingChars, underflowingCount = _updateLine(line, targetLineLength, rotationPoint)
+
+        formattedText += updatedLine
+        prevOverflowingChars = overflowingChars
+        prevUnderflowingCount = underflowingCount
 
     return formattedText
