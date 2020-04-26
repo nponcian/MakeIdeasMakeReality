@@ -7,6 +7,6 @@ app_name = 'text'
 urlpatterns = [
     path('ciphermessage/', views.cipherMessage, name = "cipherMessage"),
     path('formattabindent/', views.formatTabIndent, name = "formatTabIndent"),
-    path('generatepassword/', views.generatePassword, name = "generatePassword"),
+    path('generatecode/', views.generateCode, name = "generateCode"),
     path('', views.text, name = "textRoot"),
 ]

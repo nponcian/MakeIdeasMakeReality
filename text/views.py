@@ -10,7 +10,7 @@ from text.formatTabIndent import (
     formatter,
 )
 
-from text.generatePassword import (
+from text.generateCode import (
     characterGroup,
     characterLength,
 )
@@ -59,8 +59,8 @@ def formatTabIndent(request):
 
     return render(request, template, context)
 
-def generatePassword(request):
-    template = "text/generatePassword.html"
+def generateCode(request):
+    template = "text/generateCode.html"
     context = {}
 
     if request.method == "POST":
@@ -74,6 +74,6 @@ def generatePassword(request):
                                                                 charCountDivisionPerGroup,
                                                                 remainingCharsCount)
         result = characterGroup.shuffleIntoString(charsFromTheGroups, remainingChars)
-        context["generatedPassword"] = result
+        context["generatedCode"] = result
 
     return render(request, template, context)

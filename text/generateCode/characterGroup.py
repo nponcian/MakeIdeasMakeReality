@@ -1,7 +1,7 @@
 import itertools
 import random
 
-from text.generatePassword import ascii
+from text.generateCode import ascii
 
 def getCharacterGroups():
     characterGroups = list()
