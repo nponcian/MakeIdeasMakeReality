@@ -28,7 +28,7 @@ def serverExternalIp(request):
     # IP address.
     # return JsonResponse({'ip' : request.META.get('HTTP_HOST', "")})
 
-    IP_KEY_NAME = "ip_addr"
+    IP_ADDRESS_TAG = "ip_addr"
     PUBLIC_IP_ADDRESS_FINDER = "http://ifconfig.me/ip"
     response = requests.get(PUBLIC_IP_ADDRESS_FINDER)
-    return JsonResponse({IP_KEY_NAME : response.text})
+    return JsonResponse({IP_ADDRESS_TAG : response.text})
