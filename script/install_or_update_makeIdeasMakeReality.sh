@@ -197,6 +197,9 @@ func_additionalNotes()
     echo "PostgreSQL roles and the database to be used for the project separately. The details"
     echo "should be the same with those configured in the environmentVariables file that was used"
     echo "to configure this project."
+    echo "    sudo su postgres"
+    echo "    createuser --interactive -P"
+    echo "    createdb makeIdeasMakeRealityDb"
     echo
     echo "For local development and deployment where you would not use Gunicorn as the WSGI server,"
     echo "lets say you would be using the default Django provided WSGI server (the one used when you"
@@ -206,6 +209,11 @@ func_additionalNotes()
     # or # echo "    source $(readlink -f ${SCRIPT_ENVIRONMENT_VARIABLES_EXPORTER})"
     echo "Activate the created virtual environment:"
     echo "    source ${VENV_ACTIVATE}"
+    echo "Run migrations (wasn't run in the script to avoid messing up with the database)"
+    echo "    ./manage.py makemigrations"
+    echo "    ./manage.py migrate"
+    echo "Create a superuser (optional, such as if you would like to access Admin pages)"
+    echo "    ./manage.py createsuperuser"
 }
 
 func_setupApt
