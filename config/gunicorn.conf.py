@@ -34,7 +34,11 @@ daemon = False
 accesslog = 'log/accesslog.log'
 
 # The access log format.
-access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+access_log_format = '%({x-forwarded-for}i)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+# access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+# "h" is the remote address specified in the HTTP Request header, specifically "request.META['REMOTE_ADDR']",
+# but it is not anymore automatically populated (as noted in nginx.conf) thus the alternative
+# "x-forwarded-for" is used which corresponds to "request.META['HTTP_X_FORWARDED_FOR']"
 
 # The Error log file to write to.
 # Using '-' for FILE makes gunicorn log to stderr.
