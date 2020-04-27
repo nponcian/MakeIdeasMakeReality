@@ -1,5 +1,17 @@
 DEFAULT_TAB_INDENT_MULTIPLIER = 2
 TAB_CHAR = " "
+EXAMPLE_TEXT_TO_FORMAT = "\
+<this>\n\
+  <is>\n\
+    <an>\n\
+      example that contains\n\
+      tab indents of size 2\n\
+      <want to='make' the='tabindents: 4'?>\n\
+        then, format me now!\n\
+      </want>\n\
+    </an>\n\
+  </is>\n\
+</this>"
 
 def _floatOrDefault(tabMultiplier):
     try:              return float(tabMultiplier)

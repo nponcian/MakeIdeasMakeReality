@@ -6,11 +6,13 @@
 DEFAULT_TARGET_LINE_LENGTH = 100
 DEFAULT_ROTATION_POINT = 1 # 3 for for Python comments
 EXAMPLE_TEXT_TO_FORMAT = "\
-# Sample line:\n\
-# This is a line containing one hundred characters horizontally within this line ending in 3, 2, 111\n\
-# This is another line containing more than one hundred characters horizontally within this line ending in 3, 2, 1\n\
+# Enter paragraph here\n\
+# Sample paragraph\n\
+# Rotate me at point 3 to adjust for the tag '#'\n\
+# This is a line containing exactly 100 characters, you can try to count this and you'd also get 100\n\
+# This is another line containing more than 100 characters, don't manually count it, that is time consuming, use a text editor!\n\
 # This is again another line, I would catch overflowing characters above, but even me would also overflow so let the next line handle me\n\
-# Okay fine, I would catch their overflows here."
+# Okay fine, I would catch their overflows here. Thisisanotherlinecontainingmorethan100charactersWITHOUTspaces,don'tmanuallycountit,thatistimeconsuming,useatexteditor!Thisisanotherlinecontainingmorethan100charactersWITHOUTspaces,don'tmanuallycountit,thatistimeconsuming,useatexteditor!"
 
 SPACE = " "
 NEW_LINE = "\n"

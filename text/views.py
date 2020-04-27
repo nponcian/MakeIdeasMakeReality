@@ -37,7 +37,8 @@ def cipherMessage(request):
 def formatTabIndent(request):
     template = "text/formatTabIndent.html"
     context = {
-        "tabMultiplier" : tabIndentFormatter.DEFAULT_TAB_INDENT_MULTIPLIER
+        "tabMultiplier" : tabIndentFormatter.DEFAULT_TAB_INDENT_MULTIPLIER,
+        "textToFormatPlaceholder" : tabIndentFormatter.EXAMPLE_TEXT_TO_FORMAT
     }
 
     if request.method == "POST":
