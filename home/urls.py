@@ -5,6 +5,8 @@ from home import views
 app_name = 'home'
 
 urlpatterns = [
+    path('api/serverexternalip/', views.serverExternalIp, name = "serverExternalIp"),
+
     path('home/', views.home, name = "home"),
     path('', views.home, name = "homeRoot"),
 
