@@ -31,6 +31,7 @@ daemon = False
 # The Access log file to write to.
 # '-' means log to stdout.
 # Logs details of each HTTP Request made. The path is relative to where gunicorn will be invoked.
+# Also see /var/log/nginx/access.log and /var/log/nginx/error.log
 accesslog = 'log/accesslog.log'
 
 # The access log format.
