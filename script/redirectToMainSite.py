@@ -48,14 +48,15 @@ def redirectToSite(request):
 
     PROTOCOL = "http://"
     COMPUTE_ENGINE_INTERNAL_IP = "10.128.0.2"
-    API_ENDPOINT = "/api/serverexternalip/"
+    API_ENDPOINT = "/api/ipinfo/?who=server"
+    SERVER_TAG = "server"
     IP_ADDRESS_TAG = "ip_addr"
 
     apiRequest = PROTOCOL + COMPUTE_ENGINE_INTERNAL_IP + API_ENDPOINT
     response = requests.get(apiRequest)
 
     externalIpDict = json.loads(response.text)
-    computeEngineExternalIp = externalIpDict[IP_ADDRESS_TAG]
+    computeEngineExternalIp = externalIpDict[SERVER_TAG][IP_ADDRESS_TAG]
 
     targetSite = PROTOCOL + computeEngineExternalIp
     return redirect(targetSite)
