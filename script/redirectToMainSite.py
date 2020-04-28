@@ -6,9 +6,24 @@
 # (because domain names are not free!) and its external IP address is marked as ephemeral (only
 # temporary, as reserving a static one is also not free!), this function is created to be the entry
 # point to the website. This function would have a static URL provided by the GC Cloud Function
-# platform itself that isn't changing and can be accessed anytime, thus users could always refer to
-# this function to access the main site, even if the GC Compute Engine VM instance hosting the main
-# site suddenly restarts and changes external IP address.
+# platform itself that would not change and can be accessed anytime, thus users could always refer
+# to this function to access the main site, even if the GC Compute Engine VM instance hosting the
+# main site suddenly restarts and changes external IP address. It is also possible to access other
+# URLs of the main website by adding the query string ?q=put/target/path/here to the GC Cloud
+# Function URL.
+
+# PURPOSE (side note)
+# If you're poor, you have no choice but to have a bit of creativity to stay alive, even if it means
+# writing a dedicated GC Cloud Function just to stay free of charges :) But of course, with poverty
+# comes hardships, and trade-offs, as the bad news is that this architecture introduces additional
+# delays caused by the internal communications, additional requests and redirections, and a visible
+# IP address, which would not happen if I was rich, coding inside my yacht. The good news? I don't
+# have to bring my wallet out :)
+
+# EXAMPLE URLS (using HTTP GET)
+#     https://us-central1-makeideasmakereality.cloudfunctions.net/mimr
+#     https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/limitlinelength
+#     https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=api/ipinfo
 
 # FLOW
 # This Cloud Function would communicate to the internal IP of the Compute Engine VM Instance through
@@ -51,6 +66,8 @@ def redirectToSite(request):
     API_ENDPOINT = "/api/ipinfo/?who=server"
     SERVER_TAG = "server"
     IP_ADDRESS_TAG = "ip_addr"
+    TARGET_PATH_TAG = "q"
+    SLASH = "/"
 
     apiRequest = PROTOCOL + COMPUTE_ENGINE_INTERNAL_IP + API_ENDPOINT
     response = requests.get(apiRequest)
@@ -58,5 +75,7 @@ def redirectToSite(request):
     externalIpDict = json.loads(response.text)
     computeEngineExternalIp = externalIpDict[SERVER_TAG][IP_ADDRESS_TAG]
 
-    targetSite = PROTOCOL + computeEngineExternalIp
+    targetPath = SLASH + request.args.get(TARGET_PATH_TAG, "").lstrip(SLASH)
+    targetSite = PROTOCOL + computeEngineExternalIp + targetPath
+
     return redirect(targetSite)
