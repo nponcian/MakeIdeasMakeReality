@@ -36,7 +36,7 @@
 # 5. Compute Engine receives the request via its internal IP address
 # 6. Compute Engine gets its current external IP address
 # 7. Compute Engine returns its external IP address to the Cloud Function
-# 8 Cloud Function redirects the client to the current external IP of the MakeIdeasMakeReality website
+# 8. Cloud Function redirects the client to the current external IP of the MakeIdeasMakeReality website
 
 from flask import redirect
 
