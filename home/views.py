@@ -35,6 +35,7 @@ def ipInfo(request):
     SERVER_TAG = "server"
     CLIENT_TAG = "client"
     IP_ADDRESS_TAG = "ip_addr"
+    WHO_QUERY_PARAM = "who"
 
     SERVER_PUBLIC_IP_ADDRESS_FINDER = "http://ifconfig.me/ip"
     serverPublicIpResponse = requests.get(SERVER_PUBLIC_IP_ADDRESS_FINDER)
@@ -46,4 +47,12 @@ def ipInfo(request):
     clientPublicIp = httpHeaderRemoteAddr if httpHeaderRemoteAddr else httpHeaderXForwardedFor
     clientInfo = {IP_ADDRESS_TAG : clientPublicIp}
 
-    return JsonResponse({SERVER_TAG : serverInfo, CLIENT_TAG : clientInfo})
+    ipDict = {SERVER_TAG : serverInfo, CLIENT_TAG : clientInfo}
+
+    who = request.GET.get(WHO_QUERY_PARAM)
+    if who:
+        who = who.casefold()
+        if who == SERVER_TAG:   ipDict.pop(CLIENT_TAG, "")
+        elif who == CLIENT_TAG: ipDict.pop(SERVER_TAG, "")
+
+    return JsonResponse(ipDict)
