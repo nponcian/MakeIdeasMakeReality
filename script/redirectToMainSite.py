@@ -1,8 +1,14 @@
+# Google Cloud: Cloud Function
+
 # PURPOSE
-# To access the website for MakeIdeasMakeReality. Since the target website does not have a domain
-# name and its external IP address is marked as ephemeral (temporary), this function is created to
-# be the entry point to the main website. This would be deployed as a Google Cloud - Cloud Function,
-# which would have a static domain name that isn't changing and can be accessed anytime.
+# This is intended to be deployed and run on the Google Cloud: Cloud Functions platform to access
+# the website for MakeIdeasMakeReality. Since the target website does not have a domain name
+# (because domain names are not free!) and its external IP address is marked as ephemeral (only
+# temporary, as reserving a static one is also not free!), this function is created to be the entry
+# point to the website. This function would have a static URL provided by the GC Cloud Function
+# platform itself that isn't changing and can be accessed anytime, thus users could always refer to
+# this function to access the main site, even if the GC Compute Engine VM instance hosting the main
+# site suddenly restarts and changes external IP address.
 
 # FLOW
 # This Cloud Function would communicate to the internal IP of the Compute Engine VM Instance through
@@ -45,14 +51,10 @@ def redirectToSite(request):
     API_ENDPOINT = "/api/serverexternalip/"
     IP_ADDRESS_TAG = "ip_addr"
 
-    print("eto1 start")
     apiRequest = PROTOCOL + COMPUTE_ENGINE_INTERNAL_IP + API_ENDPOINT
     response = requests.get(apiRequest)
-    print("eto2", response)
-    print("eto3", response.text)
 
     externalIpDict = json.loads(response.text)
-    print("eto4", externalIpDict)
     computeEngineExternalIp = externalIpDict[IP_ADDRESS_TAG]
 
     targetSite = PROTOCOL + computeEngineExternalIp
