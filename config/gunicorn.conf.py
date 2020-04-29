@@ -35,11 +35,22 @@ daemon = False
 accesslog = 'log/accesslog.log'
 
 # The access log format.
-access_log_format = '%({x-forwarded-for}i)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 # access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
+# Gunicorn 19 introduced a breaking change concerning how REMOTE_ADDR is handled. Previous to
+# Gunicorn 19 this was set to the value of X-Forwarded-For if received from a trusted proxy.
+# However, this was not in compliance with RFC 3875 which is why the REMOTE_ADDR is now the IP
+# address of the proxy and not the actual user.
+# To have access logs indicate the actual user IP when proxied, set access_log_format with a
+# format which includes X-Forwarded-For. For example, this format uses X-Forwarded-For in place
+# of REMOTE_ADDR:
+#     %({x-forwarded-for}i)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+# It is also worth noting that the REMOTE_ADDR will be completely empty if you bind Gunicorn to
+# a UNIX socket and not a TCP host:port tuple. So one way to populate it is by implementing a
+# middleware that would assign it with the value in HTTP_X_FORWARDED_FOR
 # "h" is the remote address specified in the HTTP Request header, specifically "request.META['REMOTE_ADDR']",
-# but it is not anymore automatically populated (as noted in nginx.conf) thus the alternative
-# "x-forwarded-for" is used which corresponds to "request.META['HTTP_X_FORWARDED_FOR']"
+# but it is not anymore automatically populated thus the alternative "x-forwarded-for" is used which
+# corresponds to "request.META['HTTP_X_FORWARDED_FOR']"
+access_log_format = '%({x-forwarded-for}i)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 
 # The Error log file to write to.
 # Using '-' for FILE makes gunicorn log to stderr.

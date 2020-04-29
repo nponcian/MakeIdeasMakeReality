@@ -32,8 +32,13 @@
 # 2. Cloud Function receives the request via its domain name
 # 3. Cloud Function has the information about the internal IP (within the VPC) of the Compute Engine
 #    and the API endpoint to obtain the wanted information
-# 4. Cloud Function sends the request through the Serverless VPC Access connector
-# 5. Compute Engine receives the request via its internal IP address
+# 4. Cloud Function sends the request through the Serverless VPC Access connector. This means that,
+#    one of the devices used in the VPC Access connector having an IP of one among the set range for
+#    it would be used to send the request coming from the Cloud Function, and this IP would be the
+#    "client IP" that is visible to the VM. So this could change for every request as the IPs are
+#    within a range and not static.
+# 5. Compute Engine receives the request which comes from one of the IPs in the range set for the
+#    VPC Access connector and is sent to the VM's internal IP address within the internal VPC Network
 # 6. Compute Engine gets its current external IP address
 # 7. Compute Engine returns its external IP address to the Cloud Function
 # 8. Cloud Function redirects the client to the current external IP of the MakeIdeasMakeReality website
