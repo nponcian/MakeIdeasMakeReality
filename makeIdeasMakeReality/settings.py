@@ -126,16 +126,78 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 # The base url to access the static files
-# ex.
-#     http://35.192.166.203:8003/static/home/assets/img/homeJumbotron.jpg
-STATIC_URL = '/static/'
 
+if os.environ['MIMR_SETTINGS_IS_DEVELOPMENT'] == "True": # For development
+    STATIC_URL = '/static/'
+    # "static" word could be anything, but it is the standard name
+    # URL to use when referring to static files located in STATIC_ROOT.
+    # If this STATIC_URL is used as a tag in the HTML
+    #     {% load static %}
+    #     <img src="{% static 'home/assets/img/homeJumbotron.jpg' %}">
+    # The loaded "static" tag is substituted to the value of the "STATIC_URL"
+    #     <img src="/static/home/assets/img/homeJumbotron.jpg">
+    # Since it is not a full link, then it will just be accessed on the current server
+    #     http://35.192.166.203:8003/static/home/assets/img/homeJumbotron.jpg
+    #  So, such HTTP GET request would again reach the current server. Then, if nginx is configured
+    #  to catch URLs with the STATIC_URL prefix
+    #      location /static/ { alias /var/www/makeIdeasMakeReality/; }
+    #  Thus, the prefix "/static/" as configured in nginx would be replaced with the alias value
+    #  of "/var/www/makeIdeasMakeReality/", leading to the file in the local server
+    #      /var/www/makeIdeasMakeReality/home/assets/img/homeJumbotron.jpg
+else: # For production
+    # Method 1 (easier, manual copying of all static files for every change)
+    #     1. Create a new bucket in Google Cloud Storage
+    #     2. Run collectstatic and either manually copy (upload) the files from the STATIC_ROOT to
+    #        the GCS bucket or use tools such as gsutil rsync
+    #     3. STATIC_URL = 'https://storage.googleapis.com/mimr-bucket/'
+    #     4. Those accesing any static files in the GCS should either be prefixed with this STATIC_URL
+    #        through the {% load static %} or directly have the complete URL of the target resource in GCS
+    # Method 2 (harder, automatic handling of static files to target storage)
+    # NOTE: This effectively disregards STATIC_ROOT as all static files present in all STATICFILES_DIRS
+    #       would now go directly to the target storage (so collectstatic would store files directly
+    #       to Google Cloud, without anymore filling up /var/www/makeIdeasMakeReality/)
+    # 1. Create a new bucket in Google Cloud Storage
+    # 2. Change the current Default: 'django.core.files.storage.FileSystemStorage'
+    # Default file storage class to be used for any file-related operations that don’t specify a
+    # particular storage system.
+    # Set the default storage and bucket name in your settings.py file:
+    # from django.core.files.storage import default_storage
+    # from storages.backends.gcloud import GoogleCloudStorage
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage' # print(default_storage.__class__)
+    GS_BUCKET_NAME = 'mimr-bucket'
+    # 3. Change the current Default: 'django.contrib.staticfiles.storage.StaticFilesStorage'
+    # The file storage engine to use when collecting static files with the collectstatic management command.
+    # To allow django-admin.py collectstatic to automatically put your static files in your bucket set
+    # the following in your settings.py:
+    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    # 4. The base url
+    # See notes For development above
+    # For public access, instead of prefixing with
+    #     https://storage.cloud.google.com/ # this would require users to log-in their Google account
+    # Use
+    #     https://storage.googleapis.com/
+    STATIC_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
+    # 5. Create an IAM Service Account with permission to access the Cloud Storage (e.g. Project
+    #    Owner) and generate a JSON key from it.
+    # 6. either export environment variable GOOGLE_APPLICATION_CREDENTIALS or define GS_CREDENTIALS
+    # export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
+    # from google.oauth2 import service_account
+    # GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    #     "path/to/credentials.json"
+    # )
+
+# The absolute path to the directory where collectstatic will collect static files for deployment.
 # The location in the local directory of the server serving static files to where the static files
-# are stored
+# are stored. This is used for ease of deployment as ALL static files used by the project would be
+# in a single location only.
 # ex.
 #     /var/www/makeIdeasMakeReality/
 # Thus, based on the above URL, the file should be located in:
 #     /var/www/makeIdeasMakeReality/home/assets/img/homeJumbotron.jpg
+# Runnng collectstatic would copy (not move) all files and subdirectories coming from the paths in
+# STATICFILES_DIRS and places them to a single location which is this STATIC_ROOT. So it
+# important to note that if this path is outside the /home/user/, then it might be needed to run
+# collectstatic as sudo to have write access to paths such as /var/www/
 STATIC_ROOT = os.environ['MIMR_SETTINGS_STATIC_ROOT']
 
 # The locations in the local directory to where the different static files to be served are located.

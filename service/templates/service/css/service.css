@@ -1,6 +1,6 @@
 #pageLabel
 {
-    background-image: url('/static/service/assets/img/indiaAgraTajMahal.jpeg');
+    background-image: url("../assets/img/indiaAgraTajMahal.jpeg");
     background-size: cover;
     background-position: center; /* bottom center; */
     background-attachment: fixed;
