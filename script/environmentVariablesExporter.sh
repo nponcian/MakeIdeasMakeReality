@@ -13,6 +13,14 @@
 
 ENVIRONMENT_VARIABLES_PATH="config/environmentVariables"
 
+printAndExecuteCommand()
+{
+    echo "---> Command: ${@}"
+    eval "${@}"
+}
+
 while read line; do
-    export ${line}
+    if [[ ! -z "${line}" ]]; then
+        printAndExecuteCommand "export ${line}"
+    fi
 done < ${ENVIRONMENT_VARIABLES_PATH}
