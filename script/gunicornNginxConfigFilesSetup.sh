@@ -78,6 +78,8 @@ setupNginx()
     printAndExecuteCommand "sudo systemctl enable --now ${MIMR_NGINX_SERVICE}"
     echo "Done enabling ${MIMR_NGINX} to automatically start on boot"
 
+    printAndExecuteCommand "sed -i 's|location .* { # MIMR_SCRIPT_TAG MIMR_SETTINGS_DEVELOPMENT_STATIC_URL|location '${MIMR_SETTINGS_DEVELOPMENT_STATIC_URL}' { # MIMR_SCRIPT_TAG MIMR_SETTINGS_DEVELOPMENT_STATIC_URL|' ${NGINX_CONF}"
+    echo "Set URL prefix for locally stored static files to ${MIMR_SETTINGS_DEVELOPMENT_STATIC_URL}"
     printAndExecuteCommand "sed -i 's|alias .*; # MIMR_SCRIPT_TAG MIMR_SETTINGS_STATIC_ROOT|alias '${MIMR_SETTINGS_STATIC_ROOT}'; # MIMR_SCRIPT_TAG MIMR_SETTINGS_STATIC_ROOT|' ${NGINX_CONF}"
     echo "Set location of static files to ${MIMR_SETTINGS_STATIC_ROOT}"
     printAndExecuteCommand "sed -i 's/listen .*; # MIMR_SCRIPT_TAG MIMR_NGINX_PORT/listen '${MIMR_NGINX_PORT}'; # MIMR_SCRIPT_TAG MIMR_NGINX_PORT/' ${NGINX_CONF}"
