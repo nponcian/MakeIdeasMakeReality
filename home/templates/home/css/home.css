@@ -13,7 +13,7 @@
     /*https://storage.googleapis.com/home/assets/img/spainMadridMetropolis.jpg*/
 
     /*3. Correct relative and absolute path*/
-    background-image: url("../assets/img/spainMadridMetropolis.jpg");
+    /*background-image: url("../assets/img/spainMadridMetropolis.jpg");*/
     /*or*/
     /*background-image: url("../../home/assets/img/spainMadridMetropolis.jpg");*/
     /*or*/
@@ -33,6 +33,8 @@
         }
     </style>
     */
+
+    background-image: url("../../assets/img/spainMadridMetropolis.jpg");
 
     background-size: cover;
     background-position: center; /* bottom center; */
