@@ -25,7 +25,9 @@ def displayEnvVariables():
 
 def updateEnvVariables():
     temporaryFileName = ENVIRONMENT_VARIABLES_FILE + "_temp"
-    print("Leave blank to retain current value")
+    print("Unless you know what you are doing, only put a trailing / at the end of a path if the")
+    print("initial default values also have it.")
+    print("Leave blank to retain current value.")
 
     with open(ENVIRONMENT_VARIABLES_FILE) as envVariablesFile:
         with open(temporaryFileName, 'w') as temporaryFile:

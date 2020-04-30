@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 if os.environ['MIMR_SETTINGS_IS_DEVELOPMENT'] == "True": # For development
-    STATIC_URL = '/static/'
+    STATIC_URL = os.environ['MIMR_SETTINGS_DEVELOPMENT_STATIC_URL'] # '/static/'
     # The base url to access the static files
     # "static" word could be anything, but it is the standard name
     # URL to use when referring to static files located in STATIC_ROOT.
@@ -163,7 +163,7 @@ else: # For production
     # from django.core.files.storage import default_storage
     # from storages.backends.gcloud import GoogleCloudStorage
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage' # print(default_storage.__class__)
-    GS_BUCKET_NAME = 'mimr-bucket'
+    GS_BUCKET_NAME = os.environ['MIMR_SETTINGS_GS_BUCKET_NAME']
     # 3. Change the current Default: 'django.contrib.staticfiles.storage.StaticFilesStorage'
     # The file storage engine to use when collecting static files with the collectstatic management command.
     # To allow django-admin.py collectstatic to automatically put your static files in your bucket set
@@ -175,15 +175,15 @@ else: # For production
     #     https://storage.cloud.google.com/ # this would require users to log-in their Google account
     # Use
     #     https://storage.googleapis.com/
-    STATIC_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
+    STATIC_URL = os.environ['MIMR_SETTINGS_PRODUCTION_STATIC_URL'] # 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
     # 5. Create an IAM Service Account with permission to access the Cloud Storage (e.g. Project
     #    Owner) and generate a JSON key from it.
     # 6. either export environment variable GOOGLE_APPLICATION_CREDENTIALS or define GS_CREDENTIALS
     # export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
-    # from google.oauth2 import service_account
-    # GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    #     "path/to/credentials.json"
-    # )
+    from google.oauth2 import service_account
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS']
+    )
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 # The location in the local directory of the server serving static files to where the static files
