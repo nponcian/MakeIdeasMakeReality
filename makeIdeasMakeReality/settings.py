@@ -125,10 +125,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# The base url to access the static files
-
 if os.environ['MIMR_SETTINGS_IS_DEVELOPMENT'] == "True": # For development
     STATIC_URL = '/static/'
+    # The base url to access the static files
     # "static" word could be anything, but it is the standard name
     # URL to use when referring to static files located in STATIC_ROOT.
     # If this STATIC_URL is used as a tag in the HTML

@@ -106,6 +106,17 @@ func_acceptInput()
     read ${1}
 }
 
+func_setupProjectDir()
+{
+    func_acceptInput PROJECT_DIR "Enter target path to ${APP_NAME} (e.g. ../../Documents)"
+    eval PROJECT_DIR="${PROJECT_DIR}" # Substitutes special character for home "~" to absolute path
+
+    if [[ ! -z "${PROJECT_DIR}" ]]; then
+        func_printAndExecuteCommand "mkdir -p ${PROJECT_DIR}"
+        func_printAndExecuteCommand "cd ${PROJECT_DIR}"
+    fi
+}
+
 func_setupApt()
 {
     func_acceptInput SHOULD_UPGRADE "Upgrade package manager? (advisable if using new machine) [y/n]"
@@ -131,13 +142,6 @@ func_setupGit()
     #     cd "$A_NON_EXISTING_VARIABLE"
     #         translates to <cd ""> which stays on current directory
     func_aptInstall "${GIT_LOC}" "${GIT}"
-
-    func_acceptInput PROJECT_DIR "Enter target path to ${APP_NAME} (e.g. ../../Documents)"
-    eval PROJECT_DIR="${PROJECT_DIR}" # Substitutes special character for home "~" to absolute path
-
-    if [[ ! -z "${PROJECT_DIR}" ]]; then
-        func_printAndExecuteCommand "cd ${PROJECT_DIR}"
-    fi
 
     if [[ ! -d "${APP_NAME}" ]]; then
         func_printAndExecuteCommand "git clone ${GIT_REPO}"
@@ -216,8 +220,9 @@ func_additionalNotes()
     echo "    ./manage.py createsuperuser"
 }
 
+func_setupProjectDir # this changes directory to the location of the target makeIdeasMakeReality repository
 func_setupApt
-func_setupGit # this changes directory to the location of the target makeIdeasMakeReality repository
+func_setupGit
 func_setupPython
 func_setupPostgreSql
 func_setupNginx
