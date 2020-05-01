@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/defaultLayout.css' %}">
 
-<title>Generate Code | MakeIdeasMakeReality</title>
+<title>About MIMR | MakeIdeasMakeReality</title>
 
 {% endblock %}
 
@@ -15,18 +15,9 @@
 <div class="jumbotron jumbotron-fluid" id="pageLabel">
     <div class="container pt-5 text-center">
         <div class="display-3 pt-xs-3 pt-sm-5">
-            Generate Code
+            $ whatis mimr # ?
         </h1>
     </div>
 </div>
-
-{% endblock %}
-
-{% block body %}
-
-<form method="POST" action="."> {% csrf_token %}
-    <button class="btn btn-info">Generate</button>
-    <input type="text" placeholder="Click the other guy!" value="{{ generatedCode }}" readonly>
-</form>
 
 {% endblock %}

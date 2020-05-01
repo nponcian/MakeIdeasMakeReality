@@ -7,7 +7,11 @@ def aboutMimr(request, *args):
     # Or simply # redirect("mimr/") # but don't put absolute "/mimr/" to retain the prefix "/about/"
     if args and args[0] == None: return redirect("about:aboutMimr", "mimr/")
 
-    return HttpResponse("About the website")
+    template = "about/aboutMimr.html"
+    context = {}
+    return render(request, template, context)
 
 def whoAmI(request):
-    return HttpResponse("About us")
+    template = "about/whoAmI.html"
+    context = {}
+    return render(request, template, context)

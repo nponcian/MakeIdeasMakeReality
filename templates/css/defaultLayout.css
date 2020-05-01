@@ -1,0 +1,49 @@
+/*Include in HTML*/
+    /*<!-- Google Fonts -->*/
+    /*<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">*/
+/*Include in CSS*/
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+#pageLabel
+{
+    /*Ways of accessing static files*/
+
+    /*1. Wrong relative path*/
+    /*background-image: url("home/assets/img/spainMadridMetropolis.jpg");*/
+    /*http://127.0.0.1:8003/static/home/css/home/assets/img/spainMadridMetropolis.jpg*/
+    /*https://storage.googleapis.com/mimr-bucket/home/css/home/assets/img/spainMadridMetropolis.jpg*/
+
+    /*2. Wrong absolute path*/
+    /*background-image: url("/home/assets/img/spainMadridMetropolis.jpg");*/
+    /*http://127.0.0.1:8003/home/assets/img/spainMadridMetropolis.jpg*/
+    /*https://storage.googleapis.com/home/assets/img/spainMadridMetropolis.jpg*/
+
+    /*3. Correct relative and absolute path*/
+    /*background-image: url("../assets/img/spainMadridMetropolis.jpg");*/
+    /*or*/
+    /*background-image: url("../../home/assets/img/spainMadridMetropolis.jpg");*/
+    /*or*/
+    /*background-image: url('/static/home/assets/img/spainMadridMetropolis.jpg');*/
+    /*or*/
+    /*background-image: url("https://storage.googleapis.com/mimr-bucket/home/assets/img/spainMadridMetropolis.jpg");*/
+    /*http://127.0.0.1:8003/static/home/assets/img/spainMadridMetropolis.jpg*/
+    /*https://storage.googleapis.com/mimr-bucket/home/assets/img/spainMadridMetropolis.jpg*/
+
+    /*4. You can also just add this instead to the HTML file, reading from the STATIC_URL*/
+    /*
+    {% load static %}
+    <style type="text/css">
+        #pageLabel
+        {
+            background-image: url("{% static 'home/assets/img/spainMadridMetropolis.jpg' %}");
+        }
+    </style>
+    */
+
+    background-size: cover;
+    background-position: center; /* bottom center; */
+    background-attachment: fixed;
+    min-height: 75vh;
+    font-family: 'Permanent Marker', cursive;
+    text-shadow: 0 0 20px rgba(0,255,0,1);
+}
