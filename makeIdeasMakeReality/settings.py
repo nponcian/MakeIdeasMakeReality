@@ -175,6 +175,10 @@ else: # For production
     #     https://storage.cloud.google.com/ # this would require users to log-in their Google account
     # Use
     #     https://storage.googleapis.com/
+    # Others (https://cloud.google.com/storage/docs/request-endpoints):
+    #     https://storage.googleapis.com/bucket/object
+    #     http://bucket.storage.googleapis.com/object
+    #     https://storage.cloud.google.com/bucket/object
     STATIC_URL = os.environ['MIMR_SETTINGS_PRODUCTION_STATIC_URL'] # 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
     # 5. Create an IAM Service Account with permission to access the Cloud Storage (e.g. Project
     #    Owner) and generate a JSON key from it.
