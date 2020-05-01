@@ -25,17 +25,30 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav">
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesNavDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Services
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="servicesNavDropdown">
                             <a class="dropdown-item" href="/service/">All</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/service/text/">Text</a>
                         </div>
                     </div>
-                    <a class="nav-item nav-link" href="/blog/">Blogs</a>
-                    <a class="nav-item nav-link disabled" href="/whoami/" tabindex="-1" aria-disabled="true">$(whoami)</a>
+                    <a class="nav-item nav-link disabled" href="/blog/" tabindex="-1" aria-disabled="true">Blogs</a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutNavDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            About
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="aboutNavDropdown">
+                            <a class="dropdown-item text-primary font-weight-bold" href="/about/mimr/">
+                                <span class="text-black-50">$</span> man mimr
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-success font-weight-bold" href="/about/whoami/">
+                                <span class="text-black-50">$</span> whoami
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
