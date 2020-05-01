@@ -22,6 +22,9 @@ handler404 = 'home.views.notFound'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('about/', include('about.urls', namespace = 'about')),
     path('service/', include('service.urls', namespace = 'service')),
+
     path('', include('home.urls', namespace = 'home')),
 ]
