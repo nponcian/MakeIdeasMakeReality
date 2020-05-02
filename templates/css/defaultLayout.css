@@ -47,3 +47,8 @@
     font-family: 'Permanent Marker', cursive;
     text-shadow: 0 0 20px rgba(0,255,0,1);
 }
+
+.mimr-text-orange { color: orange; }
+.mimr-text-pink { color: pink; }
+.mimr-text-purple { color: purple; }
+.mimr-text-violet { color: violet; }

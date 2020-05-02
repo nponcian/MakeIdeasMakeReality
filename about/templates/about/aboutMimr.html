@@ -26,7 +26,10 @@
 {% block body %}
 
 <div class="container text-center">
-    <h1 class="display-3 mt-5">PURPOSE</h1>
+    <h1 class="display-3 mt-5">
+        PURPOSE
+        <i class="far fa-eye text-primary"></i>
+    </h1>
     <p class="lead text-justify mt-3">
         The objective is simple: make ideas, make reality! Ideas are good, but are they enough? Ideas are the brains of a fully functional system, but without fueling the other moving parts, ideas are nothing but a useless series of electrochemical brain signals suppressed and held in captivity behind the bars of one's skull, unable to spread its
         <del class="text-muted">gills</del>
@@ -45,7 +48,10 @@
 <br>
 
 <div class="container text-center">
-    <h1 class="display-3 mt-5">TECH STACK</h1>
+    <h1 class="display-3 mt-5">
+        TECH STACK
+        <i class="fas fa-layer-group text-primary"></i>
+    </h1>
     <p class="lead text-justify mt-3">
         This project is built from scratch to deployment, be it backend code, frontend design, API design, database host, HTTP server, CDN storage, VPC Network, Cloud infrastucture, contents, travel images, you name it! No CMS has been used as of the moment, but there are plans to use Django CMS for dynamic contents in the future.
     </p>
@@ -71,7 +77,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techHtmlCss">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techHtmlCssInfo" aria-expanded="true" aria-controls="techHtmlCssInfo">HTML + CSS</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techHtmlCssInfo" aria-expanded="true" aria-controls="techHtmlCssInfo">HTML <i class="fab fa-html5 mimr-text-orange"></i> + CSS <i class="fab fa-css3-alt text-info"></i></button>
             </div>
             <div id="techHtmlCssInfo" class="collapse" aria-labelledby="techHtmlCss" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">Not sure if this should be on this list explicitly. It's like being asked by an amigo "How to know if my dog wants to be a cat?" and responding "Firstly, you need a pair of eyes to be able to see, then... [insert steps here]" ;)</div>
@@ -80,7 +86,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techBootstrap">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techBootstrapInfo" aria-expanded="true" aria-controls="techBootstrapInfo">Bootstrap</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techBootstrapInfo" aria-expanded="true" aria-controls="techBootstrapInfo">Bootstrap <i class="fab fa-bootstrap mimr-text-violet"></i></button>
             </div>
             <div id="techBootstrapInfo" class="collapse" aria-labelledby="techBootstrap" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">If you're reading this list on a desktop computer, then try reading this from your smartphone with rotation enabled! Or maybe you're already using phone, but also have a smartwatch lying around?<br><br>Okay I'll confess, please don't try the smartwatch dare, that hasn't been tested yet. Or maybe you don't have any smartwatch? Well, me neither. :)</div>
@@ -98,7 +104,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techFontAwesome">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techFontAwesomeInfo" aria-expanded="true" aria-controls="techFontAwesomeInfo">Font Awesome</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techFontAwesomeInfo" aria-expanded="true" aria-controls="techFontAwesomeInfo">Font Awesome <i class="fab fa-font-awesome text-info"></i></button>
             </div>
             <div id="techFontAwesomeInfo" class="collapse" aria-labelledby="techFontAwesome" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">As the name suggests, Font Awesome. Or awesome fonts, or maybe awesome icons, or Icon Awesome?</div>
@@ -161,7 +167,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techPython3">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPython3Info" aria-expanded="true" aria-controls="techPython3Info">python3</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPython3Info" aria-expanded="true" aria-controls="techPython3Info">python3 <i class="fab fa-python text-warning"></i></button>
             </div>
             <div id="techPython3Info" class="collapse" aria-labelledby="techPython3" data-parent="#techStack">
                 <div class="card-body bg-light text-dark"><ol><li>Backend development language</li><li>Tools and scripts</li></ol></div>
@@ -215,7 +221,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techPostgreSql">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPostgreSqlInfo" aria-expanded="true" aria-controls="techPostgreSqlInfo">PostgreSQL</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPostgreSqlInfo" aria-expanded="true" aria-controls="techPostgreSqlInfo">PostgreSQL <i class="fas fa-database text-info"></i></button>
             </div>
             <div id="techPostgreSqlInfo" class="collapse" aria-labelledby="techPostgreSql" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">RDBMS for storing Django models</div>
@@ -224,7 +230,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techGunicorn">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGunicornInfo" aria-expanded="true" aria-controls="techGunicornInfo">gunicorn</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGunicornInfo" aria-expanded="true" aria-controls="techGunicornInfo">gunicorn <i class="fas fa-horse text-success"></i></button>
             </div>
             <div id="techGunicornInfo" class="collapse" aria-labelledby="techGunicorn" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">Python WSGI HTTP Server. Configured to communicate with Nginx via Unix socket.</div>
@@ -233,7 +239,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techNginx">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techNginxInfo" aria-expanded="true" aria-controls="techNginxInfo">nginx</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techNginxInfo" aria-expanded="true" aria-controls="techNginxInfo">nginx <i class="fas fa-server text-danger"></i></button>
             </div>
             <div id="techNginxInfo" class="collapse" aria-labelledby="techNginx" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">Entry point HTTP Server. Serves static files. Directs non-static requests to Gunicorn.</div>
@@ -251,7 +257,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techShell">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techShellInfo" aria-expanded="true" aria-controls="techShellInfo">shell | bash</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techShellInfo" aria-expanded="true" aria-controls="techShellInfo">shell | bash <i class="fab fa-linux text-warning"></i></button>
             </div>
             <div id="techShellInfo" class="collapse" aria-labelledby="techShell" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">Automating manual tasks through scripts</div>
@@ -260,7 +266,7 @@
 
         <div class="card bg">
             <div class="card-header bg-dark" id="techGnuLinux">
-                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGnuLinuxInfo" aria-expanded="true" aria-controls="techGnuLinuxInfo">GNU/Linux: Ubuntu 18.04 LTS, Ubuntu 20.04 LTS</button>
+                <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGnuLinuxInfo" aria-expanded="true" aria-controls="techGnuLinuxInfo">GNU/Linux: <i class="fab fa-linux text-warning"></i> Ubuntu 18.04 LTS, Ubuntu 20.04 LTS <i class="fab fa-ubuntu mimr-text-violet"></i></button>
             </div>
             <div id="techGnuLinuxInfo" class="collapse" aria-labelledby="techGnuLinux" data-parent="#techStack">
                 <div class="card-body bg-light text-dark">Development and production environment<br><br>Fossa is <3 <3 <3</div>
