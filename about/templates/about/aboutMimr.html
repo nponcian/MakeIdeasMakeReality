@@ -4,7 +4,6 @@
 
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/defaultLayout.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'about/css/aboutMimr.css' %}">
 
 <title>About MIMR | MakeIdeasMakeReality</title>
@@ -193,7 +192,7 @@
                 <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPython3VenvInfo" aria-expanded="true" aria-controls="techPython3VenvInfo">python3-venv <i class="fab fa-docker text-info"></i></button>
             </div>
             <div id="techPython3VenvInfo" class="collapse" aria-labelledby="techPython3Venv" data-parent="#techStack">
-                <div class="card-body bg-light text-dark">Isolated Python virtual environments</div>
+                <div class="card-body bg-light text-dark">Creates isolated Python virtual environments.<br><br>No, this is not Docker.</div>
             </div>
         </div>
 
@@ -280,5 +279,13 @@
 
     </div>
 </div>
+
+{% endblock %}
+
+{% block footer %}
+
+{% load static %}
+
+<script type="text/javascript" src="{% static 'about/js/aboutMimr.js' %}"></script>
 
 {% endblock %}
