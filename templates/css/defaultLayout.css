@@ -100,7 +100,13 @@
     text-shadow: 0 0 20px rgba(0,255,0,1);
 }
 
-#navMimr:hover
+.mimr-hover-white:hover
 {
+    /*either mark this as important to be prioritized or put this at the end of the list so that
+    is the last to be applied*/
     color: white !important;
+}
+.fab:hover, .far:hover, .fas:hover
+{
+    font-size: 1.3em;
 }
