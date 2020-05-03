@@ -3,6 +3,23 @@
     background-image: url("../../assets/img/indiaAgraTajMahal.jpeg");
 }
 
+#devicePhoto
+{
+    background-image: url("../../assets/img/japanTokyoGundam.jpeg");
+    min-height: 25em;
+    background-position: center;
+    background-size: cover;
+}
+
+#soonPhoto
+{
+    background-image: url("");
+    background-color: olive;
+    min-height: 25em;
+    background-position: center;
+    background-size: cover;
+}
+
 #textPhoto
 {
     background-image: url("../../assets/img/thailandBangkokWatPho.JPG");

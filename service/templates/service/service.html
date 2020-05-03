@@ -25,20 +25,56 @@
 {% block body %}
 
 <div class="container-fluid p-0 text-center">
-    <h1 class="display-4 mt-5">CATEGORIES</h1>
+    <h1 class="display-4 mt-5">
+        CATEGORIES
+        <i class="fas fa-sitemap text-primary"></i>
+    </h1>
     <br>
     <!-- either use "row-cols-md-2" on row or put "col-md-6" on each col -->
     <div class="row no-gutters row-cols-1 row-cols-md-2">
         <div class="col order-md-2">
             <a class="mimr-service-image" href="/service/text/">
-                <div class="mimr-service-image-hover"><i class="fas fa-rocket h-100 d-flex justify-content-center align-items-center"></i></div>
+                <div class="mimr-service-image-hover h-100 d-flex justify-content-center align-items-center">
+                    <i class="fas fa-sort-alpha-down"></i>
+                    <i class="fas fa-sort-numeric-up-alt"></i>
+                </div>
                 <div id="textPhoto"></div>
             </a>
         </div>
         <div class="col order-md-1 mimr-bg-beige">
             <div class="offset-md-2 col-md-8 h-100 d-flex flex-column text-left justify-content-center"> <!-- border-top border-info -->
-                <h1 class="font-weight-bolder" data-toggle="tooltip" data-placement="right" title="Click the image">Text</h1>
+                <h1 class="font-weight-bolder" data-toggle="tooltip" data-placement="right" title="Hola! Click the grass of Wat Pho!">Text</h1>
                 <p class="lead">Analyze and process data involving characters such as letters, numbers, and symbols. Perform tasks such as manipulating words, formatting style, doing some adjustments, searching for characters, and literally anything related to processing text.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row no-gutters row-cols-1 row-cols-md-2">
+        <div class="col order-md-1">
+            <a class="mimr-service-image" href="/api/ipinfo/?who=client"> <!-- /service/device/ -->
+                <div class="mimr-service-image-hover"><i class="fas fa-robot h-100 d-flex justify-content-center align-items-center"></i></div>
+                <div id="devicePhoto"></div>
+            </a>
+        </div>
+        <div class="col order-md-2 mimr-bg-beige">
+            <div class="offset-md-2 col-md-8 h-100 d-flex flex-column text-left justify-content-center">
+                <h1 class="font-weight-bolder" data-toggle="tooltip" data-placement="right" title="Hallo! Click the Gundam!">Device</h1>
+                <p class="lead">Tools for your devices. Parsing information such as public IP address and the like.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row no-gutters row-cols-1 row-cols-md-2">
+        <div class="col order-md-2">
+            <a class="mimr-service-image" href="">
+                <div class="mimr-service-image-hover"><i class="fas fa-question-circle h-100 d-flex justify-content-center align-items-center"></i></div>
+                <div id="soonPhoto"></div>
+            </a>
+        </div>
+        <div class="col order-md-1 mimr-bg-beige">
+            <div class="offset-md-2 col-md-8 h-100 d-flex flex-column text-left justify-content-center">
+                <h1 class="font-weight-bolder" data-toggle="tooltip" data-placement="right" title="Nothing in here!">SOON</h1>
+                <p class="lead">Watch out for my next category!</p>
             </div>
         </div>
     </div>
