@@ -2,3 +2,38 @@
 {
     background-image: url("../../assets/img/indiaAgraTajMahal.jpeg");
 }
+
+#textPhoto
+{
+    background-image: url("../../assets/img/thailandBangkokWatPho.JPG");
+    min-height: 25em;
+    background-position: center;
+    background-size: cover;
+}
+
+.mimr-service-image-hover
+{
+    /*this will place the object on the exact coordinates of its parent, with its sibling objects
+    occupying its supposed space, thus producing overlap between this and at least one sibling
+    object*/
+    position: absolute;
+
+    width: 100%; /*occupy the whole width dedicated for the parent of this object*/
+    height: 25em; /*occupy just 25em, the same size used as the height of the sibling*/
+
+    background: rgba(250, 200, 50, 0.6);
+    opacity: 0;
+
+    transition: opacity ease-in-out 0.5s;
+}
+
+.mimr-service-image:hover .mimr-service-image-hover
+{
+    opacity: 1;
+}
+
+.mimr-service-image .fas
+{
+    font-size: 10em;
+    color: white;
+}

@@ -4,6 +4,7 @@
 /*Include in CSS*/
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+.mimr-text-beige { color: beige; }
 .mimr-text-bluegreen { color: lightseagreen; }
 .mimr-text-blueviolet { color: blueviolet; }
 .mimr-text-brown { color: brown; }
@@ -30,6 +31,7 @@
 .mimr-text-yellow { color: yellow; }
 .mimr-text-yellowgreen { color: yellowgreen; }
 
+.mimr-bg-beige { background-color: beige; }
 .mimr-bg-bluegreen { background-color: lightseagreen; }
 .mimr-bg-blueviolet { background-color: blueviolet; }
 .mimr-bg-brown { background-color: brown; }
@@ -102,8 +104,8 @@
 
 .mimr-hover-white:hover
 {
-    /*either mark this as important to be prioritized or put this at the end of the list so that
-    is the last to be applied*/
+    /*either mark this as important to be prioritized or put this at the end of this css file +
+    include this css file lastly so that this styling is the last to be applied*/
     color: white !important;
 }
 .fab:hover, .far:hover, .fas:hover
