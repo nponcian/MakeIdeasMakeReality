@@ -21,6 +21,7 @@ def ipInfo(request):
 
     SERVER_TAG = "server"
     CLIENT_TAG = "client"
+    ALL_TAG = "all"
     IP_ADDRESS_TAG = "ip_addr"
     WHO_QUERY_PARAM = "who"
 
@@ -34,12 +35,15 @@ def ipInfo(request):
     clientPublicIp = httpHeaderRemoteAddr if httpHeaderRemoteAddr else httpHeaderXForwardedFor
     clientInfo = {IP_ADDRESS_TAG : clientPublicIp}
 
-    ipDict = {SERVER_TAG : serverInfo, CLIENT_TAG : clientInfo}
+    ipDict = dict()
 
     who = request.GET.get(WHO_QUERY_PARAM)
     if who:
         who = who.casefold()
-        if who == SERVER_TAG:   ipDict.pop(CLIENT_TAG, "")
-        elif who == CLIENT_TAG: ipDict.pop(SERVER_TAG, "")
+        if who == SERVER_TAG:   ipDict = {SERVER_TAG : serverInfo}
+        elif who == CLIENT_TAG: ipDict = {CLIENT_TAG : clientInfo}
+        elif who == ALL_TAG:    ipDict = {SERVER_TAG : serverInfo, CLIENT_TAG : clientInfo}
+    else:
+        ipDict = {CLIENT_TAG : clientInfo}
 
     return JsonResponse(ipDict)

@@ -68,7 +68,7 @@ def redirectToSite(request):
 
     PROTOCOL = "http://"
     COMPUTE_ENGINE_INTERNAL_IP = "10.128.0.2"
-    API_ENDPOINT = "/api/ipinfo/?who=server"
+    API_ENDPOINT = "/service/device/ipinfo/api/?who=server"
     SERVER_TAG = "server"
     IP_ADDRESS_TAG = "ip_addr"
     TARGET_PATH_TAG = "q"
