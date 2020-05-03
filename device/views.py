@@ -6,7 +6,9 @@ import requests
 # Create your views here.
 
 def device(request):
-    return HttpResponse("This is device")
+    template = "device/device.html"
+    context = {}
+    return render(request, template, context)
 
 def ipInfo(request):
     """
