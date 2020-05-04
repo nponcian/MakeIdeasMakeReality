@@ -24,9 +24,19 @@
 
 {% block body %}
 
-<h1>List of Services</h1>
-<ul>
-    <li><h3><a href="/service/device/ipinfo/api/" target="_blank">IP  Information</a></h3></li>
-</ul>
+<h1 class="text-center display-3 pt-5">Services</h1>
+
+<div class="card-deck"><div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mx-sm-5 mx-md-0">
+        <div class="col pt-4"><div class="card h-100 mimr-bg-beige">
+            <img src="{% static 'assets/img/logo/ipAddress.png' %}" class="card-img-top" alt="...">
+            <div class="card-header bg-info mimr-text-beige text-center"><h2>Public IP Address</h2></div>
+            <div class="card-body">
+                <p class="card-text">Do you need to know the public IP address your device is using to communicate across the Internet? Send me a request now and I'll tell you!</p>
+            </div>
+            <div class="card-footer text-right"><a class="btn btn-primary" href="/service/device/ipinfo/api/" target="_blank">Me gusta!</a></div>
+        </div></div>
+    </div>
+</div></div>
 
 {% endblock %}
