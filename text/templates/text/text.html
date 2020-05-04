@@ -24,12 +24,57 @@
 
 {% block body %}
 
-<h1>List of Services</h1>
-<ul>
-    <li><h3><a href="/service/text/ciphermessage/">Cipher Message</a></h3></li>
-    <li><h3><a href="/service/text/formattabindent/">Format Tab Indents</a></h3></li>
-    <li><h3><a href="/service/text/generatecode/">Generate Code</a></h3></li>
-    <li><h3><a href="/service/text/limitlinelength/">Limit Line Length</a></h3></li>
-</ul>
+<h1 class="text-center display-3 py-5">Services</h1>
+
+<div class="card-deck"><div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3  row-cols-xl-4">
+        <div class="col"><div class="card h-100 mimr-bg-beige">
+            <img src="{% static 'assets/img/logo/envelopeWithLock.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-header bg-info mimr-text-beige"><h2>Cipher Message</h2></div>
+            <div class="card-body">
+                <p class="card-text">Do you have a confidential message that you're hesitant of sending directly to someone? Then let this app translate your message to an unreadable format using your own provided keycode. Don't forget to let your receiver know the keycode!</p>
+                <a class="btn btn-primary" href="/service/text/ciphermessage/">Me gusta!</a>
+            </div>
+            <!-- <div class="card-footer"><small class="text-muted">Last updated 3 mins ago</small></div> -->
+        </div></div>
+
+        <div class="container-fluid d-md-none pt-2 pb-4 py-md-0"></div>
+
+        <div class="col"><div class="card h-100 mimr-bg-beige">
+            <img src="{% static 'assets/img/logo/blockIndentation.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-header bg-info mimr-text-beige"><h2>Format Tab Indents</h2></div>
+            <div class="card-body">
+                <p class="card-text">Are you switching your project from using tab space indentation of size 2 into size 4? Or maybe you're already using 4 spaces but the level of HTML nesting that you have makes you want to just use 2 spaces? Then this app is for you!</p>
+                <a class="btn btn-primary" href="/service/text/formattabindent/">Me gusta!</a>
+            </div>
+            <!-- <div class="card-footer"><small class="text-muted">Last updated 3 mins ago</small></div> -->
+        </div></div>
+
+        <div class="container-fluid d-md-none pt-2 pb-4 py-md-0"></div>
+
+        <div class="col"><div class="card h-100 mimr-bg-beige">
+            <img src="{% static 'assets/img/logo/lettersNumbersSymbolsSquare.jpg' %}" class="card-img-top" alt="...">
+            <div class="card-header bg-info mimr-text-beige"><h2>Generate Code</h2></div>
+            <div class="card-body">
+                <p class="card-text">In need of a strong password? Or maybe you're a programmer needing random strings for testing your software? Or whatever case it maybe, should you need random combination of letters, numbers, and symbols then try this!</p>
+                <a class="btn btn-primary" href="/service/text/generatecode/">Me gusta!</a>
+            </div>
+            <!-- <div class="card-footer"><small class="text-muted">Last updated 3 mins ago</small></div> -->
+        </div></div>
+
+        <div class="container-fluid d-md-none pt-2 pb-4 py-md-0"></div>
+
+        <div class="col"><div class="card h-100 mimr-bg-beige">
+            <img src="{% static 'assets/img/logo/document2Columns.png' %}" class="card-img-top" alt="...">
+            <div class="card-header bg-info mimr-text-beige"><h2>Limit Line Length</h2></div>
+            <div class="card-body">
+                <p class="card-text">Want your paragraph to stay at maximum of 100 characters per line? Or are you inserting comments in your code and you're already tired of manually adjusting each line for every word inserted in the middle? With this app, say goodbye to manual adjustments!</p>
+                <a class="btn btn-primary" href="/service/text/limitlinelength/">Me gusta!</a>
+            </div>
+            <!-- <div class="card-footer"><small class="text-muted">Last updated 3 mins ago</small></div> -->
+        </div></div>
+
+    </div>
+</div></div>
 
 {% endblock %}

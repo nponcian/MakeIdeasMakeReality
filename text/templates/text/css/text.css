@@ -3,3 +3,14 @@
     background-image: url("../../assets/img/hongkongDisneyland.jpeg");
     background-position: left center;
 }
+
+.card
+{
+    max-width: 100em;
+}
+
+.card-img-top
+{
+    height: 40%;
+    /*object-fit: cover;*/
+}
