@@ -100,6 +100,7 @@
     min-height: 75vh;
     font-family: 'Permanent Marker', cursive;
     text-shadow: 0 0 20px rgba(0,255,0,1);
+    margin: 0;
 }
 
 .mimr-hover-white:hover
