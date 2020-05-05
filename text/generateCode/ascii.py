@@ -1,5 +1,5 @@
 REPEAT_COUNT = 2
-DISALLOWED_CHARS = [" ", '"', "'", "/", "\\", "`", "|"]
+DISALLOWED_CHARS = [" ", '"', "'", "/", "\\", "`", "|", "~"]
 SYMBOL_CODE_RANGES = [(32, 47), (58, 64), (91, 96), (123, 126)]
 
 def _getAsciiDecimalValue(variable):
