@@ -58,7 +58,7 @@
 .mimr-bg-yellow { background-color: yellow; }
 .mimr-bg-yellowgreen { background-color: yellowgreen; }
 
-#pageLabel
+.pageLabel
 {
     /*Ways of accessing static files*/
 
@@ -87,7 +87,7 @@
     /*
     {% load static %}
     <style type="text/css">
-        #pageLabel
+        .pageLabel
         {
             background-image: url("{% static 'home/assets/img/spainMadridMetropolis.jpg' %}");
         }
