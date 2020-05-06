@@ -1,4 +1,19 @@
+#cipherMessage_pageLabel
+{
+    background-image: url("../../assets/img/cambodiaSiemReapAngkorWat.jpeg");
+}
+
 #generateCode_pageLabel
 {
     background-image: url("../../assets/img/cambodiaSiemReapRuinsWithTree.jpeg");
+}
+
+#lineLength_pageLabel
+{
+    background-image: url("../../assets/img/singaporeMarinaBay.jpeg");
+}
+
+#tabIndent_pageLabel
+{
+    background-image: url("../../assets/img/spainBarcelonaSagrada.jpeg");
 }
