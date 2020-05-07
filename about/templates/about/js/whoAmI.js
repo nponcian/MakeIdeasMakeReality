@@ -5,26 +5,13 @@ $(document).ready(function() {
     // $('#moviesCarouselControl #nextMovie').on('click', function(){
     //     $('#moviesCarousel').carousel('next');
     // });
-    $('#moviesCarouselControl').on('click', '.btn', function(){
-        var PREV_VAL = "prev";
-        var NEXT_VAL = "next";
-
+    $('#moviesCarouselControl').on('click', '.btn', function() {
         var targetOperation = $(this).val();
         $('#moviesCarousel').carousel(targetOperation);
+    });
 
-        players[currentPlayer].pauseVideo();
-        var firstPlayer = 0;
-        var lastPlayer = players.length - 1;
-        if (targetOperation == PREV_VAL)
-        {
-            --currentPlayer;
-            if (currentPlayer < firstPlayer) currentPlayer = lastPlayer;
-        }
-        else if (targetOperation == NEXT_VAL)
-        {
-            ++currentPlayer;
-            if (currentPlayer > lastPlayer) currentPlayer = firstPlayer;
-        }
+    $('#moviesCarousel').on('slide.bs.carousel', function(event) {
+        players[event.from].pauseVideo();
     });
 });
 
@@ -37,7 +24,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var players = [];
-var currentPlayer = 0;
 function onYouTubeIframeAPIReady() {
     var allMovieIframes = document.getElementById("moviesCarousel").getElementsByTagName('iframe');
     for (currentIFrame of allMovieIframes)
@@ -59,7 +45,13 @@ function onPlayerStateChange(event) {
     // if (event.data == YT.PlayerState.PLAYING && !done) {
     //     setTimeout(stopVideo, 6000);
     //     done = true;
-    // }
+    if (event.data == YT.PlayerState.PLAYING || event.data == YT.PlayerState.BUFFERING) {
+        $('#moviesCarousel').carousel('pause');
+    }
+    else
+    {
+        $('#moviesCarousel').carousel();
+    }
 }
 function stopVideo() {
     // player.stopVideo();
