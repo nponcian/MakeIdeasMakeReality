@@ -25,7 +25,7 @@
 {% block body %}
 
 <div class="container text-center">
-    <h1 class="display-3 mt-5">
+    <h1 class="display-4 mt-5">
         WHO AM I?
         <i class="fas fa-user-secret text-success"></i>
     </h1>
@@ -111,5 +111,39 @@
         <a href="https://en.wikipedia.org/wiki/Null_device" target="_blank">> /dev/null</a>
     </p>
 </div>
+
+<div class="container text-center">
+    <h1 class="display-4 mt-5">
+        INTERESTS: MOVIES
+        <i class="fas fa-user-secret text-success"></i>
+    </h1>
+    <p class="lead text-justify mt-3">
+        There would always be movies that you watch today, then forget by tomorrow. On the other hand, there are also movies that you just can't forget. Movies that are either so good or, yeah, so bad. Here are some of the movies that left a special mark on my head, are they so good, or the opposite?
+    </p>
+
+    <div class="btn-group d-flex flex-fill" role="group" aria-label="Carousel controls" id="moviesCarouselControl">
+        <button type="button" class="btn btn-danger" id="prevMovie" value="prev">Prev</button>
+        <button type="button" class="btn btn-info" id="nextMovie" value="next">Next</button>
+    </div>
+    <div id="moviesCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+        <div class="carousel-inner embed-responsive embed-responsive-16by9">
+            <div class="carousel-item embed-responsive-item active">
+                <iframe src="https://www.youtube.com/embed/v98Rh9qzmPs" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="carousel-item embed-responsive-item">
+                <iframe src="https://www.youtube.com/embed/UgJr0bNmTL8" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="carousel-item embed-responsive-item">
+                <iframe src="https://www.youtube.com/embed/4OuGXlwO3Mo" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+<script type="text/javascript" src="{% static 'about/js/whoAmI.js' %}"></script>
 
 {% endblock %}
