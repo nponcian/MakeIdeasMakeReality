@@ -17,3 +17,19 @@
 {
     background-image: url("../../assets/img/spainBarcelonaSagrada.jpeg");
 }
+
+#textToFormat, #textToFormat:focus
+{
+    background-color: lightgreen;
+}
+
+#formattedText, #formattedText:focus
+{
+    background-color: lightpink;
+    /*cursor:auto;*/
+}
+
+textarea
+{
+    resize:none;
+}

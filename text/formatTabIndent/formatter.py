@@ -7,7 +7,7 @@ EXAMPLE_TEXT_TO_FORMAT = "\
       example that contains\n\
       tab indents of size 2\n\
       <want to='make' the='tabindents: 4'?>\n\
-        then, format me now!\n\
+        then, try me now!\n\
       </want>\n\
     </an>\n\
   </is>\n\

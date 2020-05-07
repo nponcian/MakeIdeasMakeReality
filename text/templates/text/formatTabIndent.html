@@ -24,26 +24,30 @@
 
 {% block body %}
 
-
-<form class="m-3" method="POST" action="."> {% csrf_token %}
-    <div class="form-group row">
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Format</button>
-        </div>
-    </div>
-
-    <div class="form-group form-row">
-        <label class="col-auto" for="tabMultiplier">Tab Multiplier</label>
-        <div class="col-auto">
-            <div class="input-group">
-                <div class="input-group-prepend"><div class="input-group-text">x</div></div>
-                <input type="number" min="0" step="0.01" id="tabMultiplier" class="form-control" name="tabMultiplier" value="{{ tabMultiplier }}">
+<form class="m-4" method="POST" action="."> {% csrf_token %}
+    <div class="form-row input-group">
+        <div class="col-sm-8 col-md-6 col-lg-4 input-group">
+            <div class="input-group-prepend">
+                <button class="btn btn-primary" type="submit" id="formatButton">Format</button>
+                <span class="input-group-text">Tab multiplier</span>
+                <span class="input-group-text">x</span>
             </div>
+            <input type="number" min="0" step="0.01" id="tabMultiplier" class="form-control form-control-lg" name="tabMultiplier" value="{{ tabMultiplier }}" aria-label="Format button" aria-describedby="formatButton">
         </div>
     </div>
 
-    Text to format: <textarea type="text" name="textToFormat" style="resize: both;" placeholder="{{ textToFormatPlaceholder }}" required>{{ textToFormat }}</textarea><br>
-    Formatted text: <textarea type="text" name="formattedText" style="resize: both;">{{ formattedText }}</textarea>
+    <div class="d-md-flex mt-3">
+        <div class="form-group flex-fill">
+            <label for="textToFormat" class="font-weight-bold">Text to format:</label>
+            <textarea id="textToFormat" class="form-control" name="textToFormat" rows="15" placeholder="{{ textToFormatPlaceholder }}" required>{{ textToFormat }}</textarea>
+        </div>
+
+        <div class="form-group flex-fill">
+            <label for="formattedText" class="font-weight-bold">Formatted text:</label>
+            <textarea id="formattedText" class="form-control" name="formattedText" rows="15" placeholder="" readonly contenteditable="true">{{ formattedText }}</textarea> <!-- contenteditable would still show cursor but cannot be edited due to readonly -->
+            <!-- other attributes:   oncut="return false" onpaste="return false" onkeydown="return false;" style="user-drag: none;" ondragenter="return false;" ondragleave="return false;" ondragover="return false;" ondrop="return false;" -->
+        </div>
+    </div>
 </form>
 
 {% endblock %}
