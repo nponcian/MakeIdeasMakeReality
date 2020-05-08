@@ -103,13 +103,27 @@
     margin: 0;
 }
 
+.copyButton
+{
+    top: 0;
+    right: 0;
+}
+
+.copyButton:hover
+{
+    text-decoration: none; /*removes underline*/
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+
+.fab:hover, .far:hover, .fas:hover
+{
+    font-size: 1.3em;
+}
+
 .mimr-hover-white:hover
 {
     /*either mark this as important to be prioritized or put this at the end of this css file +
     include this css file lastly so that this styling is the last to be applied*/
     color: white !important;
-}
-.fab:hover, .far:hover, .fas:hover
-{
-    font-size: 1.3em;
 }
