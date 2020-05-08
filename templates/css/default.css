@@ -108,6 +108,19 @@
     font-size: 1.3em;
 }
 
+.mimr-btn-copy
+{
+    top: 0;
+    right: 0;
+}
+
+.mimr-btn-copy:hover
+{
+    text-decoration: none; /*removes underline*/
+    background-color: rgb(2, 117, 216);
+    color: white;
+}
+
 .mimr-hover-white:hover
 {
     /*either mark this as important to be prioritized or put this at the end of this css file +

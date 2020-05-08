@@ -33,16 +33,3 @@ textarea
     background-color: lightpink;
     /*cursor:auto;*/
 }
-
-.copyButton
-{
-    top: 0;
-    right: 0;
-}
-
-.copyButton:hover
-{
-    text-decoration: none; /*removes underline*/
-    background-color: rgb(2, 117, 216);
-    color: white;
-}

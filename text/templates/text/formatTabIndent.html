@@ -46,15 +46,9 @@
             <label for="formattedText" class="font-weight-bold h4">Formatted text:</label>
             <textarea id="formattedText" class="form-control" name="formattedText" rows="15" placeholder="" readonly contenteditable="true">{{ formattedText }}</textarea> <!-- contenteditable would still show cursor but cannot be edited due to readonly -->
             <!-- other attributes:   oncut="return false" onpaste="return false" onkeydown="return false;" style="user-drag: none;" ondragenter="return false;" ondragleave="return false;" ondragover="return false;" ondrop="return false;" -->
-            <button id="copyButton" class="btn btn-link position-absolute copyButton" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000">Copy</button> <!-- float-right --> <!-- data-timeout is controlled by local JavaScript -->
+            <button class="btn btn-link position-absolute mimr-btn-copy" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="formattedText">Copy</button> <!-- float-right --> <!-- data-timeout and data-target are controlled by local JavaScript -->
         </div>
     </div>
 </form>
-
-{% endblock %}
-
-{% block footer %}
-
-<script type="text/javascript" src="{% static 'text/js/common.js' %}"></script>
 
 {% endblock %}
