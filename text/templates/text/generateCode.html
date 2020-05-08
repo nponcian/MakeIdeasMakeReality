@@ -70,11 +70,16 @@
     </div>
 
     <div class="form-group form-row mt-3">
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary form-control form-control-lg">Generate</button>
-        </div>
-        <div class="col-auto">
-            <input class="form-control form-control-lg border border-primary rounded-pill text-center" type="text" placeholder="Click the other guy!" value="{{ generatedCode }}" readonly>
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-3 input-group">
+            <div class="input-group-prepend">
+                <button class="btn btn-primary" type="submit">Generate</button>
+            </div>
+            <input id="generatedCode" type="text" class="form-control text-center mimr-textarea-lightgreen" placeholder="Click the other guy!" aria-label="Generated code" value="{{ generatedCode }}" readonly contenteditable="true">
+            <div class="input-group-append text-nowrap">
+                <button class="btn btn-outline-secondary mimr-btn-copy" type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Copied! :)" data-timeout="2000" data-target="generatedCode">
+                    <i class="far fa-clone"></i>
+                </button>
+            </div>
         </div>
     </div>
 </form>

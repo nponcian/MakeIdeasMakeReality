@@ -4,6 +4,12 @@
 /*Include in CSS*/
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+/*
+Either
+1. mark these as important to be prioritized or
+2. put this at the end of this css file + include this css file lastly so that this styling is the
+   last to be applied
+*/
 .mimr-text-beige { color: beige; }
 .mimr-text-bluegreen { color: lightseagreen; }
 .mimr-text-blueviolet { color: blueviolet; }
@@ -57,6 +63,9 @@
 .mimr-bg-violet { background-color: violet; }
 .mimr-bg-yellow { background-color: yellow; }
 .mimr-bg-yellowgreen { background-color: yellowgreen; }
+
+.mimr-textarea-lightgreen, .mimr-textarea-lightgreen:focus { background-color: lightgreen !important; } /*cursor:auto;*/
+.mimr-textarea-lightpink, .mimr-textarea-lightpink:focus { background-color: lightpink !important; }
 
 .pageLabel
 {
@@ -119,11 +128,4 @@
     text-decoration: none; /*removes underline*/
     background-color: rgb(2, 117, 216);
     color: white;
-}
-
-.mimr-hover-white:hover
-{
-    /*either mark this as important to be prioritized or put this at the end of this css file +
-    include this css file lastly so that this styling is the last to be applied*/
-    color: white !important;
 }
