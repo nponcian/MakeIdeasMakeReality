@@ -24,12 +24,34 @@
 
 {% block body %}
 
-<form method="POST" action="."> {% csrf_token %}
-    <button class="btn btn-info" name="encryptButton">Encrypt</button>
-    <button class="btn btn-danger" name="decryptButton">Decrypt</button><br>
-    Keycode: <input type="text" name="keycode" value="{{ keycode }}"><br>
-    Text to cipher: <textarea type="text" name="textToCipher" style="resize: both;" required>{{ textToCipher }}</textarea><br>
-    Ciphered text: <textarea type="text" name="cipheredText" style="resize: both;">{{ cipheredText }}</textarea>
+<form class="m-4" method="POST" action="."> {% csrf_token %}
+    <div class="btn-group btn-group-lg" role="group" aria-label="Cipher method">
+        <button type="submit" class="btn btn-info" name="encryptButton">Encrypt <i class="fas fa-lock h3"></i></button>
+        <button type="submit" class="btn btn-danger" name="decryptButton">Decrypt <i class="fas fa-lock-open h3"></i></button>
+    </div>
+
+    <div class="form-row mt-3">
+        <div class="col-sm-8 col-md-6 col-lg-4 col-xl-3 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Keycode</span>
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="text" name="keycode" value="{{ keycode }}" aria-label="Keycode" class="form-control">
+        </div>
+    </div>
+
+    <div class="d-md-flex mt-3">
+        <div class="form-group flex-fill">
+            <label for="textToCipher" class="font-weight-bold h4">Text to cipher:</label>
+            <textarea id="textToCipher" class="form-control mimr-bg-lightgreen mimr-bg-focus-lightgreen" name="textToCipher" type="text" rows="15" placeholder="{{ textToFormatPlaceholder }}" required>{{ textToCipher }}</textarea>
+        </div>
+
+        <div class="form-group flex-fill position-relative">
+            <label for="formattedText" class="font-weight-bold h4">Ciphered text:</label>
+            <textarea id="formattedText" class="form-control mimr-bg-lightpink mimr-bg-focus-lightpink" name="cipheredText" type="text" rows="15" placeholder="" readonly contenteditable="true">{{ cipheredText }}</textarea>
+            <button class="btn btn-link mimr-btn-copy position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="formattedText">Copy</button>
+        </div>
+    </div>
 </form>
 
 {% endblock %}
