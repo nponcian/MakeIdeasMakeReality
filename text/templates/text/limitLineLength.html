@@ -24,13 +24,50 @@
 
 {% block body %}
 
-<form method="POST" action="."> {% csrf_token %}
-    <button class="btn btn-info" name="limitButton">Limit</button>
-    <button class="btn btn-danger" name="limitAndCompressButton">Limit & Compress</button><br>
-    Target line length: <input type="number" min="0" name="targetLineLength" value="{{ targetLineLength }}"><br>
-    Rotation point (1-based): <input type="number" min="1" name="rotationPoint" value="{{ rotationPoint }}"><br>
-    Text to format: <textarea type="text" name="textToFormat" style="resize: both;" placeholder="{{ textToFormatPlaceholder }}" required>{{ textToFormat }}</textarea><br>
-    Formatted text: <textarea type="text" name="formattedText" style="resize: both;">{{ formattedText }}</textarea>
+<form class="m-4" method="POST" action="."> {% csrf_token %}
+    <div class="btn-group btn-group-lg" role="group" aria-label="Limit and compress">
+        <button type="submit" class="btn btn-info" name="limitButton">Limit <i class="fas fa-sliders-h"></i></button>
+        <button type="submit" class="btn btn-danger" name="limitAndCompressButton">Limit & Compress <i class="fas fa-compress-arrows-alt"></i></button>
+    </div>
+
+    <div class="form-row mt-3">
+        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Target line length:</span>
+                <span class="input-group-text"><i class="fas fa-ruler-horizontal"></i></span>
+            </div>
+            <input type="number" min="1" name="targetLineLength" value="{{ targetLineLength }}" aria-label="Line length" class="form-control">
+            <div class="input-group-append">
+                <span class="input-group-text">characters</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row mt-3">
+        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Rotation point (1-based):</span>
+                <span class="input-group-text"><i class="fas fa-sync-alt"></i></span>
+            </div>
+            <input type="number" min="1" name="rotationPoint" value="{{ rotationPoint }}" aria-label="Rotation point" class="form-control">
+            <div class="input-group-append"> <!-- d-none d-sm-block -->
+                <span class="input-group-text">th</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-md-flex mt-3">
+        <div class="form-group flex-fill">
+            <label for="textToFormat" class="font-weight-bold h4">Text to format:</label>
+            <textarea id="textToFormat" class="form-control mimr-bg-lightgreen mimr-bg-focus-lightgreen" name="textToFormat" rows="15" placeholder="{{ textToFormatPlaceholder }}" required>{{ textToFormat }}</textarea>
+        </div>
+
+        <div class="form-group flex-fill position-relative">
+            <label for="formattedText" class="font-weight-bold h4">Formatted text:</label>
+            <textarea id="formattedText" class="form-control mimr-bg-lightpink mimr-bg-focus-lightpink" name="formattedText" rows="15" placeholder="" readonly contenteditable="true">{{ formattedText }}</textarea>
+            <button class="btn btn-link mimr-btn-copy position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="formattedText">Copy</button>
+        </div>
+    </div>
 </form>
 
 {% endblock %}
