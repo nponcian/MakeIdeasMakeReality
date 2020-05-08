@@ -10,62 +10,62 @@ Either
 2. put this at the end of this css file + include this css file lastly so that this styling is the
    last to be applied
 */
-.mimr-text-beige { color: beige; }
-.mimr-text-bluegreen { color: lightseagreen; }
-.mimr-text-blueviolet { color: blueviolet; }
-.mimr-text-brown { color: brown; }
-.mimr-text-cyan { color: cyan; }
-.mimr-text-darkblue { color: darkblue; }
-.mimr-text-darkgreen { color: darkgreen; }
-.mimr-text-dodgerblue { color: dodgerblue; }
-.mimr-text-flesh { color: peachpuff; }
-.mimr-text-gold { color: gold; }
-.mimr-text-hotpink { color: hotpink; }
-.mimr-text-lightblue { color: lightblue; }
-.mimr-text-lightbrown { color: peru; }
-.mimr-text-lightgreen { color: lightgreen; }
-.mimr-text-lightpink { color: lightpink; }
-.mimr-text-maroon { color: maroon; }
-.mimr-text-olive { color: olive; }
-.mimr-text-orange { color: orange; }
-.mimr-text-pink { color: pink; }
-.mimr-text-purple { color: purple; }
+.mimr-text-beige { color: beige !important; }
+.mimr-text-bluegreen { color: lightseagreen !important; }
+.mimr-text-blueviolet { color: blueviolet !important; }
+.mimr-text-brown { color: brown !important; }
+.mimr-text-cyan { color: cyan !important; }
+.mimr-text-darkblue { color: darkblue !important; }
+.mimr-text-darkgreen { color: darkgreen !important; }
+.mimr-text-dodgerblue { color: dodgerblue !important; }
+.mimr-text-flesh { color: peachpuff !important; }
+.mimr-text-gold { color: gold !important; }
+.mimr-text-hotpink { color: hotpink !important; }
+.mimr-text-lightblue { color: lightblue !important; }
+.mimr-text-lightbrown { color: peru !important; }
+.mimr-text-lightgreen { color: lightgreen !important; }
+.mimr-text-lightpink { color: lightpink !important; }
+.mimr-text-maroon { color: maroon !important; }
+.mimr-text-olive { color: olive !important; }
+.mimr-text-orange { color: orange !important; }
+.mimr-text-pink { color: pink !important; }
+.mimr-text-purple { color: purple !important; }
 .mimr-text-royalblue { color: royalblue; }
-.mimr-text-skyblue { color: skyblue; }
-.mimr-text-tomato { color: tomato; }
-.mimr-text-violet { color: violet; }
-.mimr-text-yellow { color: yellow; }
-.mimr-text-yellowgreen { color: yellowgreen; }
+.mimr-text-skyblue { color: skyblue !important; }
+.mimr-text-tomato { color: tomato !important; }
+.mimr-text-violet { color: violet !important; }
+.mimr-text-yellow { color: yellow !important; }
+.mimr-text-yellowgreen { color: yellowgreen !important; }
 
-.mimr-bg-beige { background-color: beige; }
-.mimr-bg-bluegreen { background-color: lightseagreen; }
-.mimr-bg-blueviolet { background-color: blueviolet; }
-.mimr-bg-brown { background-color: brown; }
-.mimr-bg-cyan { background-color: cyan; }
-.mimr-bg-darkblue { background-color: darkblue; }
-.mimr-bg-darkgreen { background-color: darkgreen; }
-.mimr-bg-dodgerblue { background-color: dodgerblue; }
-.mimr-bg-flesh { background-color: peachpuff; }
-.mimr-bg-gold { background-color: gold; }
-.mimr-bg-hotpink { background-color: hotpink; }
-.mimr-bg-lightblue { background-color: lightblue; }
-.mimr-bg-lightbrown { background-color: peru; }
-.mimr-bg-lightgreen { background-color: lightgreen; }
-.mimr-bg-lightpink { background-color: lightpink; }
-.mimr-bg-maroon { background-color: maroon; }
-.mimr-bg-olive { background-color: olive; }
-.mimr-bg-orange { background-color: orange; }
-.mimr-bg-pink { background-color: pink; }
-.mimr-bg-purple { background-color: purple; }
-.mimr-bg-royalblue { background-color: royalblue; }
-.mimr-bg-skyblue { background-color: skyblue; }
-.mimr-bg-tomato { background-color: tomato; }
-.mimr-bg-violet { background-color: violet; }
-.mimr-bg-yellow { background-color: yellow; }
-.mimr-bg-yellowgreen { background-color: yellowgreen; }
+.mimr-bg-beige { background-color: beige !important; }
+.mimr-bg-bluegreen { background-color: lightseagreen !important; }
+.mimr-bg-blueviolet { background-color: blueviolet !important; }
+.mimr-bg-brown { background-color: brown !important; }
+.mimr-bg-cyan { background-color: cyan !important; }
+.mimr-bg-darkblue { background-color: darkblue !important; }
+.mimr-bg-darkgreen { background-color: darkgreen !important; }
+.mimr-bg-dodgerblue { background-color: dodgerblue !important; }
+.mimr-bg-flesh { background-color: peachpuff !important; }
+.mimr-bg-gold { background-color: gold !important; }
+.mimr-bg-hotpink { background-color: hotpink !important; }
+.mimr-bg-lightblue { background-color: lightblue !important; }
+.mimr-bg-lightbrown { background-color: peru !important; }
+.mimr-bg-lightgreen { background-color: lightgreen !important; }
+.mimr-bg-lightpink { background-color: lightpink !important; }
+.mimr-bg-maroon { background-color: maroon !important; }
+.mimr-bg-olive { background-color: olive !important; }
+.mimr-bg-orange { background-color: orange !important; }
+.mimr-bg-pink { background-color: pink !important; }
+.mimr-bg-purple { background-color: purple !important; }
+.mimr-bg-royalblue { background-color: royalblue !important; }
+.mimr-bg-skyblue { background-color: skyblue !important; }
+.mimr-bg-tomato { background-color: tomato !important; }
+.mimr-bg-violet { background-color: violet !important; }
+.mimr-bg-yellow { background-color: yellow !important; }
+.mimr-bg-yellowgreen { background-color: yellowgreen !important; }
 
-.mimr-textarea-lightgreen, .mimr-textarea-lightgreen:focus { background-color: lightgreen !important; } /*cursor:auto;*/
-.mimr-textarea-lightpink, .mimr-textarea-lightpink:focus { background-color: lightpink !important; }
+.mimr-bg-focus-lightgreen:focus { background-color: lightgreen !important; } /*cursor:auto;*/
+.mimr-bg-focus-lightpink:focus { background-color: lightpink !important; }
 
 .pageLabel
 {
