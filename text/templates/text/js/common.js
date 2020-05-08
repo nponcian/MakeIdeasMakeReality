@@ -10,6 +10,9 @@ $(document).ready(function(){
         /* Copy the text inside the text field */
         document.execCommand("copy");
 
+        // Deselect the text
+        copyText.blur();
+
         /* Alert the copied text */
         // alert("Copied the text: " + copyText.value); // I replaced this with popover
     });

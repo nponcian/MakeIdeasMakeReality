@@ -18,6 +18,11 @@
     background-image: url("../../assets/img/spainBarcelonaSagrada.jpeg");
 }
 
+textarea
+{
+    resize:none;
+}
+
 #textToFormat, #textToFormat:focus
 {
     background-color: lightgreen;
@@ -29,7 +34,15 @@
     /*cursor:auto;*/
 }
 
-textarea
+.copyButton
 {
-    resize:none;
+    top: 0;
+    right: 0;
+}
+
+.copyButton:hover
+{
+    text-decoration: none; /*removes underline*/
+    background-color: rgb(2, 117, 216);
+    color: white;
 }
