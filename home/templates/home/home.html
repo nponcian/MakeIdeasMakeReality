@@ -25,3 +25,41 @@
 </div>
 
 {% endblock %}
+
+{% block body %}
+
+<br>
+<div class="container mt-5 display-3 text-center">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
+        <div class="col mt-3">
+            <i class="fas fa-shipping-fast display-3 text-info"></i>
+            <h2 class="font-weight-bold mt-3">Fast</h2>
+            <p class="lead text-muted">Optimized algorithms and compressed contents</p>
+        </div>
+        <div class="col mt-3">
+            <i class="fas fa-users display-3 text-info"></i>
+            <h2 class="font-weight-bold mt-3">Friendly</h2>
+            <p class="lead text-muted">Interface designed for a smoother experience</p>
+        </div>
+        <div class="col mt-3">
+            <i class="fas fa-mobile-alt display-3 text-info"></i>
+            <h2 class="font-weight-bold mt-3">Responsive</h2>
+            <p class="lead text-muted">Looks great on any device</p>
+        </div>
+        <div class="col mt-3">
+            <i class="fas fa-hand-holding-usd display-3 text-info"></i>
+            <h2 class="font-weight-bold mt-3">Free</h2>
+            <p class="lead text-muted">No payment of any form is required</p>
+        </div>
+    </div>
+</div>
+
+<div id="welcomeMessage" class="container-fluid mt-5 h2 text-center text-light bg-secondary d-flex justify-content-center align-items-center"></div>
+
+{% endblock %}
+
+{% block footer %}
+
+<script type="text/javascript" src="{% static 'home/js/home.js' %}"></script>
+
+{% endblock %}

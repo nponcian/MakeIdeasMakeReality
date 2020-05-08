@@ -2,3 +2,8 @@
 {
     background-image: url("../../assets/img/spainMadridMetropolis.jpeg");
 }
+
+#welcomeMessage
+{
+    min-height: 30vh;
+}

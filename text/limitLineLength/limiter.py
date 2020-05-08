@@ -8,7 +8,7 @@ DEFAULT_ROTATION_POINT = 1 # 3 for for Python comments
 EXAMPLE_TEXT_TO_FORMAT = "\
 # Enter paragraph here\n\
 # Sample paragraph\n\
-# Rotate me at point 3 to adjust for the tag '#'\n\
+# Wrap the overflowing lines at point 3 to adjust for the tag '#'\n\
 # This is a line containing exactly 100 characters, you can try to count this and you'd also get 100\n\
 # This is another line containing more than 100 characters, don't manually count it, that is time consuming, use a text editor!\n\
 # This is again another line, I would catch overflowing characters above, but even me would also overflow so let the next line handle me\n\
