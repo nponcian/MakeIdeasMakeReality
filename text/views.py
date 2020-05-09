@@ -15,6 +15,11 @@ def text(request):
     context = {}
     return render(request, template, context)
 
+def countWord(request):
+    template = "text/countWord.html"
+    context = {}
+    return render(request, template, context)
+
 def cipherMessage(request):
     template = "text/cipherMessage.html"
     context = {}

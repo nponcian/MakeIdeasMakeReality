@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'text/css/common.css' %}">
+
+<title>Count Words | MakeIdeasMakeReality</title>
+
+{% endblock %}
+
+{% block pageLabel %}
+
+<div class="pageLabel jumbotron jumbotron-fluid" id="tabIndent_pageLabel">
+    <div class="container pt-5 text-center">
+        <div class="display-3 pt-xs-3 pt-sm-5">
+            Count Words
+        </h1>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+<form class="m-4" method="POST" action="."> {% csrf_token %}
+    <button class="btn btn-primary btn-lg" type="submit" id="countButton">Count</button>
+
+    <div class="d-md-flex mt-3">
+        <div class="form-group flex-fill">
+            <label for="wordsToCount" class="font-weight-bold h4">Words to count:</label>
+            <textarea id="wordsToCount" class="form-control mimr-bg-lightgreen mimr-bg-focus-lightgreen" name="wordsToCount" rows="15" placeholder="{{ wordsToCountPlaceholder }}" required>{{ wordsToCount }}</textarea>
+        </div>
+
+        <div class="form-group flex-fill position-relative">
+            <label for="countedWords" class="font-weight-bold h4">Counted Words:</label>
+            <textarea id="countedWords" class="form-control mimr-bg-lightpink mimr-bg-focus-lightpink" name="countedWords" rows="15" placeholder="" readonly contenteditable="true">{{ countedWords }}</textarea>
+            <button class="btn btn-link mimr-btn-copy position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="countedWords">Copy</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
