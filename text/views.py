@@ -6,6 +6,7 @@ from rest_framework import views as restViews
 from service import permissions as servicePermissions
 from text.cipherMessage import algorithmsFactory
 from text.commonWord import (
+    textGrouping,
     textStructure,
 )
 from text.formatTabIndent import formatter as tabIndentFormatter
@@ -33,6 +34,7 @@ class CommonWordApi(restViews.APIView):
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
         text = textStructure.reconstruct(text)
+        groupedText = textGrouping.groupWords(text)
         return JsonResponse({"Cooking" : "in the backend!"})
 
 def cipherMessage(request):
