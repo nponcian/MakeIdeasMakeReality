@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.views import APIView
+from rest_framework import permissions as restPermissions
+from rest_framework import views as restViews
 
+from service import permissions as servicePermissions
 from text.cipherMessage import algorithmsFactory
 from text.formatTabIndent import formatter as tabIndentFormatter
 from text.generateCode import (
@@ -23,10 +24,10 @@ def countWord(request):
     context = {}
     return render(request, template, context)
 
-class WordCounterApi(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+class WordCounterApi(restViews.APIView):
+    permission_classes = [servicePermissions.DefaultServicePermission]
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         return JsonResponse({"Cooking" : "in the backend!"})
 
 def cipherMessage(request):
