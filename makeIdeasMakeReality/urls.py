@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import handler404
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 # This only works if DEBUG = False
 handler404 = 'home.views.notFound'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')), # to access, append login/ and logout/
+
+     # to access, append login/ or logout/
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     path('about/', include('about.urls', namespace = 'about')),
     path('service/', include('service.urls', namespace = 'service')),

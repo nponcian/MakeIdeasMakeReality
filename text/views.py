@@ -19,15 +19,16 @@ def text(request):
     context = {}
     return render(request, template, context)
 
-def countWord(request):
-    template = "text/countWord.html"
+def commonWord(request):
+    template = "text/commonWord.html"
     context = {}
     return render(request, template, context)
 
-class WordCounterApi(restViews.APIView):
+class CommonWordApi(restViews.APIView):
     permission_classes = [servicePermissions.DefaultServicePermission]
 
     def post(self, request, *args, **kwargs):
+        text = request.data.get("text", "")
         return JsonResponse({"Cooking" : "in the backend!"})
 
 def cipherMessage(request):
