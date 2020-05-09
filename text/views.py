@@ -8,6 +8,7 @@ from text.cipherMessage import algorithmsFactory
 from text.commonWord import (
     textGrouping,
     textStructure,
+    wordCount,
 )
 from text.formatTabIndent import formatter as tabIndentFormatter
 from text.generateCode import (
@@ -35,7 +36,8 @@ class CommonWordApi(restViews.APIView):
         text = request.data.get("text", "")
         text = textStructure.reconstruct(text)
         groupedText = textGrouping.groupWords(text)
-        return JsonResponse({"Cooking" : "in the backend!"})
+        wordsAndCount = wordCount.count(groupedText)
+        return JsonResponse(wordsAndCount)
 
 def cipherMessage(request):
     template = "text/cipherMessage.html"
