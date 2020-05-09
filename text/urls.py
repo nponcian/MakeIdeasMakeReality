@@ -7,6 +7,7 @@ app_name = 'text'
 urlpatterns = [
     path('ciphermessage/', views.cipherMessage, name = "cipherMessage"),
     path('countword/', views.countWord, name = "countWord"),
+    path('countword/api/', views.WordCounterApi.as_view(), name = "countWordApi"),
     path('formattabindent/', views.formatTabIndent, name = "formatTabIndent"),
     path('generatecode/', views.generateCode, name = "generateCode"),
     path('limitlinelength/', views.limitLineLength, name = "limitLineLength"),

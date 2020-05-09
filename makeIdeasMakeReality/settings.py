@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+
     'about',
     'device',
     'home',
@@ -226,3 +228,24 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "service", "templates"),
     os.path.join(BASE_DIR, "text", "templates"),
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # Are you sure? ;)
+        # 'rest_framework.permissions.AllowAny',
+
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+
+        # Use Django's standard `django.contrib.auth` permissions,
+        'rest_framework.permissions.DjangoModelPermissions',
+        # or allow read-only access for unauthenticated users.
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+
+    ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.BasicAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    # ],
+}
