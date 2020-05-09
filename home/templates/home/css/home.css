@@ -3,6 +3,12 @@
     background-image: url("../../assets/img/spainMadridMetropolis.jpeg");
 }
 
+#features
+{
+    /*while the size is 30vh, any increase in internal contents would not affect the outside*/
+    min-height: 30vh;
+}
+
 #welcomeMessage
 {
     min-height: 40vh;
