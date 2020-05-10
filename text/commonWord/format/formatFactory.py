@@ -1,22 +1,28 @@
-# NONE = ("none", "")
+from text.commonWord.format import (
+    none,
+    letters,
+    lettersDigitsConnectorSymbols,
+)
+
+# format types
+NONE = "none"
 LETTERS = "letters"
 LETTERS_DIGITS = "letters_digits:"
 LETTERS_DIGITS_CONNECTORSYMBOLS = "letters_digits_connectorsymbols"
 LETTERS_DIGITS_NONSPLITTERYMBOLS = "letters_digits_nonsplittersymbols"
 
-from text.commonWord.format import (
-    none,
-    lettersDigitsConnectorSymbols,
-)
-
-defaultFormatter = none.NoneFormatter()
 formatterDict =\
     {
+        NONE : none.NoneFormatter(),
+        LETTERS : letters.Letters(),
         LETTERS_DIGITS_CONNECTORSYMBOLS : lettersDigitsConnectorSymbols.LettersDigitsConnectorSymbols()
     }
 
-def create(formatType):
+def getFormatter(formatType):
+    if not formatType: formatType = NONE
+
     if formatType in formatterDict:
         return formatterDict[formatType]
 
-    return defaultFormatter
+    # TODO: raise an exception instead that will return a JSON error response with details of error
+    return formatterDict[NONE]

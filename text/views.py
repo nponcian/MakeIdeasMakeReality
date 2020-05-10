@@ -39,7 +39,7 @@ class CommonWordApi(restViews.APIView):
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
 
-        formatter = commonWordFormatFactory.create(formatType)
+        formatter = commonWordFormatFactory.getFormatter(formatType)
         text = formatter.reconstruct(text)
 
         groupedText = textGrouping.groupWords(text)
