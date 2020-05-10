@@ -2,6 +2,7 @@ from text.commonWord.format import (
     none,
     letters,
     digits,
+    lettersDigits,
     lettersDigitsConnectorSymbols,
 )
 
@@ -9,7 +10,7 @@ from text.commonWord.format import (
 NONE = "none"
 LETTERS = "letters"
 DIGITS = "digits"
-LETTERS_DIGITS = "letters_digits:"
+LETTERS_DIGITS = "letters_digits"
 LETTERS_DIGITS_CONNECTORSYMBOLS = "letters_digits_connectorsymbols"
 LETTERS_DIGITS_NONSPLITTERYMBOLS = "letters_digits_nonsplittersymbols"
 
@@ -18,6 +19,7 @@ formatterDict =\
         NONE : none.NoneFormatter(),
         LETTERS : letters.Letters(),
         DIGITS : digits.Digits(),
+        LETTERS_DIGITS : lettersDigits.LettersDigits(),
         LETTERS_DIGITS_CONNECTORSYMBOLS : lettersDigitsConnectorSymbols.LettersDigitsConnectorSymbols()
     }
 
