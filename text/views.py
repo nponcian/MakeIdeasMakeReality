@@ -5,10 +5,8 @@ from rest_framework import views as restViews
 
 from service import permissions as servicePermissions
 from text.cipherMessage import algorithmsFactory
-from text.commonWord import (
-    textGrouping,
-    wordCount,
-)
+from text.commonWord import textGrouping
+from text.commonWord.count import wordCount as commonWordCount
 from text.commonWord.format import formatFactory as commonWordFormatFactory
 from text.formatTabIndent import formatter as tabIndentFormatter
 from text.generateCode import (
@@ -44,8 +42,8 @@ class CommonWordApi(restViews.APIView):
         text = formatter.reconstruct(text)
 
         groupedText = textGrouping.groupWords(text)
-        talliedWords = wordCount.count(groupedText)
-        wordsAndCountDict = wordCount.order(talliedWords, orderType)
+        talliedWords = commonWordCount.count(groupedText)
+        wordsAndCountDict = commonWordCount.order(talliedWords, orderType)
         return JsonResponse(wordsAndCountDict)
 
 def cipherMessage(request):
