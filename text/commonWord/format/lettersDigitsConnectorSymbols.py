@@ -38,9 +38,8 @@ class LettersDigitsConnectorSymbols(textFormatter.TextFormatter):
         return updatedText.rstrip()
 
     def __stripNonAlNum(self, word):
-        # could be simplified to "if word.isalnum(): return word" but seems to be slower
-        if len(word) <= 1: return word if word.isalnum() else ""
-
-        # cannot use \w here as it includes _
         substr = re.search("[a-zA-Z0-9].*[a-zA-Z0-9]", word)
+        if substr: return substr.group(0)
+
+        substr = re.search("[a-zA-Z0-9]", word)
         return substr.group(0) if substr is not None else ""

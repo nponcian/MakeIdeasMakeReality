@@ -4,6 +4,7 @@ from text.commonWord.format import (
     digits,
     lettersDigits,
     lettersDigitsConnectorSymbols,
+    lettersDigitsNonsplitterSymbols,
 )
 
 # format types
@@ -20,7 +21,8 @@ formatterDict =\
         LETTERS : letters.Letters(),
         DIGITS : digits.Digits(),
         LETTERS_DIGITS : lettersDigits.LettersDigits(),
-        LETTERS_DIGITS_CONNECTORSYMBOLS : lettersDigitsConnectorSymbols.LettersDigitsConnectorSymbols()
+        LETTERS_DIGITS_CONNECTORSYMBOLS : lettersDigitsConnectorSymbols.LettersDigitsConnectorSymbols(),
+        LETTERS_DIGITS_NONSPLITTERYMBOLS : lettersDigitsNonsplitterSymbols.LettersDigitsNonsplitterSymbols()
     }
 
 def getFormatter(formatType):

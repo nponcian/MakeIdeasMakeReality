@@ -15,4 +15,4 @@ class LettersDigits(textFormatter.TextFormatter):
         return text
 
     def __retainLettersDigits(self, text):
-        return re.sub("[^a-zA-Z0-9]", SEPARATOR, text)
+        return re.sub("[^a-zA-Z0-9]", SEPARATOR, text) # cannot use \w here as it includes _
