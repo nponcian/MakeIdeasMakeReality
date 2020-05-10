@@ -5,6 +5,7 @@ from rest_framework import views as restViews
 
 from service import permissions as servicePermissions
 from text.cipherMessage import algorithmsFactory
+from text.common import htmlToText
 from text.commonWord import textGrouping
 from text.commonWord.count import countHelper as commonWordCountHelper
 from text.commonWord.format import formatFactory as commonWordFormatFactory
@@ -32,10 +33,12 @@ class CommonWordApi(restViews.APIView):
 
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
+        links = request.data.get("links", "")
         formatType = request.data.get("format", "")
         orderType = request.data.get("order", "")
         ignoreList = request.data.get("ignore", [])
 
+        text += "\n" + htmlToText.htmlUrlsToText(*(links.strip().split()))
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
 

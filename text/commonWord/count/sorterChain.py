@@ -1,5 +1,7 @@
-from text.commonWord.count import alphabeticalSorter
-from text.commonWord.count import countSorter
+from text.commonWord.count import (
+    alphabeticalSorter,
+    countSorter,
+)
 
 def buildSortersChain(orderType):
     sorterByAlphabet = alphabeticalSorter.AlphabeticalSorter(orderType)
