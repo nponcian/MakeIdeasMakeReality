@@ -5,7 +5,7 @@ from text.commonWord.format import textFormatter
 SYMBOLS_CONNECTING_WORDS = "-_'.&+"
 SEPARATOR = " "
 
-class LettersDigitsConnectorSymbols(textFormatter.TextFormatter):
+class LettersDigitsConnectorSymbols(textFormatter.TextFormatterStrategy):
     def __init__(self):
         super().__init__()
 

@@ -35,6 +35,7 @@ class CommonWordApi(restViews.APIView):
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
         formatType = request.data.get("format", "")
+        orderType = request.data.get("order", "")
 
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
@@ -43,8 +44,9 @@ class CommonWordApi(restViews.APIView):
         text = formatter.reconstruct(text)
 
         groupedText = textGrouping.groupWords(text)
-        wordsAndCount = wordCount.count(groupedText)
-        return JsonResponse(wordsAndCount)
+        talliedWords = wordCount.count(groupedText)
+        wordsAndCountDict = wordCount.order(talliedWords, orderType)
+        return JsonResponse(wordsAndCountDict)
 
 def cipherMessage(request):
     template = "text/cipherMessage.html"

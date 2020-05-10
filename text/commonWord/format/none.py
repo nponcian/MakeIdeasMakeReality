@@ -1,6 +1,6 @@
 from text.commonWord.format import textFormatter
 
-class NoneFormatter(textFormatter.TextFormatter):
+class NoneFormatter(textFormatter.TextFormatterStrategy):
     def __init__(self):
         super().__init__()
 

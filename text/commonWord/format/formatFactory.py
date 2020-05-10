@@ -7,29 +7,20 @@ from text.commonWord.format import (
     lettersDigitsNonsplitterSymbols,
 )
 
-# format types
-NONE = "none"
-LETTERS = "letters"
-DIGITS = "digits"
-LETTERS_DIGITS = "letters_digits"
-LETTERS_DIGITS_CONNECTORSYMBOLS = "letters_digits_connectorsymbols"
-LETTERS_DIGITS_NONSPLITTERYMBOLS = "letters_digits_nonsplittersymbols"
-
-formatterDict =\
+FORMATTER_DICT =\
     {
-        NONE : none.NoneFormatter(),
-        LETTERS : letters.Letters(),
-        DIGITS : digits.Digits(),
-        LETTERS_DIGITS : lettersDigits.LettersDigits(),
-        LETTERS_DIGITS_CONNECTORSYMBOLS : lettersDigitsConnectorSymbols.LettersDigitsConnectorSymbols(),
-        LETTERS_DIGITS_NONSPLITTERYMBOLS : lettersDigitsNonsplitterSymbols.LettersDigitsNonsplitterSymbols()
+        "none" : none.NoneFormatter(),
+        "letters" : letters.Letters(),
+        "digits" : digits.Digits(),
+        "letters_digits" : lettersDigits.LettersDigits(),
+        "letters_digits_connectorsymbols" : lettersDigitsConnectorSymbols.LettersDigitsConnectorSymbols(),
+        "letters_digits_nonsplittersymbols" : lettersDigitsNonsplitterSymbols.LettersDigitsNonsplitterSymbols()
     }
 
 def getFormatter(formatType):
-    if not formatType: formatType = NONE
-
-    if formatType in formatterDict:
-        return formatterDict[formatType]
-
+    NONE_KEY = "none"
+    if formatType is None: formatType = NONE_KEY
     # TODO: raise an exception instead that will return a JSON error indicating invalid input format
-    return formatterDict[NONE]
+    elif formatType not in FORMATTER_DICT: return FORMATTER_DICT[NONE_KEY]
+
+    return FORMATTER_DICT[formatType]

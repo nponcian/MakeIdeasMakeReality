@@ -4,7 +4,7 @@ from text.commonWord.format import textFormatter
 
 SEPARATOR = " "
 
-class Letters(textFormatter.TextFormatter):
+class Letters(textFormatter.TextFormatterStrategy):
     def __init__(self):
         super().__init__()
 

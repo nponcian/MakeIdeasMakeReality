@@ -2,11 +2,11 @@ import re
 
 from text.commonWord.format import textFormatter
 
-SPLITTER_SYMBOLS = ",@|/:;()[]{}"
+SPLITTER_SYMBOLS = ',@|/:;()[]{}"'
 SPLITTER_SYMBOLS_IFF_WITH_SPACE = ".!?"
 SEPARATOR = " "
 
-class LettersDigitsNonsplitterSymbols(textFormatter.TextFormatter):
+class LettersDigitsNonsplitterSymbols(textFormatter.TextFormatterStrategy):
     def __init__(self):
         super().__init__()
 
