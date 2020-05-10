@@ -6,7 +6,7 @@
 #features
 {
     /*while the size is 30vh, any increase in internal contents would not affect the outside*/
-    min-height: 30vh;
+    min-height: 35vh;
 }
 
 #welcomeMessage

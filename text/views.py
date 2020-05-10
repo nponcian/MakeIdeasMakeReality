@@ -7,9 +7,9 @@ from service import permissions as servicePermissions
 from text.cipherMessage import algorithmsFactory
 from text.commonWord import (
     textGrouping,
-    textStructure,
     wordCount,
 )
+from text.commonWord.format import formatFactory as commonWordFormatFactory
 from text.formatTabIndent import formatter as tabIndentFormatter
 from text.generateCode import (
     characterGroup,
@@ -34,7 +34,14 @@ class CommonWordApi(restViews.APIView):
 
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
-        text = textStructure.reconstruct(text)
+        formatType = request.data.get("format", "")
+
+        text = text.strip()
+        if len(text) == 0: return JsonResponse({})
+
+        formatter = commonWordFormatFactory.create(formatType)
+        text = formatter.reconstruct(text)
+
         groupedText = textGrouping.groupWords(text)
         wordsAndCount = wordCount.count(groupedText)
         return JsonResponse(wordsAndCount)
