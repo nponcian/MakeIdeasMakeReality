@@ -5,4 +5,4 @@ class NoneFormatter(textFormatter.TextFormatter):
         super().__init__()
 
     def reconstruct(self, text):
-        return text
+        return text.casefold()
