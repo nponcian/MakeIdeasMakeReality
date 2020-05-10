@@ -24,9 +24,9 @@ def htmlUrlsToText(*htmlUrls):
         if len(url) == 0: continue
 
         response = requests.get(url)
-        htmlContents = response.content
-        if isinstance(htmlContents, (bytes, bytearray)):
-            htmlContents = htmlContents.decode()
+        htmlContents = response.text
+        # if isinstance(htmlContents, (bytes, bytearray)): # necessary if using # response.content
+        #     htmlContents = htmlContents.decode()
         mergedContent += htmlContentsToText(htmlContents) + "\n"
 
     return mergedContent

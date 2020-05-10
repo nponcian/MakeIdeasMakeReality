@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import permissions as restPermissions
 from rest_framework import views as restViews
+from rest_framework.response import Response
 
 from service import permissions as servicePermissions
 from text.cipherMessage import algorithmsFactory
@@ -31,6 +32,10 @@ def commonWord(request):
 class CommonWordApi(restViews.APIView):
     permission_classes = [servicePermissions.DefaultServicePermission]
 
+    # Not needed but to be able to post via the Django-restframework provided view thus added here
+    def get(self, request, *args, **kwargs):
+        return Response({"detail":"GET is unsupported, use POST with details on the body"})
+
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
         links = request.data.get("links", "")
@@ -51,7 +56,7 @@ class CommonWordApi(restViews.APIView):
         wordsAndCountDict = commonWordCountHelper.order(wordsAndCountDict, orderType)
         wordsAndCountDict = commonWordCountHelper.ignore(wordsAndCountDict, ignoreList)
 
-        return JsonResponse(wordsAndCountDict)
+        return Response(wordsAndCountDict) # JsonResponse(wordsAndCountDict)
 
 def cipherMessage(request):
     template = "text/cipherMessage.html"
