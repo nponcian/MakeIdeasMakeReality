@@ -39,12 +39,12 @@
     <div class="d-md-flex mt-3">
         <div class="form-group flex-fill">
             <label for="textToFormat" class="font-weight-bold h4">Text to format:</label>
-            <textarea id="textToFormat" class="form-control mimr-bg-lightgreen mimr-bg-focus-lightgreen" name="textToFormat" rows="15" placeholder="{{ textToFormatPlaceholder }}" required>{{ textToFormat }}</textarea>
+            <textarea id="textToFormat" class="form-control mimr-bg-lightgreen mimr-bg-lightgreen-focus" name="textToFormat" rows="15" placeholder="{{ textToFormatPlaceholder }}" required>{{ textToFormat }}</textarea>
         </div>
 
         <div class="form-group flex-fill position-relative">
             <label for="formattedText" class="font-weight-bold h4">Formatted text:</label>
-            <textarea id="formattedText" class="form-control mimr-bg-lightpink mimr-bg-focus-lightpink" name="formattedText" rows="15" placeholder="" readonly contenteditable="true">{{ formattedText }}</textarea> <!-- contenteditable would still show cursor but cannot be edited due to readonly -->
+            <textarea id="formattedText" class="form-control mimr-bg-lightpink mimr-bg-lightpink-focus" name="formattedText" rows="15" placeholder="" readonly contenteditable="true">{{ formattedText }}</textarea> <!-- contenteditable would still show cursor but cannot be edited due to readonly -->
             <!-- other attributes:   oncut="return false" onpaste="return false" onkeydown="return false;" style="user-drag: none;" ondragenter="return false;" ondragleave="return false;" ondragover="return false;" ondrop="return false;" -->
             <button class="btn btn-link mimr-btn-copy position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="formattedText">Copy</button> <!-- float-right --> <!-- data-timeout and data-target are controlled by local JavaScript -->
         </div>
