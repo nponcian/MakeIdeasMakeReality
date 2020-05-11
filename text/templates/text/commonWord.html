@@ -24,13 +24,21 @@
 
 {% block body %}
 
-<form class="m-4" method="POST" action="."> {% csrf_token %}
+<!-- Form contains a file input thus the need for enctype='multipart/form-data' -->
+<form class="m-4 serviceForm" method="POST" action="." enctype='multipart/form-data' data-url="/service/text/commonword/api/"> {% csrf_token %}
     <button class="btn btn-primary btn-lg" type="submit" id="countButton">Count</button>
+
+    <div class="form-row mt-3">
+        <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 custom-file">
+            <input id="fileInput" class="custom-file-input" type="file" name="files">
+            <label class="custom-file-label text-truncate" for="fileInput">Choose file...</label>
+        </div>
+    </div>
 
     <div class="d-md-flex mt-3">
         <div class="form-group flex-fill">
             <label for="wordsToCount" class="font-weight-bold h4">Words to count:</label>
-            <textarea id="wordsToCount" class="form-control mimr-bg-lightgreen mimr-bg-focus-lightgreen" name="wordsToCount" rows="15" placeholder="{{ wordsToCountPlaceholder }}" required>{{ wordsToCount }}</textarea>
+            <textarea id="wordsToCount" class="form-control mimr-bg-lightgreen mimr-bg-focus-lightgreen" name="text" rows="15" placeholder="{{ wordsToCountPlaceholder }}">{{ wordsToCount }}</textarea>
         </div>
 
         <div class="form-group flex-fill position-relative">

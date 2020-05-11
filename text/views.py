@@ -32,20 +32,22 @@ def commonWord(request):
 class CommonWordApi(restViews.APIView):
     permission_classes = [servicePermissions.DefaultServicePermission]
 
-    # Not needed but to be able to post via the Django-restframework provided view thus added here
-    def get(self, request, *args, **kwargs):
-        return Response({"detail":"GET is unsupported, use POST with details on the body"})
+    # def get(self, request, *args, **kwargs):
+    #     return Response({"detail":"GET is unsupported, use POST with details on the body"})
 
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
         links = request.data.get("links", "")
+        files = request.FILES.get('files', None)
         formatType = request.data.get("format", "")
         orderType = request.data.get("order", "")
         ignoreList = request.data.get("ignore", [])
 
         text += "\n" + htmlToText.htmlUrlsToText(*(links.strip().split()))
+        if files: text += "".join([wordsChunk.decode() for wordsChunk in files.chunks()])
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
+        print("Received:", text[:1000])
 
         formatter = commonWordFormatFactory.getFormatter(formatType)
         text = formatter.reconstruct(text)
