@@ -1,6 +1,6 @@
 import re
 
-from text.commonWord.format import textFormatter
+from text.commonWord.include import textFormatter
 
 SYMBOLS_CONNECTING_WORDS = "-_'.&+"
 SEPARATOR = " "

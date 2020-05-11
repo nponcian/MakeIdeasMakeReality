@@ -1,4 +1,4 @@
-from text.commonWord.format import textFormatter
+from text.commonWord.include import textFormatter
 
 class NoneFormatter(textFormatter.TextFormatterStrategy):
     def __init__(self):

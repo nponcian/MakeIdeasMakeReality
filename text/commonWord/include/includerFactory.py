@@ -1,4 +1,4 @@
-from text.commonWord.format import (
+from text.commonWord.include import (
     none,
     letters,
     digits,
@@ -7,7 +7,7 @@ from text.commonWord.format import (
     lettersDigitsNonsplitterSymbols,
 )
 
-FORMATTER_DICT =\
+INCLUDER_DICT =\
     {
         "none" : none.NoneFormatter(),
         "letters" : letters.Letters(),
@@ -17,10 +17,10 @@ FORMATTER_DICT =\
         "letters_digits_nonsplittersymbols" : lettersDigitsNonsplitterSymbols.LettersDigitsNonsplitterSymbols()
     }
 
-def getFormatter(formatType):
+def getIncluder(includeType):
     NONE_KEY = "none"
-    if formatType is None: formatType = NONE_KEY
+    if includeType is None: includeType = NONE_KEY
     # TODO: raise an exception instead that will return a JSON error indicating invalid input format
-    elif formatType not in FORMATTER_DICT: return FORMATTER_DICT[NONE_KEY]
+    elif includeType not in INCLUDER_DICT: return INCLUDER_DICT[NONE_KEY]
 
-    return FORMATTER_DICT[formatType]
+    return INCLUDER_DICT[includeType]

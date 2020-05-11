@@ -9,7 +9,7 @@ from text.cipherMessage import algorithmsFactory
 from text.common import htmlToText
 from text.commonWord import textGrouping
 from text.commonWord.count import countHelper as commonWordCountHelper
-from text.commonWord.format import formatFactory as commonWordFormatFactory
+from text.commonWord.include import includerFactory as commonWordIncluderFactory
 from text.formatTabIndent import formatter as tabIndentFormatter
 from text.generateCode import (
     characterGroup,
@@ -48,8 +48,8 @@ class CommonWordApi(restViews.APIView):
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
 
-        formatter = commonWordFormatFactory.getFormatter(includeType)
-        text = formatter.reconstruct(text)
+        includer = commonWordIncluderFactory.getIncluder(includeType)
+        text = includer.reconstruct(text)
 
         groupedText = textGrouping.groupWords(text)
 

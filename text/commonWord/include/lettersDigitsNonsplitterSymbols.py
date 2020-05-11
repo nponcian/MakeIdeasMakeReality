@@ -1,6 +1,6 @@
 import re
 
-from text.commonWord.format import textFormatter
+from text.commonWord.include import textFormatter
 
 SPLITTER_SYMBOLS = ',@|/:;()[]{}"'
 SPLITTER_SYMBOLS_IFF_WITH_SPACE = ".!?"
