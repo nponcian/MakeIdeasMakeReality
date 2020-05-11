@@ -47,18 +47,17 @@ class CommonWordApi(restViews.APIView):
         if files: text += "".join([wordsChunk.decode() for wordsChunk in files.chunks()])
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
-        print("Received:", text[:1000])
 
         formatter = commonWordFormatFactory.getFormatter(formatType)
         text = formatter.reconstruct(text)
 
         groupedText = textGrouping.groupWords(text)
 
-        wordsAndCountDict = commonWordCountHelper.count(groupedText)
-        wordsAndCountDict = commonWordCountHelper.order(wordsAndCountDict, orderType)
-        wordsAndCountDict = commonWordCountHelper.ignore(wordsAndCountDict, ignoreList)
+        wordCountDict = commonWordCountHelper.count(groupedText)
+        wordCountDict = commonWordCountHelper.ignore(wordCountDict, ignoreList)
+        wordCountDictList = commonWordCountHelper.order(wordCountDict, orderType)
 
-        return Response(wordsAndCountDict) # JsonResponse(wordsAndCountDict)
+        return Response(wordCountDictList) # JsonResponse(wordCountDictList)
 
 def cipherMessage(request):
     template = "text/cipherMessage.html"

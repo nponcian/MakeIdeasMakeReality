@@ -22,14 +22,18 @@ class WordCountSorter:
     def isSortRequired(self):
         return self.orderType in self.getOrderTypes().values()
 
-    def sort(self, wordCountDict):
+    def sort(self, wordCountDictList):
         pass
 
     def run(self, wordCountDict):
+        wordCountDictList = [{key : value} for key, value in wordCountDict.items()]
+        return self.performRun(wordCountDictList)
+
+    def performRun(self, wordCountDictList):
         if self.isSortRequired():
-            wordCountDict = self.sort(wordCountDict)
+            wordCountDictList = self.sort(wordCountDictList)
 
         if self.nextSorter is not None:
-            return self.nextSorter.run(wordCountDict)
+            return self.nextSorter.performRun(wordCountDictList)
 
-        return wordCountDict
+        return wordCountDictList

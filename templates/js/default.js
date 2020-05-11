@@ -65,7 +65,7 @@ $('.serviceForm').on('submit', function(event) {
             $(resultObj).text("Currently processing...");
         },
         success: function(data, textStatus, jqXHR){
-            console.log("Request successful; textStatus:", textStatus, typeof(data));
+            console.log("Request successful; textStatus:", textStatus);
             var dataStr = "";
             $.each(data, function(key, value) {
                 dataStr += key + " : " + value + "\n";

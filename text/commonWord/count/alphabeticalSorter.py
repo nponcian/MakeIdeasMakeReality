@@ -8,6 +8,7 @@ class AlphabeticalSorter(wordCountSorter.WordCountSorter):
     def __init__(self, orderType):
         super().__init__(orderType)
 
-    def sort(self, wordCountDict):
-        # sorted(wordCountDict.items(), key = lambda item : item[0])} # happens by default
-        return {key : value for key, value in sorted(wordCountDict.items())}
+    def sort(self, wordCountDictList):
+        dictKeySorter = lambda wordCountDict : list(wordCountDict.keys())[0]
+        wordCountDictList.sort(key =  dictKeySorter)
+        return wordCountDictList

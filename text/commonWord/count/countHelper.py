@@ -7,11 +7,11 @@ def count(words):
     # return {k : v for k, v in Counter(words).most_common()}
     return Counter(words)
 
-def order(wordsAndCountDict, orderType):
+def order(wordCountDict, orderType):
     sorters = sorterChain.buildSortersChain(orderType)
-    return sorters.run(wordsAndCountDict)
+    return sorters.run(wordCountDict)
 
-def ignore(wordsAndCountDict, ignoreList):
+def ignore(wordCountDict, ignoreList):
     DEFAULT = "__DEFAULT__"
     PATH_TO_IGNORE_FILE = 'text/assets/txt/commonWords.txt'
 
@@ -24,8 +24,8 @@ def ignore(wordsAndCountDict, ignoreList):
                     defaultIgnore = defaultIgnore.decode()
 
                 defaultIgnore = defaultIgnore.strip()
-                wordsAndCountDict.pop(defaultIgnore, None)
+                wordCountDict.pop(defaultIgnore, None)
         else:
-            wordsAndCountDict.pop(wordToIgnore, None)
+            wordCountDict.pop(wordToIgnore, None)
 
-    return wordsAndCountDict
+    return wordCountDict

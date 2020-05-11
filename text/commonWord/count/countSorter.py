@@ -16,9 +16,9 @@ class CountSorter(wordCountSorter.WordCountSorter):
     def isSortRequired(self):
         return self.orderType in self.targetOrderTypes
 
-    def sort(self, wordCountDict):
-        keySorter = lambda item : item[1]
+    def sort(self, wordCountDictList):
+        dictValueSorter = lambda wordCountDict : list(wordCountDict.values())[0]
         shouldReverse = self.orderType == self.targetOrderTypes[1]
 
-        return {key : value for key, value in
-                sorted(wordCountDict.items(), key = keySorter, reverse = shouldReverse)}
+        wordCountDictList.sort(key =  dictValueSorter, reverse = shouldReverse)
+        return wordCountDictList
