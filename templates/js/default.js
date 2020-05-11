@@ -44,7 +44,7 @@ $('.serviceForm').on('submit', function(event) {
     event.preventDefault(); // prevent redirecting post request to server
     var formData = new FormData(this); // new FormData($("#serviceForm")[0])
     var urlValue = $(this).data("url"); // "/service/text/commonword/api/"
-    console.log("eto", urlValue);
+    var resultObj = $(this).data("result");
 
     $.ajax({
         url: urlValue,
@@ -62,13 +62,20 @@ $('.serviceForm').on('submit', function(event) {
 
         beforeSend: function(jqXHR, settings) {
             console.log("Processing request...");
-            // $('#someElement').text('loading');
+            $(resultObj).text("Currently processing...");
         },
         success: function(data, textStatus, jqXHR){
-            console.log("Request successful; textStatus:", textStatus);
+            console.log("Request successful; textStatus:", textStatus, typeof(data));
+            var dataStr = "";
+            $.each(data, function(key, value) {
+                dataStr += key + " : " + value + "\n";
+            });
+            $(resultObj).text(dataStr);
         },
         error: function(jqXHR, textStatus, errorThrown){
-            console.log("Request error; textStatus:", textStatus, "; errorThrown:", errorThrown);
+            var msg = "Request error; textStatus: " + textStatus + " ; errorThrown: " + errorThrown;
+            console.log(msg);
+            $(resultObj).text(msg);
         },
     })
     // would only be called if there are no errors with the HTTP Request
@@ -83,7 +90,7 @@ $('.serviceForm').on('submit', function(event) {
         })
     // would be called whether the HTTP Request was successful or not
     .always(function(data) { // data|jqXHR, textStatus, jqXHR|errorThrown
-            console.log("Request ended", data);
+            console.log("Request ended");
         });
     });
 

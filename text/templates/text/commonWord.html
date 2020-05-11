@@ -25,7 +25,7 @@
 {% block body %}
 
 <!-- Form contains a file input thus the need for enctype='multipart/form-data' -->
-<form class="m-4 serviceForm" method="POST" action="." enctype='multipart/form-data' data-url="/service/text/commonword/api/"> {% csrf_token %}
+<form class="m-4 serviceForm" method="POST" action="." enctype='multipart/form-data' data-url="/service/text/commonword/api/" data-result="#countedWords"> {% csrf_token %}
     <button class="btn btn-primary btn-lg" type="submit" id="countButton">Count</button>
 
     <div class="form-row mt-3">
