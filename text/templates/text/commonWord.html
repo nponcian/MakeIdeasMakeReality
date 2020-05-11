@@ -30,18 +30,41 @@
 
     <div class="form-row mt-3">
         <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 custom-file">
-            <input id="fileInput" class="custom-file-input" type="file" name="files">
+            <input id="fileInput" class="custom-file-input" type="file" name="file">
             <label class="custom-file-label text-truncate" for="fileInput">Choose file...</label>
         </div>
     </div>
 
     <div class="form-row mt-3">
-        <select class="col-sm-7 col-md-5 col-lg-4 col-xl-3 custom-select" name="order">
-            <option value="none" selected>None</option>
-            <option value="alphabetical">Alphabetical</option>
-            <option value="increasing">Increasing</option>
-            <option value="decreasing">Decreasing</option>
-        </select>
+        <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Order:</span>
+                <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
+            </div>
+            <select id="order" class="custom-select" name="order">
+                <option value="none">None</option>
+                <option value="alphabetical">Alphabetical</option>
+                <option value="increasing">Increasing</option>
+                <option value="decreasing" selected>Decreasing</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row mt-3">
+        <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text font-weight-bold">Format:</span>
+                <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
+            </div>
+            <select id="include" class="custom-select" name="include">
+                <option value="none">None</option>
+                <option value="letters">Letters</option>
+                <option value="digits">Digits</option>
+                <option value="letters_digits">Letters, Digits</option>
+                <option value="letters_digits_connectorsymbols">Letters, Digits, Connectors</option>
+                <option value="letters_digits_nonsplittersymbols" selected>Letters, Digits, Non-splitters</option>
+            </select>
+        </div>
     </div>
 
     <div class="d-md-flex mt-3">

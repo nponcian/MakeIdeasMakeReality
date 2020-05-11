@@ -38,17 +38,17 @@ class CommonWordApi(restViews.APIView):
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
         links = request.data.get("links", "")
-        files = request.FILES.get('files', None)
-        formatType = request.data.get("format", "")
+        file = request.FILES.get('file', None)
+        includeType = request.data.get("include", "")
         orderType = request.data.get("order", "")
         ignoreList = request.data.get("ignore", [])
 
         text += "\n" + htmlToText.htmlUrlsToText(*(links.strip().split()))
-        if files: text += "".join([wordsChunk.decode() for wordsChunk in files.chunks()])
+        if file: text += "".join([wordsChunk.decode() for wordsChunk in file.chunks()])
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
 
-        formatter = commonWordFormatFactory.getFormatter(formatType)
+        formatter = commonWordFormatFactory.getFormatter(includeType)
         text = formatter.reconstruct(text)
 
         groupedText = textGrouping.groupWords(text)
