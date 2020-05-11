@@ -64,6 +64,7 @@ Either
 .mimr-bg-yellow { background-color: yellow !important; }
 .mimr-bg-yellowgreen { background-color: yellowgreen !important; }
 
+.mimr-bg-focus-beige:focus { background-color: beige !important; }
 .mimr-bg-focus-lightgreen:focus { background-color: lightgreen !important; } /*cursor:auto;*/
 .mimr-bg-focus-lightpink:focus { background-color: lightpink !important; }
 

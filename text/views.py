@@ -37,14 +37,14 @@ class CommonWordApi(restViews.APIView):
 
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
-        links = request.data.get("links", "")
         file = request.FILES.get('file', None)
+        urls = request.data.get("urls", "")
         includeType = request.data.get("include", "")
         orderType = request.data.get("order", "")
         ignoreList = request.data.get("ignore", [])
 
-        text += "\n" + htmlToText.htmlUrlsToText(*(links.strip().split()))
         if file: text += "".join([wordsChunk.decode() for wordsChunk in file.chunks()])
+        text += "\n" + htmlToText.htmlUrlsToText(*(urls.strip().split()))
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
 
