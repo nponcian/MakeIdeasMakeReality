@@ -1,12 +1,12 @@
 import re
 
-from text.commonWord.include import textFormatter
+from text.commonWord.include import includerStrategy
 
 SPLITTER_SYMBOLS = ',@|/:;()[]{}"'
 SPLITTER_SYMBOLS_IFF_WITH_SPACE = ".!?"
 SEPARATOR = " "
 
-class LettersDigitsNonsplitterSymbols(textFormatter.TextFormatterStrategy):
+class LettersDigitsNonsplitterSymbols(includerStrategy.IncluderStrategy):
     def __init__(self):
         super().__init__()
 

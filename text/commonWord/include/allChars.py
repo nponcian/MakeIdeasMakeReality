@@ -1,6 +1,6 @@
-from text.commonWord.include import textFormatter
+from text.commonWord.include import includerStrategy
 
-class NoneFormatter(textFormatter.TextFormatterStrategy):
+class AllChars(includerStrategy.IncluderStrategy):
     def __init__(self):
         super().__init__()
 

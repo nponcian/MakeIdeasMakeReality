@@ -1,5 +1,5 @@
 from text.commonWord.include import (
-    none,
+    allChars,
     letters,
     digits,
     lettersDigits,
@@ -9,7 +9,7 @@ from text.commonWord.include import (
 
 INCLUDER_DICT =\
     {
-        "none" : none.NoneFormatter(),
+        "all" : allChars.AllChars(),
         "letters" : letters.Letters(),
         "digits" : digits.Digits(),
         "letters_digits" : lettersDigits.LettersDigits(),
@@ -18,9 +18,9 @@ INCLUDER_DICT =\
     }
 
 def getIncluder(includeType):
-    NONE_KEY = "none"
-    if includeType is None: includeType = NONE_KEY
+    ALL_KEY = "all"
+    if includeType is None: includeType = ALL_KEY
     # TODO: raise an exception instead that will return a JSON error indicating invalid input format
-    elif includeType not in INCLUDER_DICT: return INCLUDER_DICT[NONE_KEY]
+    elif includeType not in INCLUDER_DICT: return INCLUDER_DICT[ALL_KEY]
 
     return INCLUDER_DICT[includeType]

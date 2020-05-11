@@ -1,11 +1,11 @@
 import re
 
-from text.commonWord.include import textFormatter
+from text.commonWord.include import includerStrategy
 
 SYMBOLS_CONNECTING_WORDS = "-_'.&+"
 SEPARATOR = " "
 
-class LettersDigitsConnectorSymbols(textFormatter.TextFormatterStrategy):
+class LettersDigitsConnectorSymbols(includerStrategy.IncluderStrategy):
     def __init__(self):
         super().__init__()
 

@@ -1,10 +1,10 @@
 import re
 
-from text.commonWord.include import textFormatter
+from text.commonWord.include import includerStrategy
 
 SEPARATOR = " "
 
-class Digits(textFormatter.TextFormatterStrategy):
+class Digits(includerStrategy.IncluderStrategy):
     def __init__(self):
         super().__init__()
 
