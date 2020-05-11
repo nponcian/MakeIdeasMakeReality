@@ -67,9 +67,19 @@ $('.serviceForm').on('submit', function(event) {
         success: function(data, textStatus, jqXHR){
             console.log("Request successful; textStatus:", textStatus);
             var dataStr = "";
-            $.each(data, function(key, value) {
-                dataStr += key + " : " + value + "\n";
-            });
+
+            // $.each(data, function(index, object) {
+            //     $.each(object, function(word, count) {
+            //         dataStr += word + " : " + count + "\n";
+            //     });
+            // });
+            // or
+            for (var index = 0; index < data.length; ++index) {
+                for (var key in data[index]) {
+                    dataStr += key + " : " + data[index][key] + "\n";
+                }
+            }
+
             $(resultObj).text(dataStr);
         },
         error: function(jqXHR, textStatus, errorThrown){
