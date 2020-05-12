@@ -120,6 +120,12 @@ Either
     font-size: 1.3em;
 }
 
+.mimr-top-right
+{
+    top: 0;
+    right: 0;
+}
+
 .mimr-btn-copy
 {
     top: 0;
