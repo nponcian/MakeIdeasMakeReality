@@ -134,3 +134,8 @@ Either
     background-color: rgb(2, 117, 216);
     color: white;
 }
+
+.mimr-mh-80vh
+{
+    max-height: 80vh;
+}
