@@ -62,6 +62,9 @@ $('.serviceForm').on('submit', function(event) {
         }
     }
 
+    var spinnerObjects = $("span[class^='spinner-'],span[class*=' spinner-']");
+    var spinners = $(this).find(spinnerObjects);
+
     $.ajax({
         url: urlValue,
         type: "post",
@@ -77,6 +80,7 @@ $('.serviceForm').on('submit', function(event) {
         // dataType: 'json',
 
         beforeSend: function(jqXHR, settings) {
+            spinners.removeClass("d-none");
             console.log("Processing request...");
             $(resultObj).text("Currently processing...");
         },
@@ -117,6 +121,7 @@ $('.serviceForm').on('submit', function(event) {
     // would be called whether the HTTP Request was successful or not
     .always(function(data) { // data|jqXHR, textStatus, jqXHR|errorThrown
             console.log("Request ended");
+            spinners.addClass("d-none");
         });
 });
 

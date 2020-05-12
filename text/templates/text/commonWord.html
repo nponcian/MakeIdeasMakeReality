@@ -63,7 +63,7 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold">Include:</span>
-                        <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
+                        <span class="input-group-text d-none d-sm-block"><i class="fas fa-fill-drip"></i></span>
                     </div>
                     <select id="include" class="custom-select" name="include">
                         <option value="all">All</option>
@@ -80,7 +80,7 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text font-weight-bold">Order:</span>
-                        <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
+                        <span class="input-group-text d-none d-sm-block"><i class="fas fa-sort-amount-down-alt"></i></span>
                     </div>
                     <select id="order" class="custom-select" name="order">
                         <option value="none">None</option>
@@ -107,11 +107,18 @@
         </div>
 
         <div class="d-flex flex-column mt-3 mr-4">
-            <button class="btn btn-primary btn-block flex-fill" type="submit" id="countButton">Count</button>
+            <button class="btn btn-primary btn-block flex-fill" type="submit" id="countButton">
+                Count
+                <br class="d-none d-lg-inline">
+                <span class="spinner-border spinner-border-sm d-none text-warning" role="status" aria-hidden="true"></span>
+            </button>
         </div>
 
         <div class="flex-fill d-flex flex-column form-group position-relative mt-3"> <!-- col-md-10 col-lg-8 col-xl-6 mt-3 p-0 -->
-            <label for="countedWords" class="font-weight-bold text-muted h4">Counted Words:</label>
+            <label for="countedWords" class="font-weight-bold text-muted h4 position-relative">
+                Words Count:
+                <span class="spinner-grow mimr-text-blueviolet d-none position-absolute" role="status" aria-hidden="true"></span>
+            </label>
             <textarea id="countedWords" class="form-control mimr-bg-lightpink mimr-bg-lightpink-focus flex-grow-1" name="countedWords" placeholder="" rows="15" readonly contenteditable="true"></textarea>
             <button class="btn btn-link mimr-btn-copy mimr-top-right position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="countedWords">Copy</button>
         </div>
