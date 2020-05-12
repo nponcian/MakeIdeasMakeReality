@@ -26,78 +26,83 @@
 
 <!-- Form contains a file input thus the need for enctype='multipart/form-data' -->
 <form class="m-4 serviceForm" method="POST" action="." enctype='multipart/form-data' data-url="/service/text/commonword/api/" data-result="#countedWords" data-list="#urlsInput"> {% csrf_token %}
-    <div class="mt-3">
-        <nav>
-            <div class="nav nav-pills h4 mimr-bg-blueviolet-active" id="nav-tab-inputs" role="tablist">
-                <a class="nav-item nav-link active" id="nav-textInput-tab" data-toggle="tab" href="#nav-textInput" role="tab" aria-controls="nav-textInput" aria-selected="true">Text</a>
-                <a class="nav-item nav-link" id="nav-fileInput-tab" data-toggle="tab" href="#nav-fileInput" role="tab" aria-controls="nav-fileInput" aria-selected="false">File</a>
-                <a class="nav-item nav-link" id="nav-urlsInput-tab" data-toggle="tab" href="#nav-urlsInput" role="tab" aria-controls="nav-urlsInput" aria-selected="false">URLs</a>
-            </div>
-        </nav>
-        <div class="tab-content col-md-10 col-lg-8 col-xl-6 p-0" id="nav-tab-inputs-content">
-            <div class="tab-pane fade show active" id="nav-textInput" role="tabpanel" aria-labelledby="nav-textInput-tab">
+    <div class="d-lg-flex">
+        <div class="flex-fill mr-4">
+            <div class="mt-3">
+                <nav>
+                    <div class="nav nav-pills h4 mimr-bg-blueviolet-active" id="nav-tab-inputs" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-textInput-tab" data-toggle="tab" href="#nav-textInput" role="tab" aria-controls="nav-textInput" aria-selected="true">Text</a>
+                        <a class="nav-item nav-link" id="nav-fileInput-tab" data-toggle="tab" href="#nav-fileInput" role="tab" aria-controls="nav-fileInput" aria-selected="false">File</a>
+                        <a class="nav-item nav-link" id="nav-urlsInput-tab" data-toggle="tab" href="#nav-urlsInput" role="tab" aria-controls="nav-urlsInput" aria-selected="false">URLs</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tab-inputs-content">
+                    <div class="tab-pane fade show active" id="nav-textInput" role="tabpanel" aria-labelledby="nav-textInput-tab">
+                        <div>
+                            <textarea id="textInput" class="form-control mimr-bg-lightgreen mimr-bg-lightgreen-focus" name="text" rows="15" placeholder="Enter text to be counted..."></textarea>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-fileInput" role="tabpanel" aria-labelledby="nav-fileInput-tab">
+                        <div class="custom-file">
+                            <input id="fileInput" class="custom-file-input" type="file" name="file">
+                            <label class="custom-file-label text-truncate" for="fileInput">Choose file...</label>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-urlsInput" role="tabpanel" aria-labelledby="nav-urlsInput-tab">
+                        <div>
+                            <textarea id="urlsInput" class="form-control mimr-bg-beige mimr-bg-beige-focus" name="urls" rows="15" placeholder="Enter URLs to be extracted and counted. Separate items by new line..."></textarea>
+                        </div>
+                    </div>
+                </div>
                 <div>
-                    <textarea id="textInput" class="form-control mimr-bg-lightgreen mimr-bg-lightgreen-focus" name="text" rows="15" placeholder="Enter text to be counted..."></textarea>
+                    <small class="form-text text-muted d-flex justify-content-end">Multiple input sources are possible. Try it!</small>
                 </div>
             </div>
-            <div class="tab-pane fade" id="nav-fileInput" role="tabpanel" aria-labelledby="nav-fileInput-tab">
-                <div class="custom-file">
-                    <input id="fileInput" class="custom-file-input" type="file" name="file">
-                    <label class="custom-file-label text-truncate" for="fileInput">Choose file...</label>
+
+            <div class="form-row mt-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold">Include:</span>
+                        <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
+                    </div>
+                    <select id="include" class="custom-select" name="include">
+                        <option value="all">All</option>
+                        <option value="letters">Letters</option>
+                        <option value="digits">Digits</option>
+                        <option value="letters_digits">Letters, Digits</option>
+                        <option value="letters_digits_connectorsymbols">Letters, Digits, Connectors</option>
+                        <option value="letters_digits_nonsplittersymbols" selected>Letters, Digits, Non-splitters</option>
+                    </select>
                 </div>
             </div>
-            <div class="tab-pane fade" id="nav-urlsInput" role="tabpanel" aria-labelledby="nav-urlsInput-tab">
-                <div>
-                    <textarea id="urlsInput" class="form-control mimr-bg-beige mimr-bg-beige-focus" name="urls" rows="15" placeholder="Enter URLs to be extracted and counted, separate by spaces..."></textarea>
+
+            <div class="form-row mt-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text font-weight-bold">Order:</span>
+                        <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
+                    </div>
+                    <select id="order" class="custom-select" name="order">
+                        <option value="none">None</option>
+                        <option value="alphabetical">Alphabetical</option>
+                        <option value="increasing">Increasing</option>
+                        <option value="decreasing" selected>Decreasing</option>
+                    </select>
                 </div>
             </div>
         </div>
-        <div class="col-md-10 col-lg-8 col-xl-6 p-0">
-            <small class="form-text text-muted d-flex justify-content-end">Multiple input sources are possible. Try it!</small>
+
+        <div class="d-flex flex-column mt-3 mr-4">
+            <button class="btn btn-primary btn-block flex-fill" type="submit" id="countButton">Count</button>
+        </div>
+
+        <div class="flex-fill d-flex flex-column form-group position-relative mt-3"> <!-- col-md-10 col-lg-8 col-xl-6 mt-3 p-0 -->
+            <label for="countedWords" class="font-weight-bold text-muted h4">Counted Words:</label>
+            <textarea id="countedWords" class="form-control mimr-bg-lightpink mimr-bg-focus-lightpink flex-grow-1" name="countedWords" placeholder="" rows="15" readonly contenteditable="true">{{ countedWords }}</textarea>
+            <button class="btn btn-link mimr-btn-copy position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="countedWords">Copy</button>
         </div>
     </div>
 
-    <div class="form-row mt-3">
-        <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text font-weight-bold">Include:</span>
-                <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
-            </div>
-            <select id="include" class="custom-select" name="include">
-                <option value="all">All</option>
-                <option value="letters">Letters</option>
-                <option value="digits">Digits</option>
-                <option value="letters_digits">Letters, Digits</option>
-                <option value="letters_digits_connectorsymbols">Letters, Digits, Connectors</option>
-                <option value="letters_digits_nonsplittersymbols" selected>Letters, Digits, Non-splitters</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-row mt-3">
-        <div class="col-sm-7 col-md-5 col-lg-4 col-xl-3 input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text font-weight-bold">Order:</span>
-                <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
-            </div>
-            <select id="order" class="custom-select" name="order">
-                <option value="none">None</option>
-                <option value="alphabetical">Alphabetical</option>
-                <option value="increasing">Increasing</option>
-                <option value="decreasing" selected>Decreasing</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="col-md-10 col-lg-8 col-xl-6 mt-3 p-0">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" id="countButton">Count</button>
-    </div>
-
-    <div class="form-group position-relative col-md-10 col-lg-8 col-xl-6 mt-3 p-0">
-        <label for="countedWords" class="font-weight-bold h4">Counted Words:</label>
-        <textarea id="countedWords" class="form-control mimr-bg-lightpink mimr-bg-focus-lightpink" name="countedWords" rows="15" placeholder="" readonly contenteditable="true">{{ countedWords }}</textarea>
-        <button class="btn btn-link mimr-btn-copy position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="countedWords">Copy</button>
-    </div>
 </form>
 
 {% endblock %}
