@@ -56,6 +56,8 @@ class CommonWordApi(restViews.APIView):
             ignore = json.loads(ignore)
             ignore = list(filter(len, ignore))
 
+        # TODO: Make different strategies to handle different file types. Add support for reading
+        # pdf, doc, docx, html, images (should call a different service for text conversions), etc.
         if file: text += "".join([wordsChunk.decode() for wordsChunk in file.chunks()])
         text += "\n" + htmlToText.htmlUrlsToText(*urls) # if urls is str then # *(urls.split())
         text = text.strip()
