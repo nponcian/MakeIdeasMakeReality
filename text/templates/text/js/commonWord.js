@@ -30,22 +30,10 @@ $('#ignoreInput').on('keyup', function() {
 
     if (isDefaultKeywordPresent) {
         $("#ignoreDefault").prop("checked", true); // $('#ignoreDefault').attr("checked", true);
-        console.log("added attr");
     }
     else {
         $("#ignoreDefault").prop("checked", false); // $('#ignoreDefault').removeAttr("checked");
-        console.log("removed attr");
     }
-});
-
-$('#ignoreInput').on('change', function() {
-    console.log("hala");
-    var currentIgnoreText = $("#ignoreInput").val();
-    currentIgnoreText = currentIgnoreText.replace(/[\t ]*\n/g, '\n');
-    currentIgnoreText = currentIgnoreText.replace(/\n[\t ]*/g, '\n');
-    currentIgnoreText = currentIgnoreText.replace(/\n*\n/g, '\n');
-
-    $("#ignoreInput").val(currentIgnoreText);
 });
 
 });

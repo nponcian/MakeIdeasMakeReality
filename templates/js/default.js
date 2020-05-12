@@ -118,6 +118,15 @@ $('.serviceForm').on('submit', function(event) {
     .always(function(data) { // data|jqXHR, textStatus, jqXHR|errorThrown
             console.log("Request ended");
         });
-    });
+});
+
+$('.mimr-strip-whitespace').on('change', function() {
+    var strippedText = $(this).val();
+    strippedText = strippedText.replace(/[\t ]*\n/g, '\n');
+    strippedText = strippedText.replace(/\n[\t ]*/g, '\n');
+    strippedText = strippedText.replace(/\n*\n/g, '\n');
+
+    $(this).val(strippedText);
+});
 
 });

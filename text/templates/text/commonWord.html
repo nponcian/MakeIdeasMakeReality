@@ -50,7 +50,7 @@
                     </div>
                     <div class="tab-pane fade" id="nav-urlsInput" role="tabpanel" aria-labelledby="nav-urlsInput-tab">
                         <div>
-                            <textarea id="urlsInput" class="form-control mimr-bg-beige mimr-bg-beige-focus" name="urls" rows="15" placeholder="Enter URLs to be extracted and counted. Separate items by new line..."></textarea>
+                            <textarea id="urlsInput" class="form-control mimr-bg-beige mimr-bg-beige-focus mimr-strip-whitespace" name="urls" rows="15" placeholder="Enter URLs to be extracted and counted. Separate items by new line..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -94,9 +94,9 @@
             <div class="form-row mt-3 position-relative">
                 <div class="form-group w-100">
                     <label for="ignoreInput" class="font-weight-bold text-muted h4">Words to Ignore:</label>
-                    <textarea id="ignoreInput" class="form-control mimr-bg-beige mimr-bg-beige-focus flex-grow-1" name="ignore" placeholder="Enter words to be ignored. Separate items by new line..." rows="10"></textarea>
+                    <textarea id="ignoreInput" class="form-control mimr-bg-beige mimr-bg-beige-focus mimr-strip-whitespace" name="ignore" placeholder="Enter words to be ignored. Separate items by new line..." rows="10"></textarea>
                 </div>
-                <div class="custom-control custom-switch position-absolute mimr-top-right">
+                <div class="custom-control custom-switch position-absolute mimr-top-right mimr-bg-blueviolet-checkbox">
                     <input type="checkbox" class="custom-control-input" id="ignoreDefault">
                     <label class="custom-control-label" for="ignoreDefault">
                         Ignore

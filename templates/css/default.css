@@ -70,6 +70,8 @@ Either
 
 .mimr-bg-blueviolet-active .active, .mimr-bg-blueviolet-active .active:hover { background-color: blueviolet !important; }
 
+.mimr-bg-blueviolet-checkbox .custom-control-input:checked ~ .custom-control-label::before { background-color: blueviolet !important; }
+
 .pageLabel
 {
     /*Ways of accessing static files*/
