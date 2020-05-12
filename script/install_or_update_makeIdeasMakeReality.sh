@@ -218,6 +218,10 @@ func_additionalNotes()
     echo "    ./manage.py migrate"
     echo "Create a superuser (optional, such as if you would like to access Admin pages)"
     echo "    ./manage.py createsuperuser"
+    echo "Collect static files to the target storage. You might need to tweak the environment"
+    echo "variables that are accessed in settings.py for storing static files to be able to transfer"
+    echo "files to the target storage."
+    echo "    ./manage.py collectstatic"
 }
 
 func_setupProjectDir # this changes directory to the location of the target makeIdeasMakeReality repository
