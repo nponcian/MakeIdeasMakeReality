@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+import json
 from rest_framework import permissions as restPermissions
 from rest_framework import views as restViews
 from rest_framework.response import Response
@@ -38,24 +39,27 @@ class CommonWordApi(restViews.APIView):
     def post(self, request, *args, **kwargs):
         text = request.data.get("text", "")
         file = request.FILES.get('file', None)
-        urls = request.data.get("urls", "")
-        includeType = request.data.get("include", "")
-        orderType = request.data.get("order", "")
-        ignoreList = request.data.get("ignore", [])
+        urls = request.data.get("urls", [])
+        include = request.data.get("include", "")
+        order = request.data.get("order", "")
+        ignore = request.data.get("ignore", [])
+
+        if not isinstance(urls, list):   urls = json.loads(urls)
+        if not isinstance(ignore, list): ignore = ignore.loads(urls)
 
         if file: text += "".join([wordsChunk.decode() for wordsChunk in file.chunks()])
-        text += "\n" + htmlToText.htmlUrlsToText(*(urls.strip().split()))
+        text += "\n" + htmlToText.htmlUrlsToText(*urls) # if urls is str then # *(urls.split())
         text = text.strip()
         if len(text) == 0: return JsonResponse({})
 
-        includer = commonWordIncluderFactory.getIncluder(includeType)
+        includer = commonWordIncluderFactory.getIncluder(include)
         text = includer.reconstruct(text)
 
         groupedText = textGrouping.groupWords(text)
 
         wordCountDict = commonWordCountHelper.count(groupedText)
-        wordCountDict = commonWordCountHelper.ignore(wordCountDict, ignoreList)
-        wordCountDictList = commonWordCountHelper.order(wordCountDict, orderType)
+        wordCountDict = commonWordCountHelper.ignore(wordCountDict, ignore)
+        wordCountDictList = commonWordCountHelper.order(wordCountDict, order)
 
         return Response(wordCountDictList) # JsonResponse(wordCountDictList)
 

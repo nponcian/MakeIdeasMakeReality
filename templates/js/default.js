@@ -46,6 +46,22 @@ $('.serviceForm').on('submit', function(event) {
     var urlValue = $(this).data("url"); // "/service/text/commonword/api/"
     var resultObj = $(this).data("result");
 
+    var listElementsStr = $(this).data("list");
+    if (listElementsStr) {
+        var listElements = listElementsStr.split(' ');
+        console.log("Transforming into list of strings the value of elements", listElements);
+        for (var index = 0; index < listElements.length; ++index) {
+            var targetAttribute = $(listElements[index]).attr("name");
+            if (!targetAttribute) {
+                console.log("Warning. Missing name for", listElements[index]);
+                continue;
+            }
+            var arrayOfLines = $(listElements[index]).val().split('\n');
+            var stringifiedList = JSON.stringify(arrayOfLines);
+            formData.set(targetAttribute, stringifiedList);
+        }
+    }
+
     $.ajax({
         url: urlValue,
         type: "post",
