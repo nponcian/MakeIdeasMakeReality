@@ -127,6 +127,8 @@ $('.serviceForm').on('submit', function(event) {
 
 $('.mimr-strip-whitespace').on('change', function() {
     var strippedText = $(this).val();
+    strippedText = strippedText.replace(/^[\t ]*/g, '');
+    strippedText = strippedText.replace(/[\t ]*$/g, '');
     strippedText = strippedText.replace(/[\t ]*\n/g, '\n');
     strippedText = strippedText.replace(/\n[\t ]*/g, '\n');
     strippedText = strippedText.replace(/\n*\n/g, '\n');
