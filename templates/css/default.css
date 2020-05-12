@@ -128,12 +128,6 @@ Either
     right: 0;
 }
 
-.mimr-btn-copy
-{
-    top: 0;
-    right: 0;
-}
-
 .mimr-btn-copy:hover
 {
     text-decoration: none; /*removes underline*/
