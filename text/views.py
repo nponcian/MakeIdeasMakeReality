@@ -44,6 +44,11 @@ class CommonWordApi(restViews.APIView):
         order = request.data.get("order", "")
         ignore = request.data.get("ignore", [])
 
+        # TODO: This, is currently bad. Future extensions will make this even worse. Design an input
+        # chain handler, each getting their respective target data and each knowing what type of
+        # data they are expecting. Put all user inputs to a single struct. Each handler in the chain
+        # would act as builders. Each gradually building the struct to contain all user input data.
+        # This function should only act as a facade! Don't put detailed-details here!
         if not isinstance(urls, list):
             urls = json.loads(urls)
             urls = list(filter(len, urls))
