@@ -44,8 +44,12 @@ class CommonWordApi(restViews.APIView):
         order = request.data.get("order", "")
         ignore = request.data.get("ignore", [])
 
-        if not isinstance(urls, list):   urls = json.loads(urls)
-        if not isinstance(ignore, list): ignore = ignore.loads(urls)
+        if not isinstance(urls, list):
+            urls = json.loads(urls)
+            urls = list(filter(len, urls))
+        if not isinstance(ignore, list):
+            ignore = json.loads(ignore)
+            ignore = list(filter(len, ignore))
 
         if file: text += "".join([wordsChunk.decode() for wordsChunk in file.chunks()])
         text += "\n" + htmlToText.htmlUrlsToText(*urls) # if urls is str then # *(urls.split())

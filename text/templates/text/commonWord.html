@@ -25,7 +25,7 @@
 {% block body %}
 
 <!-- Form contains a file input thus the need for enctype='multipart/form-data' -->
-<form class="m-4 serviceForm" method="POST" action="." enctype='multipart/form-data' data-url="/service/text/commonword/api/" data-result="#countedWords" data-list="#urlsInput"> {% csrf_token %}
+<form class="m-4 serviceForm" method="POST" action="." enctype='multipart/form-data' data-url="/service/text/commonword/api/" data-result="#countedWords" data-list="#urlsInput #ignoreInput"> {% csrf_token %}
     <div class="d-lg-flex">
         <div class="flex-fill mr-4">
             <div class="mt-3">
@@ -90,6 +90,11 @@
                     </select>
                 </div>
             </div>
+
+            <div class="form-row mt-3">
+                <label for="ignoreInput" class="font-weight-bold text-muted h4">Words to Ignore:</label>
+                <textarea id="ignoreInput" class="form-control mimr-bg-beige mimr-bg-beige-focus flex-grow-1" name="ignore" placeholder="Enter words to be ignored. Separate items by new line..." rows="10"></textarea>
+            </div>
         </div>
 
         <div class="d-flex flex-column mt-3 mr-4">
@@ -98,7 +103,7 @@
 
         <div class="flex-fill d-flex flex-column form-group position-relative mt-3"> <!-- col-md-10 col-lg-8 col-xl-6 mt-3 p-0 -->
             <label for="countedWords" class="font-weight-bold text-muted h4">Counted Words:</label>
-            <textarea id="countedWords" class="form-control mimr-bg-lightpink mimr-bg-focus-lightpink flex-grow-1" name="countedWords" placeholder="" rows="15" readonly contenteditable="true">{{ countedWords }}</textarea>
+            <textarea id="countedWords" class="form-control mimr-bg-lightpink mimr-bg-lightpink-focus flex-grow-1" name="countedWords" placeholder="" rows="15" readonly contenteditable="true"></textarea>
             <button class="btn btn-link mimr-btn-copy position-absolute" type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="Copied! :)" data-timeout="2000" data-target="countedWords">Copy</button>
         </div>
     </div>
