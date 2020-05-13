@@ -86,6 +86,7 @@ $('.serviceForm').on('submit', function(event) {
             spinners.removeClass("d-none");
             console.log("Processing request...");
             $(resultObj).text("Currently processing...");
+            $(resultObj).val("Currently processing..."); // for elements such as input type=text
         },
         success: function(data, textStatus, jqXHR){
             console.log("Request successful; textStatus:", textStatus);
@@ -112,11 +113,13 @@ $('.serviceForm').on('submit', function(event) {
             }
 
             $(resultObj).text(dataStr);
+            $(resultObj).val(dataStr);
         },
         error: function(jqXHR, textStatus, errorThrown){
             var msg = "Request error; textStatus: " + textStatus + " ; errorThrown: " + errorThrown;
             console.log(msg);
             $(resultObj).text(msg);
+            $(resultObj).val(msg);
         },
     })
     // would only be called if there are no errors with the HTTP Request

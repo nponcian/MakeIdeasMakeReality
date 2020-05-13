@@ -92,7 +92,6 @@ class CipherMessageApi(restViews.APIView):
         keycode = request.data.get("keycode", "")
         textToCipher = request.data.get("textToCipher", "")
         isAnEncryptOperation = "encryptButton" in request.data
-        print("eto", keycode, textToCipher, isAnEncryptOperation)
 
         algorithm = algorithmsFactory.getChosenAlgorithm()
         cipheredText = algorithm.encrypt(textToCipher, keycode) if isAnEncryptOperation\
@@ -121,8 +120,12 @@ class FormatTabIndentApi(restViews.APIView):
 def generateCode(request):
     template = "text/generateCode.html"
     context = {}
+    return render(request, template, context)
 
-    if request.method == "POST":
+class GenerateCodeApi(restViews.APIView):
+    permission_classes = [servicePermissions.DefaultServicePermission]
+
+    def post(self, request, *args, **kwargs):
         groups = characterGroup.getCharacterGroups()
         characterGroup.shuffleCharacterGroups(groups)
         targetLength = characterLength.getTargetLength()
@@ -133,9 +136,7 @@ def generateCode(request):
                                                                 charCountDivisionPerGroup,
                                                                 remainingCharsCount)
         result = characterGroup.shuffleIntoString(charsFromTheGroups, remainingChars)
-        context["generatedCode"] = result
-
-    return render(request, template, context)
+        return Response(result)
 
 def limitLineLength(request):
     template = "text/limitLineLength.html"

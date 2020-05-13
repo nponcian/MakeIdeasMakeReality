@@ -6,12 +6,13 @@ app_name = 'text'
 
 urlpatterns = [
     path('ciphermessage/', views.cipherMessage, name = "cipherMessage"),
-    path('ciphermessage/api/', views.CipherMessageApi.as_view(), name = "cipherMessageApi"),
+    path('ciphermessage/api/', views.CipherMessageApi.as_view(), name = "CipherMessageApi"),
     path('commonword/', views.commonWord, name = "commonWord"),
     path('commonword/api/', views.CommonWordApi.as_view(), name = "CommonWordApi"),
     path('formattabindent/', views.formatTabIndent, name = "formatTabIndent"),
-    path('formattabindent/api/', views.FormatTabIndentApi.as_view(), name = "formatTabIndentApi"),
+    path('formattabindent/api/', views.FormatTabIndentApi.as_view(), name = "FormatTabIndentApi"),
     path('generatecode/', views.generateCode, name = "generateCode"),
+    path('generatecode/api/', views.GenerateCodeApi.as_view(), name = "GenerateCodeApi"),
     path('limitlinelength/', views.limitLineLength, name = "limitLineLength"),
     path('', views.text, name = "textRoot"),
 ]
