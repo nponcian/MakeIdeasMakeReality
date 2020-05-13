@@ -37,6 +37,12 @@ class CommonWordApi(restViews.APIView):
     #     return Response({"detail":"GET is unsupported, use POST with details on the body"})
 
     def post(self, request, *args, **kwargs):
+        # TODO: Instead of doing everything below consecutively, with each step unnecessarily
+        # waiting for the previous one, better yet implement asynchronus threading, somehow the same
+        # idea with Map-Reduce algorithm. Handle each input type simultaneously in parallel then
+        # just combine results in the end before sorting. This will alleviate the long processing of
+        # htmlUrlsToText!
+
         text = request.data.get("text", "")
         file = request.FILES.get('file', None)
         urls = request.data.get("urls", [])
