@@ -145,21 +145,20 @@ def limitLineLength(request):
         "rotationPoint" : lineLengthLimiter.DEFAULT_ROTATION_POINT,
         "textToFormatPlaceholder" : lineLengthLimiter.EXAMPLE_TEXT_TO_FORMAT
     }
+    return render(request, template, context)
 
-    if request.method == "POST":
-        targetLineLength = request.POST.get("targetLineLength", "")
-        rotationPoint = request.POST.get("rotationPoint", "")
-        textToFormat = request.POST.get("textToFormat", "")
-        shouldCompress = "limitAndCompressButton" in request.POST
+class LimitLineLengthApi(restViews.APIView):
+    permission_classes = [servicePermissions.DefaultServicePermission]
+
+    def post(self, request, *args, **kwargs):
+        targetLineLength = request.data.get("targetLineLength", "")
+        rotationPoint = request.data.get("rotationPoint", "")
+        textToFormat = request.data.get("textToFormat", "")
+        shouldCompress = "limitAndCompressButton" in request.data
 
         formattedText = lineLengthLimiter.processLines(textToFormat,
                                                         targetLineLength,
                                                         rotationPoint,
                                                         shouldCompress)
 
-        context["targetLineLength"] = targetLineLength
-        context["rotationPoint"] = rotationPoint
-        context["textToFormat"] = textToFormat
-        context["formattedText"] = formattedText
-
-    return render(request, template, context)
+        return Response(formattedText)

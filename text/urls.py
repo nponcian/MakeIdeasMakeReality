@@ -14,5 +14,6 @@ urlpatterns = [
     path('generatecode/', views.generateCode, name = "generateCode"),
     path('generatecode/api/', views.GenerateCodeApi.as_view(), name = "GenerateCodeApi"),
     path('limitlinelength/', views.limitLineLength, name = "limitLineLength"),
+    path('limitlinelength/api/', views.LimitLineLengthApi.as_view(), name = "LimitLineLengthApi"),
     path('', views.text, name = "textRoot"),
 ]
