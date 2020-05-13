@@ -106,17 +106,17 @@ def formatTabIndent(request):
         "tabMultiplier" : tabIndentFormatter.DEFAULT_TAB_INDENT_MULTIPLIER,
         "textToFormatPlaceholder" : tabIndentFormatter.EXAMPLE_TEXT_TO_FORMAT
     }
+    return render(request, template, context)
 
-    if request.method == "POST":
-        tabMultiplier = request.POST.get("tabMultiplier", "")
-        textToFormat = request.POST.get("textToFormat", "")
+class FormatTabIndentApi(restViews.APIView):
+    permission_classes = [servicePermissions.DefaultServicePermission]
+
+    def post(self, request, *args, **kwargs):
+        tabMultiplier = request.data.get("tabMultiplier", "")
+        textToFormat = request.data.get("textToFormat", "")
         formattedText = tabIndentFormatter.formatTab(textToFormat, tabMultiplier)
 
-        context["tabMultiplier"] = tabMultiplier
-        context["textToFormat"] = textToFormat
-        context["formattedText"] = formattedText
-
-    return render(request, template, context)
+        return Response(formattedText)
 
 def generateCode(request):
     template = "text/generateCode.html"
