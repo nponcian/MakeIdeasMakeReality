@@ -24,10 +24,10 @@
 
 {% block body %}
 
-<form class="m-4" method="POST" action="."> {% csrf_token %}
+<form class="m-4 serviceForm" method="POST" action="." data-url="/service/text/ciphermessage/api/" data-result="#formattedText"> {% csrf_token %}
     <div class="btn-group btn-group-lg" role="group" aria-label="Cipher method">
-        <button type="submit" class="btn btn-info" name="encryptButton">Encrypt <i class="fas fa-lock h3"></i></button>
-        <button type="submit" class="btn btn-danger" name="decryptButton">Decrypt <i class="fas fa-lock-open h3"></i></button>
+        <button type="submit" class="btn btn-info" name="encryptButton" value="encrypt">Encrypt <i class="fas fa-lock h3"></i></button>
+        <button type="submit" class="btn btn-danger" name="decryptButton" value="decrypt">Decrypt <i class="fas fa-lock-open h3"></i></button>
     </div>
 
     <div class="form-row mt-3">

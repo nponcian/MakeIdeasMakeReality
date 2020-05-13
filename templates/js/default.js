@@ -65,6 +65,9 @@ $('.serviceForm').on('submit', function(event) {
     var spinnerObjects = $("span[class^='spinner-'],span[class*=' spinner-']");
     var spinners = $(this).find(spinnerObjects);
 
+    var btnSubmit = $(this).find("button[type=submit]:focus");
+    formData.set($(btnSubmit).attr("name"), $(btnSubmit).val());
+
     $.ajax({
         url: urlValue,
         type: "post",
@@ -88,16 +91,24 @@ $('.serviceForm').on('submit', function(event) {
             console.log("Request successful; textStatus:", textStatus);
             var dataStr = "";
 
-            // $.each(data, function(index, object) {
-            //     $.each(object, function(word, count) {
-            //         dataStr += word + " : " + count + "\n";
-            //     });
-            // });
-            // or
-            for (var index = 0; index < data.length; ++index) {
-                for (var key in data[index]) {
-                    dataStr += key + " : " + data[index][key] + "\n";
+            // TODO: Design a way to dynamically display different types of responses
+            if (typeof(data) == "string") {
+                dataStr = data;
+            }
+            else {
+                // $.each(data, function(index, object) {
+                //     $.each(object, function(word, count) {
+                //         dataStr += word + " : " + count + "\n";
+                //     });
+                // });
+                // or
+                for (var index = 0; index < data.length; ++index) {
+                    for (var key in data[index]) {
+                        dataStr += key + " : " + data[index][key] + "\n";
+                    }
                 }
+                // or
+                // dataStr = JSON.stringify(data);
             }
 
             $(resultObj).text(dataStr);

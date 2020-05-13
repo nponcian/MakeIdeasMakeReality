@@ -83,21 +83,22 @@ class CommonWordApi(restViews.APIView):
 def cipherMessage(request):
     template = "text/cipherMessage.html"
     context = {}
+    return render(request, template, context)
 
-    if request.method == "POST":
-        keycode = request.POST.get("keycode", "")
-        textToCipher = request.POST.get("textToCipher", "")
-        isAnEncryptOperation = "encryptButton" in request.POST
+class CipherMessageApi(restViews.APIView):
+    permission_classes = [servicePermissions.DefaultServicePermission]
+
+    def post(self, request, *args, **kwargs):
+        keycode = request.data.get("keycode", "")
+        textToCipher = request.data.get("textToCipher", "")
+        isAnEncryptOperation = "encryptButton" in request.data
+        print("eto", keycode, textToCipher, isAnEncryptOperation)
 
         algorithm = algorithmsFactory.getChosenAlgorithm()
         cipheredText = algorithm.encrypt(textToCipher, keycode) if isAnEncryptOperation\
                         else algorithm.decrypt(textToCipher, keycode)
 
-        context['keycode'] = keycode
-        context['textToCipher'] = textToCipher
-        context['cipheredText'] = cipheredText
-
-    return render(request, template, context)
+        return Response(cipheredText)
 
 def formatTabIndent(request):
     template = "text/formatTabIndent.html"
