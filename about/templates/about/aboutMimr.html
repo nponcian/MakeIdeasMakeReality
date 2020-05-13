@@ -66,21 +66,22 @@
                 <div class="card-header" id="techPillow"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPillowInfo" aria-expanded="true" aria-controls="techPillowInfo">Pillow <i class="far fa-file-image mimr-text-pink"></i></button></div>
                 <div id="techPillowInfo" class="collapse" aria-labelledby="techPillow" data-parent="#techStack"><div class="card-body bg-light text-dark">Python library for manipulating images<br><br>Wait, did I just reword my definition for GIMP?</div></div>
             </div>
+            <!-- TODO: Esto es muy muy malo! Muchos ajustes manuales! Store all this items in a PostgreSQL database and let Django view-template do the balancing. -->
             <!-- To balance contents between 2 columns, use either -->
             <!-- 1. -->
-            <div class="card bg-dark border border-light flex-fill">
+            <!-- <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGit"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGitInfo" aria-expanded="true" aria-controls="techGitInfo">Git <i class="fab fa-git-alt mimr-text-tomato"></i> + GitHub <i class="fab fa-github"></i></button></div>
                 <div id="techGitInfo" class="collapse" aria-labelledby="techGit" data-parent="#techStack"><div class="card-body bg-light text-dark">Version control system</div></div>
-            </div>
+            </div> -->
             <!-- 2. -->
-            <!-- <div class="card bg-dark border border-light flex-fill">
+            <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGit"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGitInfo" aria-expanded="true" aria-controls="techGitInfo">Git <i class="fab fa-git-alt mimr-text-tomato"></i></button></div>
                 <div id="techGitInfo" class="collapse" aria-labelledby="techGit" data-parent="#techStack"><div class="card-body bg-light text-dark">Version control system</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGitHub"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGitHubInfo" aria-expanded="true" aria-controls="techGitHubInfo">GitHub <i class="fab fa-github"></i></button></div>
                 <div id="techGitHubInfo" class="collapse" aria-labelledby="techGitHub" data-parent="#techStack"><div class="card-body bg-light text-dark">Version control system</div></div>
-            </div> -->
+            </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techHtmlCss"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techHtmlCssInfo" aria-expanded="true" aria-controls="techHtmlCssInfo">HTML <i class="fab fa-html5 mimr-text-orange"></i> + CSS <i class="fab fa-css3-alt text-info"></i></button></div>
                 <div id="techHtmlCssInfo" class="collapse" aria-labelledby="techHtmlCss" data-parent="#techStack"><div class="card-body bg-light text-dark">Not sure if this should be on this list explicitly. It's like being asked by an amigo "How to know if my dog wants to be a cat?" and responding "Firstly, you need a pair of eyes to be able to see, then... [insert steps here]" ;)</div></div>
@@ -91,7 +92,11 @@
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techJQuery"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techJQueryInfo" aria-expanded="true" aria-controls="techJQueryInfo">JavaScript: jQuery <i class="fab fa-js-square text-info"></i></button></div>
-                <div id="techJQueryInfo" class="collapse" aria-labelledby="techJQuery" data-parent="#techStack"><div class="card-body bg-light text-dark">Manipulation of HTML DOM tree for controlling the view.</div></div>
+                <div id="techJQueryInfo" class="collapse" aria-labelledby="techJQuery" data-parent="#techStack"><div class="card-body bg-light text-dark">Traversal and manipulation of HTML DOM tree for controlling the view.</div></div>
+            </div>
+            <div class="card bg-dark border border-light flex-fill">
+                <div class="card-header" id="techAjax"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techAjaxInfo" aria-expanded="true" aria-controls="techAjaxInfo">JavaScript: AJAX <i class="fab fa-js-square text-info"></i></button></div>
+                <div id="techAjaxInfo" class="collapse" aria-labelledby="techAjax" data-parent="#techStack"><div class="card-body bg-light text-dark">Who wants a page that reloads each time you do something? Answer: no one!<br><br>Used to query the HTTP REST API endpoints offered by the backend services.</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techYoutubeIframeApi"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techYoutubeIframeApiInfo" aria-expanded="true" aria-controls="techYoutubeIframeApiInfo">Youtube iframe API <i class="fab fa-youtube text-danger"></i></button></div>
@@ -121,13 +126,14 @@
                 <div class="card-header" id="techGcpCs"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGcpCsInfo" aria-expanded="true" aria-controls="techGcpCsInfo">Google Cloud: Cloud Storage <i class="far fa-hdd mimr-text-dodgerblue"></i></button></div>
                 <div id="techGcpCsInfo" class="collapse" aria-labelledby="techGcpCs" data-parent="#techStack"><div class="card-body bg-light text-dark">CDN (Content Delivery Network) storage</div></div>
             </div>
+        </div>
+
+        <div class="container mx-md-2 mx-lg-4 d-flex flex-column">
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGcpCf"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGcpCfInfo" aria-expanded="true" aria-controls="techGcpCfInfo">Google Cloud: Cloud Functions <i class="fas fa-code mimr-text-dodgerblue"></i></button></div>
                 <div id="techGcpCfInfo" class="collapse" aria-labelledby="techGcpCf" data-parent="#techStack"><div class="card-body bg-light text-dark">Tools to interact with the other Google Cloud services</div></div>
             </div>
-        </div>
 
-        <div class="container mx-md-2 mx-lg-4 d-flex flex-column">
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGcpServerlessVpc"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGcpServerlessVpcInfo" aria-expanded="true" aria-controls="techGcpServerlessVpcInfo">Google Cloud: Serverless VPC Access (connector)  <i class="fas fa-sitemap mimr-text-dodgerblue"></i></button></div>
                 <div id="techGcpServerlessVpcInfo" class="collapse" aria-labelledby="techGcpServerlessVpc" data-parent="#techStack"><div class="card-body bg-light text-dark">Communication device connector used by serverless Google Cloud services, such as GCF to GCE</div></div>
