@@ -69,19 +69,20 @@
             <!-- TODO: Esto es muy muy malo! Muchos ajustes manuales! Store all this items in a PostgreSQL database and let Django view-template do the balancing. -->
             <!-- To balance contents between 2 columns, use either -->
             <!-- 1. -->
-            <!-- <div class="card bg-dark border border-light flex-fill">
+            <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGit"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGitInfo" aria-expanded="true" aria-controls="techGitInfo">Git <i class="fab fa-git-alt mimr-text-tomato"></i> + GitHub <i class="fab fa-github"></i></button></div>
                 <div id="techGitInfo" class="collapse" aria-labelledby="techGit" data-parent="#techStack"><div class="card-body bg-light text-dark">Version control system</div></div>
-            </div> -->
+            </div>
             <!-- 2. -->
-            <div class="card bg-dark border border-light flex-fill">
+            <!-- <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGit"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGitInfo" aria-expanded="true" aria-controls="techGitInfo">Git <i class="fab fa-git-alt mimr-text-tomato"></i></button></div>
                 <div id="techGitInfo" class="collapse" aria-labelledby="techGit" data-parent="#techStack"><div class="card-body bg-light text-dark">Version control system</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGitHub"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGitHubInfo" aria-expanded="true" aria-controls="techGitHubInfo">GitHub <i class="fab fa-github"></i></button></div>
                 <div id="techGitHubInfo" class="collapse" aria-labelledby="techGitHub" data-parent="#techStack"><div class="card-body bg-light text-dark">Version control system</div></div>
-            </div>
+            </div> -->
+            <!-- end of balancing elements -->
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techHtmlCss"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techHtmlCssInfo" aria-expanded="true" aria-controls="techHtmlCssInfo">HTML <i class="fab fa-html5 mimr-text-orange"></i> + CSS <i class="fab fa-css3-alt text-info"></i></button></div>
                 <div id="techHtmlCssInfo" class="collapse" aria-labelledby="techHtmlCss" data-parent="#techStack"><div class="card-body bg-light text-dark">Not sure if this should be on this list explicitly. It's like being asked by an amigo "How to know if my dog wants to be a cat?" and responding "Firstly, you need a pair of eyes to be able to see, then... [insert steps here]" ;)</div></div>
@@ -109,6 +110,10 @@
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techFontAwesome"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techFontAwesomeInfo" aria-expanded="true" aria-controls="techFontAwesomeInfo">Font Awesome <i class="fab fa-font-awesome text-info"></i></button></div>
                 <div id="techFontAwesomeInfo" class="collapse" aria-labelledby="techFontAwesome" data-parent="#techStack"><div class="card-body bg-light text-dark">As the name suggests, Font Awesome. Or awesome fonts, or maybe awesome icons, or Icon Awesome?</div></div>
+            </div>
+            <div class="card bg-dark border border-light flex-fill">
+                <div class="card-header" id="techPostman"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPostmanInfo" aria-expanded="true" aria-controls="techPostmanInfo">Postman <i class="fas fa-exchange-alt mimr-text-tomato"></i></button></div>
+                <div id="techPostmanInfo" class="collapse" aria-labelledby="techPostman" data-parent="#techStack"><div class="card-body bg-light text-dark">Send HTTP requests to the server via the REST APIs.<br><br>For simpler HTTP requests such as GET (list / retrieve) operations, other technologies such as curl and Python-requests are also used.</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGcpIam"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGcpIamInfo" aria-expanded="true" aria-controls="techGcpIamInfo">Google Cloud: IAM <i class="far fa-id-badge mimr-text-dodgerblue"></i></button></div>
@@ -176,7 +181,7 @@
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techSystemd"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techSystemdInfo" aria-expanded="true" aria-controls="techSystemdInfo">systemd <i class="fas fa-cogs text-secondary"></i></button></div>
-                <div id="techSystemdInfo" class="collapse" aria-labelledby="techSystemd" data-parent="#techStack"><div class="card-body bg-light text-dark">Automatically starts and monitors Gunicorn, Nginx, PostgreSQL, and other services</div></div>
+                <div id="techSystemdInfo" class="collapse" aria-labelledby="techSystemd" data-parent="#techStack"><div class="card-body bg-light text-dark">Linux tool that automatically starts and monitors Gunicorn, Nginx, PostgreSQL, and other services</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techShell"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techShellInfo" aria-expanded="true" aria-controls="techShellInfo">shell | bash <i class="fab fa-linux text-warning"></i></button></div>
