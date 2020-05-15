@@ -10,7 +10,7 @@ Welcome to MakeIdeasMakeReality's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   modules/code/code
 
 Indices and tables
 ==================
