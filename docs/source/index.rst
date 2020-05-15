@@ -7,10 +7,10 @@ Welcome to MakeIdeasMakeReality's documentation!
 ================================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
+   :caption: API:
 
-   modules/code/code
+   modules/api/service/service
 
 Indices and tables
 ==================
