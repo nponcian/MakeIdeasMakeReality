@@ -18,3 +18,14 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+|
+.. highlight:: none
+
+*Quoting from a* **DjangoCon** *by Eric Holscher*::
+
+    I can't say I'm self-taught...
+
+    I've been taught by the people who wrote the documentation.
+
+.. highlight:: default
