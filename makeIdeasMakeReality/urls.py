@@ -22,12 +22,11 @@ handler404 = 'home.views.notFound'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('about/', include('about.urls', namespace = 'about')),
+    path('service/', include('service.urls', namespace = 'service')),
 
      # to access, append login/ or logout/
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
-    path('about/', include('about.urls', namespace = 'about')),
-    path('service/', include('service.urls', namespace = 'service')),
 
     path('', include('home.urls', namespace = 'home')),
 ]

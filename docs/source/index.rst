@@ -20,6 +20,7 @@ Indices and tables
 * :ref:`search`
 
 |
+
 .. highlight:: none
 
 *Quoting from a* **DjangoCon** *by Eric Holscher*::
