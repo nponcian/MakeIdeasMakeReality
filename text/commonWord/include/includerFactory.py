@@ -19,7 +19,7 @@ INCLUDER_DICT =\
 
 def getIncluder(includeType):
     ALL_KEY = "all"
-    if includeType is None: includeType = ALL_KEY
+    if includeType is None or len(includeType) == 0: includeType = ALL_KEY
     # TODO: raise an exception instead that will return a JSON error indicating invalid input format
     elif includeType not in INCLUDER_DICT: return INCLUDER_DICT[ALL_KEY]
 
