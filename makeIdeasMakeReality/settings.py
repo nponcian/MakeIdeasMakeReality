@@ -224,6 +224,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates'),
     os.path.join(BASE_DIR, "about", "templates"),
     os.path.join(BASE_DIR, "device", "templates"),
+    ("docs/build", os.path.join(BASE_DIR, "docs", "build")),
     os.path.join(BASE_DIR, "home", "templates"),
     os.path.join(BASE_DIR, "service", "templates"),
     os.path.join(BASE_DIR, "text", "templates"),

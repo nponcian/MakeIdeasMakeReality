@@ -1,7 +1,7 @@
 .. _mimr-api-service-text-formatTabIndent:
 
-Format Tab Indent
-=================
+Format Tab Indents
+==================
 
 .. toctree::
    :maxdepth: 1
