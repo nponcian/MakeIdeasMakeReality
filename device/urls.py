@@ -5,7 +5,7 @@ from device import views
 app_name = "device"
 
 urlpatterns = [
-    path("ipinfo/api/", views.ipInfo, name = "ipInfo"),
+    re_path(r"ipinfo/api/?", views.ipInfo, name = "ipInfo"),
 
     path('', views.device, name = "deviceRoot"),
 ]
