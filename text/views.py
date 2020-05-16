@@ -141,7 +141,7 @@ class GenerateCodeApi(restViews.APIView):
 def limitLineLength(request):
     template = "text/limitLineLength.html"
     context = {
-        "targetLineLength" : lineLengthLimiter.DEFAULT_TARGET_LINE_LENGTH,
+        "maxLineLength" : lineLengthLimiter.DEFAULT_MAX_LINE_LENGTH,
         "rotationPoint" : lineLengthLimiter.DEFAULT_ROTATION_POINT,
         "textToFormatPlaceholder" : lineLengthLimiter.EXAMPLE_TEXT_TO_FORMAT
     }
@@ -151,13 +151,13 @@ class LimitLineLengthApi(restViews.APIView):
     permission_classes = [servicePermissions.DefaultServicePermission]
 
     def post(self, request, *args, **kwargs):
-        targetLineLength = request.data.get("targetLineLength", "")
+        maxLineLength = request.data.get("maxLineLength", "")
         rotationPoint = request.data.get("rotationPoint", "")
-        textToFormat = request.data.get("textToFormat", "")
-        shouldCompress = "limitAndCompressButton" in request.data
+        text = request.data.get("text", "")
+        shouldCompress = request.data.get("operation", "") == "limit_compress"
 
-        formattedText = lineLengthLimiter.processLines(textToFormat,
-                                                        targetLineLength,
+        formattedText = lineLengthLimiter.processLines(text,
+                                                        maxLineLength,
                                                         rotationPoint,
                                                         shouldCompress)
 

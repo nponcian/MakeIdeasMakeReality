@@ -3,7 +3,7 @@
 # word on the right side) is moved to the next line, in which case the spacing in between is
 # stripped.
 
-DEFAULT_TARGET_LINE_LENGTH = 100
+DEFAULT_MAX_LINE_LENGTH = 100
 DEFAULT_ROTATION_POINT = 1 # 3 for for Python comments
 EXAMPLE_TEXT_TO_FORMAT = "\
 # Enter paragraph here\n\
@@ -23,25 +23,25 @@ def _prepareLine(rotationPointChars, prevOverflowingChars, line = ""):
         prevOverflowingChars += SPACE
     return rotationPointChars + prevOverflowingChars + line[rotationPoint:]
 
-def _updateLine(line, targetLineLength, rotationPoint, shouldCompress):
+def _updateLine(line, maxLineLength, rotationPoint, shouldCompress):
     updatedLine = str()
     overflowingChars = str()
     underflowingCount = 0
 
-    if len(line) <= targetLineLength:
+    if len(line) <= maxLineLength:
         updatedLine = line.rstrip()
-        underflowingCount = targetLineLength - len(updatedLine) - 1 # 1 is for space
+        underflowingCount = maxLineLength - len(updatedLine) - 1 # 1 is for space
         if not shouldCompress or underflowingCount <= 0: updatedLine += NEW_LINE
     else:
-        lastPossibleChar = line[targetLineLength - 1]
-        firstOverflowingChar = line[targetLineLength]
+        lastPossibleChar = line[maxLineLength - 1]
+        firstOverflowingChar = line[maxLineLength]
 
         if lastPossibleChar.isspace() or firstOverflowingChar.isspace():
-            updatedLine = line[:targetLineLength].rstrip() + NEW_LINE
-            overflowingChars = line[targetLineLength:].strip()
+            updatedLine = line[:maxLineLength].rstrip() + NEW_LINE
+            overflowingChars = line[maxLineLength:].strip()
         else:
-            lastSpaceIndex = line[:targetLineLength].rfind(SPACE, rotationPoint + 1)
-            lineBreaker = lastSpaceIndex if lastSpaceIndex > 0 else targetLineLength
+            lastSpaceIndex = line[:maxLineLength].rfind(SPACE, rotationPoint + 1)
+            lineBreaker = lastSpaceIndex if lastSpaceIndex > 0 else maxLineLength
 
             updatedLine = line[:lineBreaker].rstrip() + NEW_LINE
             overflowingChars = line[lineBreaker:].strip()
@@ -83,9 +83,9 @@ def _processPrevUnderflow(line, rotationPoint, prevUnderflowingCount):
 
     return line, appendToPrevLine, underflowingCount
 
-def processLines(textToFormat, targetLineLength, rotationPoint, shouldCompress):
-    targetLineLength = int(targetLineLength)
-    targetLineLength = targetLineLength if targetLineLength > 0 else DEFAULT_TARGET_LINE_LENGTH
+def processLines(textToFormat, maxLineLength, rotationPoint, shouldCompress):
+    maxLineLength = int(maxLineLength)
+    maxLineLength = maxLineLength if maxLineLength > 0 else DEFAULT_MAX_LINE_LENGTH
     rotationPoint = int(rotationPoint) - 1 # base 0
     rotationPoint = rotationPoint if rotationPoint >= 0 else DEFAULT_ROTATION_POINT
 
@@ -101,7 +101,7 @@ def processLines(textToFormat, targetLineLength, rotationPoint, shouldCompress):
             if len(line) == 0: continue
 
         line = _prepareLine(line[:rotationPoint], prevOverflowingChars, line)
-        updatedLine, overflowingChars, underflowingCount = _updateLine(line, targetLineLength, rotationPoint, shouldCompress)
+        updatedLine, overflowingChars, underflowingCount = _updateLine(line, maxLineLength, rotationPoint, shouldCompress)
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
         prevUnderflowingCount = underflowingCount
@@ -109,7 +109,7 @@ def processLines(textToFormat, targetLineLength, rotationPoint, shouldCompress):
     rotationPointChars = textToFormat[:rotationPoint]
     while len(prevOverflowingChars) != 0:
         prevOverflowingChars = _prepareLine(rotationPointChars, prevOverflowingChars)
-        updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, targetLineLength, rotationPoint, shouldCompress)
+        updatedLine, overflowingChars, _ = _updateLine(prevOverflowingChars, maxLineLength, rotationPoint, shouldCompress)
         formattedText += updatedLine
         prevOverflowingChars = overflowingChars
 

@@ -26,8 +26,8 @@
 
 <form class="m-4 serviceForm" method="POST" action="." data-url="/service/text/limitlinelength/api/" data-result="#formattedText"> {% csrf_token %}
     <div class="btn-group btn-group-lg" role="group" aria-label="Limit and compress">
-        <button type="submit" class="btn btn-info" name="limitButton">Limit <i class="fas fa-sliders-h"></i></button>
-        <button type="submit" class="btn btn-danger" name="limitAndCompressButton">Limit & Compress <i class="fas fa-compress-arrows-alt"></i></button>
+        <button type="submit" class="btn btn-info" name="operation" value="limit">Limit <i class="fas fa-sliders-h"></i></button>
+        <button type="submit" class="btn btn-danger" name="operation" value="limit_compress">Limit & Compress <i class="fas fa-compress-arrows-alt"></i></button>
     </div>
 
     <div class="form-row mt-3">
@@ -36,7 +36,7 @@
                 <span class="input-group-text font-weight-bold">Max line length:</span>
                 <span class="input-group-text d-none d-sm-block"><i class="fas fa-ruler-horizontal"></i></span>
             </div>
-            <input type="number" min="1" name="targetLineLength" value="{{ targetLineLength }}" aria-label="Line length" class="form-control">
+            <input type="number" min="1" name="maxLineLength" value="{{ maxLineLength }}" aria-label="Line length" class="form-control">
             <div class="input-group-append">
                 <span class="input-group-text d-none d-sm-block">characters</span>
             </div>
@@ -59,7 +59,7 @@
     <div class="d-md-flex mt-3">
         <div class="form-group flex-fill">
             <label for="textToFormat" class="font-weight-bold h4">Text to format:</label>
-            <textarea id="textToFormat" class="form-control mimr-bg-lightgreen mimr-bg-lightgreen-focus" name="textToFormat" rows="15" placeholder="{{ textToFormatPlaceholder }}" required></textarea>
+            <textarea id="textToFormat" class="form-control mimr-bg-lightgreen mimr-bg-lightgreen-focus" name="text" rows="15" placeholder="{{ textToFormatPlaceholder }}" required></textarea>
         </div>
 
         <div class="form-group flex-fill position-relative">
