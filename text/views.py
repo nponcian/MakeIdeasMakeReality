@@ -102,7 +102,7 @@ class CommonWordApi(restViews.APIView):
 def formatTabIndent(request):
     template = "text/formatTabIndent.html"
     context = {
-        "tabMultiplier" : tabIndentFormatter.DEFAULT_TAB_INDENT_MULTIPLIER,
+        "multiplier" : tabIndentFormatter.DEFAULT_TAB_INDENT_MULTIPLIER,
         "textToFormatPlaceholder" : tabIndentFormatter.EXAMPLE_TEXT_TO_FORMAT
     }
     return render(request, template, context)
@@ -111,9 +111,9 @@ class FormatTabIndentApi(restViews.APIView):
     permission_classes = [servicePermissions.DefaultServicePermission]
 
     def post(self, request, *args, **kwargs):
-        tabMultiplier = request.data.get("tabMultiplier", "")
+        multiplier = request.data.get("multiplier", "")
         text = request.data.get("text", "")
-        formattedText = tabIndentFormatter.formatTab(text, tabMultiplier)
+        formattedText = tabIndentFormatter.formatTab(text, multiplier)
 
         return Response(formattedText)
 

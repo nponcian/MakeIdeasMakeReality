@@ -37,18 +37,18 @@ Parameters
 
             {"text":"<nav class="navbar navbar-light bg-light">\n  <a class="navbar-brand" href="#">\n    <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">\n    Bootstrap\n  </a>\n</nav>"}
 
-* ``tabMultiplier`` (optional, default is ``2``)
+* ``multiplier`` (optional, default is ``2``)
 
     Type
         number (float)
 
     Description
-        Used for adjusting each tab indent per line in ``text``. This is done per line by multiplying the tab spaces to the number indicated here.
+        Used per line of ``text`` by multiplying the tab indentation spaces to the number indicated here. The resulting number would be the updated count of indentation spaces.
 
     Example
         .. code-block::
 
-            {"tabMultiplier":0.5}
+            {"multiplier":0.5}
 
 Run
 ---
@@ -63,7 +63,7 @@ Run
         curl \
           --header "Content-Type: application/json" \
           --request POST \
-          --data "{\"text\":\"${mySampleTextEscaped}\",\"tabMultiplier\":0.5}" \
+          --data "{\"text\":\"${mySampleTextEscaped}\",\"multiplier\":0.5}" \
           https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/formattabindent/api)
 
     curlResult=$(echo "${curlResultEscaped}" | sed 's/\\"/"/g') # revert back the added escape symbols
