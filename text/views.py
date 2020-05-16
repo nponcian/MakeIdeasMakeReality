@@ -151,8 +151,8 @@ class LimitLineLengthApi(restViews.APIView):
     permission_classes = [servicePermissions.DefaultServicePermission]
 
     def post(self, request, *args, **kwargs):
-        maxLineLength = request.data.get("maxLineLength", "")
-        rotationPoint = request.data.get("rotationPoint", "")
+        maxLineLength = request.data.get("maxLineLength", lineLengthLimiter.DEFAULT_MAX_LINE_LENGTH)
+        rotationPoint = request.data.get("rotationPoint", lineLengthLimiter.DEFAULT_ROTATION_POINT)
         text = request.data.get("text", "")
         shouldCompress = request.data.get("operation", "") == "limit_compress"
 

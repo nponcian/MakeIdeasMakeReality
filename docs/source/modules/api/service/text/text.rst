@@ -10,3 +10,4 @@ Text
    commonWord
    formatTabIndent
    generateCode
+   wrapLine

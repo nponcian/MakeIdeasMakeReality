@@ -4,7 +4,7 @@
 # stripped.
 
 DEFAULT_MAX_LINE_LENGTH = 100
-DEFAULT_ROTATION_POINT = 1 # 3 for for Python comments
+DEFAULT_ROTATION_POINT = 1
 EXAMPLE_TEXT_TO_FORMAT = "\
 # Enter paragraph here\n\
 # Sample paragraph\n\

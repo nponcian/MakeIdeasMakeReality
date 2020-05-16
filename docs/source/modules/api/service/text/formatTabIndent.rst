@@ -40,7 +40,10 @@ Parameters
 * ``multiplier`` (optional, default is ``2``)
 
     Type
-        number (float)
+        number
+
+            * float
+            * greater than or equal to 0
 
     Description
         Used per line of ``text`` by multiplying the tab indentation spaces to the number indicated here. The resulting number would be the updated count of indentation spaces.
