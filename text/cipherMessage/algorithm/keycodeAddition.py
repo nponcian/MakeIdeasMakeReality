@@ -47,11 +47,11 @@ class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
 
         return differencesDeque
 
-    def __cipher(self, textToCipher, keycode, cipherOperation):
+    def __cipher(self, message, keycode, cipherOperation):
         keycodeDifferences = self.__getDifferencesBetweenChars(keycode)
 
         ciphered = str()
-        for ch in textToCipher:
+        for ch in message:
             if not self.__isCharInRangeToProcess(ch):
                 ciphered += ch
                 continue
@@ -67,8 +67,8 @@ class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
 
         return ciphered
 
-    def encrypt(self, textToCipher, keycode):
-        return self.__cipher(textToCipher, keycode, "+")
+    def encrypt(self, message, keycode):
+        return self.__cipher(message, keycode, "+")
 
-    def decrypt(self, textToCipher, keycode):
-        return self.__cipher(textToCipher, keycode, "-")
+    def decrypt(self, message, keycode):
+        return self.__cipher(message, keycode, "-")

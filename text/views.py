@@ -25,6 +25,25 @@ def text(request):
     context = {}
     return render(request, template, context)
 
+def cipherMessage(request):
+    template = "text/cipherMessage.html"
+    context = {}
+    return render(request, template, context)
+
+class CipherMessageApi(restViews.APIView):
+    permission_classes = [servicePermissions.DefaultServicePermission]
+
+    def post(self, request, *args, **kwargs):
+        keycode = request.data.get("keycode", "")
+        message = request.data.get("message", "")
+        isADecryptOperation = request.data.get("operation", "") == "decrypt"
+
+        algorithm = algorithmsFactory.getChosenAlgorithm()
+        cipheredText = algorithm.decrypt(message, keycode) if isADecryptOperation\
+                        else algorithm.encrypt(message, keycode)
+
+        return Response(cipheredText)
+
 def commonWord(request):
     template = "text/commonWord.html"
     context = {}
@@ -79,25 +98,6 @@ class CommonWordApi(restViews.APIView):
         wordCountDictList = commonWordCountHelper.order(wordCountDict, order)
 
         return Response(wordCountDictList) # JsonResponse(wordCountDictList)
-
-def cipherMessage(request):
-    template = "text/cipherMessage.html"
-    context = {}
-    return render(request, template, context)
-
-class CipherMessageApi(restViews.APIView):
-    permission_classes = [servicePermissions.DefaultServicePermission]
-
-    def post(self, request, *args, **kwargs):
-        keycode = request.data.get("keycode", "")
-        textToCipher = request.data.get("textToCipher", "")
-        isAnEncryptOperation = "encryptButton" in request.data
-
-        algorithm = algorithmsFactory.getChosenAlgorithm()
-        cipheredText = algorithm.encrypt(textToCipher, keycode) if isAnEncryptOperation\
-                        else algorithm.decrypt(textToCipher, keycode)
-
-        return Response(cipheredText)
 
 def formatTabIndent(request):
     template = "text/formatTabIndent.html"
