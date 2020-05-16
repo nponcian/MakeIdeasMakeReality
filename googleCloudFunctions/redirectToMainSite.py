@@ -22,7 +22,7 @@
 
 # EXAMPLE URLS (using HTTP GET)
 #     https://us-central1-makeideasmakereality.cloudfunctions.net/mimr
-#     https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/limitlinelength
+#     https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/wrapline
 #     https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=api/ipinfo
 
 # FLOW

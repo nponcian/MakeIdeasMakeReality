@@ -13,14 +13,14 @@
     background-image: url("../../assets/img/cambodiaSiemReapRuinsWithTree.jpeg");
 }
 
-#lineLength_pageLabel
-{
-    background-image: url("../../assets/img/singaporeMarinaBay.jpeg");
-}
-
-#tabIndent_pageLabel
+#formatTabIndent_pageLabel
 {
     background-image: url("../../assets/img/spainBarcelonaSagrada.jpeg");
+}
+
+#wrapLine_pageLabel
+{
+    background-image: url("../../assets/img/singaporeMarinaBay.jpeg");
 }
 
 textarea

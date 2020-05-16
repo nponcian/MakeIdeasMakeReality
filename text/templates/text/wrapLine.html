@@ -6,16 +6,16 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'text/css/common.css' %}">
 
-<title>Limit Line Length | MakeIdeasMakeReality</title>
+<title>Wrap Line | MakeIdeasMakeReality</title>
 
 {% endblock %}
 
 {% block pageLabel %}
 
-<div class="pageLabel jumbotron jumbotron-fluid" id="lineLength_pageLabel">
+<div class="pageLabel jumbotron jumbotron-fluid" id="wrapLine_pageLabel">
     <div class="container pt-5 text-center">
         <div class="display-3 pt-xs-3 pt-sm-5">
-            Limit Line Length
+            Wrap Line
         </h1>
     </div>
 </div>
@@ -24,7 +24,7 @@
 
 {% block body %}
 
-<form class="m-4 serviceForm" method="POST" action="." data-url="/service/text/limitlinelength/api/" data-result="#formattedText"> {% csrf_token %}
+<form class="m-4 serviceForm" method="POST" action="." data-url="/service/text/wrapline/api/" data-result="#formattedText"> {% csrf_token %}
     <div class="btn-group btn-group-lg" role="group" aria-label="Limit and compress">
         <button type="submit" class="btn btn-info" name="operation" value="limit">Limit <i class="fas fa-sliders-h"></i></button>
         <button type="submit" class="btn btn-danger" name="operation" value="limit_compress">Limit & Compress <i class="fas fa-compress-arrows-alt"></i></button>

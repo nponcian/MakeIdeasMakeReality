@@ -14,7 +14,7 @@ Limit the line length of a paragraph by wrapping the overflowing characters to a
 Endpoint
 --------
 
-https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/limitlinelength/api
+https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/wrapline/api
 
 HTTP Method
 -----------

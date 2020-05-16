@@ -16,7 +16,7 @@ from text.generateCode import (
     characterGroup,
     characterLength,
 )
-from text.limitLineLength import limiter as lineLengthLimiter
+from text.wrapLine import wrapper as lineWrapper
 
 # Create your views here.
 
@@ -138,27 +138,23 @@ class GenerateCodeApi(restViews.APIView):
         result = characterGroup.shuffleIntoString(charsFromTheGroups, remainingChars)
         return Response(result)
 
-def limitLineLength(request):
-    template = "text/limitLineLength.html"
+def wrapLine(request):
+    template = "text/wrapLine.html"
     context = {
-        "maxLineLength" : lineLengthLimiter.DEFAULT_MAX_LINE_LENGTH,
-        "rotationPoint" : lineLengthLimiter.DEFAULT_ROTATION_POINT,
-        "textToFormatPlaceholder" : lineLengthLimiter.EXAMPLE_TEXT_TO_FORMAT
+        "maxLineLength" : lineWrapper.DEFAULT_MAX_LINE_LENGTH,
+        "rotationPoint" : lineWrapper.DEFAULT_ROTATION_POINT,
+        "textToFormatPlaceholder" : lineWrapper.EXAMPLE_TEXT_TO_FORMAT
     }
     return render(request, template, context)
 
-class LimitLineLengthApi(restViews.APIView):
+class WrapLineApi(restViews.APIView):
     permission_classes = [servicePermissions.DefaultServicePermission]
 
     def post(self, request, *args, **kwargs):
-        maxLineLength = request.data.get("maxLineLength", lineLengthLimiter.DEFAULT_MAX_LINE_LENGTH)
-        rotationPoint = request.data.get("rotationPoint", lineLengthLimiter.DEFAULT_ROTATION_POINT)
+        maxLineLength = request.data.get("maxLineLength", lineWrapper.DEFAULT_MAX_LINE_LENGTH)
+        rotationPoint = request.data.get("rotationPoint", lineWrapper.DEFAULT_ROTATION_POINT)
         text = request.data.get("text", "")
         shouldCompress = request.data.get("operation", "") == "limit_compress"
 
-        formattedText = lineLengthLimiter.processLines(text,
-                                                        maxLineLength,
-                                                        rotationPoint,
-                                                        shouldCompress)
-
+        formattedText = lineWrapper.processLines(text, maxLineLength, rotationPoint, shouldCompress)
         return Response(formattedText)

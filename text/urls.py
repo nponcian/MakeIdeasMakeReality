@@ -15,7 +15,7 @@ urlpatterns = [
     re_path(r'formattabindent/api/?', views.FormatTabIndentApi.as_view(), name = "FormatTabIndentApi"),
     path('generatecode/', views.generateCode, name = "generateCode"),
     re_path(r'generatecode/api/?', views.GenerateCodeApi.as_view(), name = "GenerateCodeApi"),
-    path('limitlinelength/', views.limitLineLength, name = "limitLineLength"),
-    re_path(r'limitlinelength/api/?', views.LimitLineLengthApi.as_view(), name = "LimitLineLengthApi"),
+    path('wrapline/', views.wrapLine, name = "wrapLine"),
+    re_path(r'wrapline/api/?', views.WrapLineApi.as_view(), name = "WrapLineApi"),
     path('', views.text, name = "textRoot"),
 ]
