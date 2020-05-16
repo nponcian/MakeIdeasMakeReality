@@ -24,7 +24,7 @@
 
 {% block body %}
 
-<div class="mt-2 text-center text-muted font-italic">Need <a href="{% static 'docs/build/html/modules/api/service/text/commonWord.html' %}" target="_blank">help?</a></div>
+{% include "needHelp.html" with staticChildPath="docs/build/html/modules/api/service/text/commonWord.html" %}
 
 <!-- Form contains a file input thus the need for enctype='multipart/form-data' -->
 <form class="m-4 serviceForm" method="POST" action="." enctype='multipart/form-data' data-url="/service/text/commonword/api/" data-result="#countedWords" data-list="#urlsInput #ignoreInput"> {% csrf_token %}
