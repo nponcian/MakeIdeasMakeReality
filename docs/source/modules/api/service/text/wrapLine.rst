@@ -92,6 +92,18 @@ Parameters
 Run
 ---
 
+.. code-block::
+    :caption: Input text
+    :linenos:
+
+            # Enter paragraph here
+            # Sample paragraph
+            # Wrap the overflowing lines at point 11 to adjust for the indent and the tag #
+            # This is a line, containing exactly 100 characters, try to count this and you would get 100
+            # This is another line containing more than 100 characters, do not manually count it, that is time consuming, use a text editor!
+            # This is again another line, I would catch overflowing characters above, but even me would also overflow so let the next line handle me
+            # Okay fine, I would catch their overflows here. Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,thatistimeconsuming,useatexteditor!Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,thatistimeconsuming,useatexteditor!
+
 .. centered:: Limit
 
 **HTTP Request**::
@@ -106,6 +118,22 @@ Run
 
     "        # Enter paragraph here\n        # Sample paragraph\n        # Wrap the overflowing lines at point 11 to adjust for the indent and the tag #\n        # This is a line, containing exactly 100 characters, try to count this and you would get 100\n        # This is another line containing more than 100 characters, do not manually count it, that\n        # is time consuming, use a text editor! This is again another line, I would catch\n        # overflowing characters above, but even me would also overflow so let the next line handle\n        # me Okay fine, I would catch their overflows here.\n        # Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,that\n        # istimeconsuming,useatexteditor!Thisisaseriesofwordscontainingmorethan100charactersWITHOUTs\n        # paces,donotmanuallycountit,thatistimeconsuming,useatexteditor!\n"
 
+.. code-block::
+    :caption: HTTP Response (displayed)
+    :linenos:
+
+            # Enter paragraph here
+            # Sample paragraph
+            # Wrap the overflowing lines at point 11 to adjust for the indent and the tag #
+            # This is a line, containing exactly 100 characters, try to count this and you would get 100
+            # This is another line containing more than 100 characters, do not manually count it, that
+            # is time consuming, use a text editor! This is again another line, I would catch
+            # overflowing characters above, but even me would also overflow so let the next line handle
+            # me Okay fine, I would catch their overflows here.
+            # Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,that
+            # istimeconsuming,useatexteditor!Thisisaseriesofwordscontainingmorethan100charactersWITHOUTs
+            # paces,donotmanuallycountit,thatistimeconsuming,useatexteditor!
+
 .. centered:: Limit and Compress
 
 **HTTP Request**::
@@ -119,3 +147,17 @@ Run
 **HTTP Response**::
 
     "        # Enter paragraph here Sample paragraph Wrap the overflowing lines at point 11 to adjust for\n        # the indent and the tag # This is a line, containing exactly 100 characters, try to count\n        # this and you would get 100 This is another line containing more than 100 characters, do\n        # not manually count it, that is time consuming, use a text editor! This is again another\n        # line, I would catch overflowing characters above, but even me would also overflow so let\n        # the next line handle me Okay fine, I would catch their overflows here.\n        # Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,that\n        # istimeconsuming,useatexteditor!Thisisaseriesofwordscontainingmorethan100charactersWITHOUTs\n        # paces,donotmanuallycountit,thatistimeconsuming,useatexteditor!"
+
+.. code-block::
+    :caption: HTTP Response (displayed)
+    :linenos:
+
+            # Enter paragraph here Sample paragraph Wrap the overflowing lines at point 11 to adjust for
+            # the indent and the tag # This is a line, containing exactly 100 characters, try to count
+            # this and you would get 100 This is another line containing more than 100 characters, do
+            # not manually count it, that is time consuming, use a text editor! This is again another
+            # line, I would catch overflowing characters above, but even me would also overflow so let
+            # the next line handle me Okay fine, I would catch their overflows here.
+            # Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,that
+            # istimeconsuming,useatexteditor!Thisisaseriesofwordscontainingmorethan100charactersWITHOUTs
+            # paces,donotmanuallycountit,thatistimeconsuming,useatexteditor!
