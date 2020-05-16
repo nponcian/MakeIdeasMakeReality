@@ -4,9 +4,9 @@
 # Setup the directory to where the static files would be stored
 
 # USAGE
-#     sudo bash /absolute/path/from/literally/anywhere/to/script/staticFilesProcessor.sh.sh
+#     sudo bash /absolute/path/from/literally/anywhere/to/script/staticFilesProcessor.sh
 #     or
-#     sudo bash ../relative/path/from/literally/anywhere/to/script/staticFilesProcessor.sh.sh
+#     sudo bash ../relative/path/from/literally/anywhere/to/script/staticFilesProcessor.sh
 # Use sudo if the target location of the static files is not writable to the current user, such as
 # if it is outside of the /home/user/... directory.
 
