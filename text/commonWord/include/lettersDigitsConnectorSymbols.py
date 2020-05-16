@@ -2,7 +2,7 @@ import re
 
 from text.commonWord.include import includerStrategy
 
-SYMBOLS_CONNECTING_WORDS = "-_'.&+"
+SYMBOLS_CONNECTING_WORDS = "-_'`.&+"
 SEPARATOR = " "
 
 class LettersDigitsConnectorSymbols(includerStrategy.IncluderStrategy):
