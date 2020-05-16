@@ -112,8 +112,8 @@ class FormatTabIndentApi(restViews.APIView):
 
     def post(self, request, *args, **kwargs):
         tabMultiplier = request.data.get("tabMultiplier", "")
-        textToFormat = request.data.get("textToFormat", "")
-        formattedText = tabIndentFormatter.formatTab(textToFormat, tabMultiplier)
+        text = request.data.get("text", "")
+        formattedText = tabIndentFormatter.formatTab(text, tabMultiplier)
 
         return Response(formattedText)
 

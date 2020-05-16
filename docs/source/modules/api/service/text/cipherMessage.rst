@@ -14,7 +14,7 @@ Encrypt a message into an unreadable format using a user-provided keycode. Decry
 Endpoint
 --------
 
-https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/cipherMessage/api
+https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/ciphermessage/api
 
 HTTP Method
 -----------
@@ -30,7 +30,7 @@ Parameters
         string
 
     Description
-        Raw text input containing words, sentences and paragraphs that would directly be ciphered.
+        Raw text input containing words, sentences and paragraphs that would be ciphered.
 
     Example
         .. code-block::
@@ -77,8 +77,7 @@ Parameters
 Run
 ---
 
-Encryption
-^^^^^^^^^^
+.. centered:: Encryption
 
 **HTTP Request**::
 
@@ -92,8 +91,7 @@ Encryption
 
     "<f${,gud(fw$cw`?? Gbf%x,bWykbW__``__u+Uae%tL1hx__`__2leaXlf |-Rlrq&9!kc1%n]g!;#A6&~<;=>|6(_ 2%#61+w[dpxwmviG$ 05=q12_g2gs{*#39\n\n2ybz,-OJ{jb/wSsU!mQ gh\\!%f3cci+ct^h!7@Bbalzc`!u;YPcjoruTn__``__2_t{W\\l}Uv]ltryJ=3/[B~$sO6oC04|855>;*p>heq_bx~*Rfk&ga-j0]bdtyZrXw%Dss`sNkopvc+c|t?lgo?2!sITN}"
 
-Decryption
-^^^^^^^^^^
+.. centered:: Decryption
 
 **HTTP Request**::
 

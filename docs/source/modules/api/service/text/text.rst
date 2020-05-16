@@ -8,3 +8,4 @@ Text
 
    cipherMessage
    commonWord
+   formatTabIndent

@@ -1,0 +1,75 @@
+.. _mimr-api-service-text-formatTabIndent:
+
+Format Tab Indent
+=================
+
+.. toctree::
+   :maxdepth: 1
+
+Purpose
+-------
+
+Adjust the tab indentations per line of text.
+
+Endpoint
+--------
+
+https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/formattabindent/api
+
+HTTP Method
+-----------
+
+POST
+
+Parameters
+----------
+
+* ``text``
+
+    Type
+        string
+
+    Description
+        Raw text input containing multiple lines of words, sentences and paragraphs containing indentations that would be adjusted.
+
+    Example
+        .. code-block::
+
+            {"text":"<nav class="navbar navbar-light bg-light">\n  <a class="navbar-brand" href="#">\n    <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">\n    Bootstrap\n  </a>\n</nav>"}
+
+* ``tabMultiplier`` (optional, default is ``2``)
+
+    Type
+        number (float)
+
+    Description
+        Used for adjusting each tab indent per line in ``text``. This is done per line by multiplying the tab spaces to the number indicated here.
+
+    Example
+        .. code-block::
+
+            {"tabMultiplier":0.5}
+
+Run
+---
+
+**HTTP Request**::
+
+    mySampleText='<nav class="navbar navbar-light bg-light">\n  <a class="navbar-brand" href="#">\n    <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">\n    Bootstrap\n  </a>\n</nav>'
+
+    mySampleTextEscaped=$(echo "${mySampleText}" | sed 's/"/\\"/g') # escape the variable for it to be successfully parsed by the curl statement
+
+    curlResultEscaped=$(\
+        curl \
+          --header "Content-Type: application/json" \
+          --request POST \
+          --data "{\"text\":\"${mySampleTextEscaped}\",\"tabMultiplier\":0.5}" \
+          https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/formattabindent/api)
+
+    curlResult=$(echo "${curlResultEscaped}" | sed 's/\\"/"/g') # revert back the added escape symbols
+
+    echo "${curlResult}"
+
+**HTTP Response**::
+
+    "<nav class="navbar navbar-light bg-light">\n    <a class="navbar-brand" href="#">\n        <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">\n        Bootstrap\n    </a>\n</nav>"
