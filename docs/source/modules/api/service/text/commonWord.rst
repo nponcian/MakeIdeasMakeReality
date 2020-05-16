@@ -9,7 +9,7 @@ Common Words
 Purpose
 -------
 
-Count the number of occurrences of each word in a document
+Count the number of occurrences of each word in a document.
 
 Endpoint
 --------
