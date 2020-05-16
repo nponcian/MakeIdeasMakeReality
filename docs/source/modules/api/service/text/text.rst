@@ -9,3 +9,4 @@ Text
    cipherMessage
    commonWord
    formatTabIndent
+   generateCode
