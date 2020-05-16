@@ -2,8 +2,12 @@ from collections import (
     deque,
     namedtuple,
 )
+import re
 
 from text.cipherMessage.algorithm import cipherAlgorithm
+
+SINGLE_QUOTE_SUB = "__`__"
+DOUBLE_QUOTE_SUB = "__``__"
 
 class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
     def __init__(self):
@@ -67,8 +71,22 @@ class KeycodeAddition(cipherAlgorithm.CipherAlgorithm):
 
         return ciphered
 
+    def __showQuotes(self, message, display = True):
+        singleQuote = [SINGLE_QUOTE_SUB, "'"]
+        doubleQuote = [DOUBLE_QUOTE_SUB, '"']
+
+        if not display:
+            singleQuote.reverse()
+            doubleQuote.reverse()
+
+        message = re.sub(*singleQuote, message)
+        message = re.sub(*doubleQuote, message)
+        return message
+
     def encrypt(self, message, keycode):
-        return self.__cipher(message, keycode, "+")
+        encryptedMessage = self.__cipher(message, keycode, "+")
+        return self.__showQuotes(encryptedMessage, False)
 
     def decrypt(self, message, keycode):
+        message = self.__showQuotes(message, True)
         return self.__cipher(message, keycode, "-")
