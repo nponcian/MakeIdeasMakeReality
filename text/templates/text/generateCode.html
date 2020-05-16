@@ -24,9 +24,11 @@
 
 {% block body %}
 
+<div class="mt-2 text-center text-muted font-italic">Need <a href="{% static 'docs/build/html/modules/api/service/text/generateCode.html' %}" target="_blank">help?</a></div>
+
 <form class="m-4 serviceForm" method="POST" action="." data-url="/service/text/generatecode/api/" data-result="#generatedCode"> {% csrf_token %}
     <fieldset class="form-group" disabled>
-        <div class="row mt-3">
+        <div class="row">
             <legend class="col-form-label col-auto pt-0 font-weight-bold">Include:</legend>
             <div class="col-sm-10">
                 <!-- <div class="form-check">
