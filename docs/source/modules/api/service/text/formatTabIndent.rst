@@ -56,6 +56,17 @@ Parameters
 Run
 ---
 
+.. code-block::
+    :caption: Input text
+    :linenos:
+
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        Bootstrap
+      </a>
+    </nav>
+
 **HTTP Request**::
 
     mySampleText='<nav class="navbar navbar-light bg-light">\n  <a class="navbar-brand" href="#">\n    <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">\n    Bootstrap\n  </a>\n</nav>'
@@ -66,7 +77,7 @@ Run
         curl \
           --header "Content-Type: application/json" \
           --request POST \
-          --data "{\"text\":\"${mySampleTextEscaped}\",\"multiplier\":0.5}" \
+          --data "{\"text\":\"${mySampleTextEscaped}\",\"multiplier\":2}" \
           https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/formattabindent/api)
 
     curlResult=$(echo "${curlResultEscaped}" | sed 's/\\"/"/g') # revert back the added escape symbols
@@ -76,3 +87,14 @@ Run
 **HTTP Response**::
 
     "<nav class="navbar navbar-light bg-light">\n    <a class="navbar-brand" href="#">\n        <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">\n        Bootstrap\n    </a>\n</nav>"
+
+.. code-block::
+    :caption: HTTP Response (displayed)
+    :linenos:
+
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+            Bootstrap
+        </a>
+    </nav>
