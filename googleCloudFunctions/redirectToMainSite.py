@@ -48,6 +48,11 @@ from flask import redirect
 import json
 import requests
 
+PROTOCOL = "http://"
+COMPUTE_ENGINE_INTERNAL_IP = "10.128.0.2"
+TARGET_PATH_TAG = "q"
+SLASH = "/"
+
 def redirectToSite(request):
     """Responds to any HTTP request.
     Args:
@@ -66,13 +71,13 @@ def redirectToSite(request):
         return f'Hello World!'
     """
 
-    PROTOCOL = "http://"
-    COMPUTE_ENGINE_INTERNAL_IP = "10.128.0.2"
+    if request.method == "GET": return handleGet(request)
+    return handlePost(request)
+
+def handleGet(request):
     API_ENDPOINT = "/service/device/ipinfo/api/?who=server"
     SERVER_TAG = "server"
     IP_ADDRESS_TAG = "ip_addr"
-    TARGET_PATH_TAG = "q"
-    SLASH = "/"
 
     apiRequest = PROTOCOL + COMPUTE_ENGINE_INTERNAL_IP + API_ENDPOINT
     response = requests.get(apiRequest)
@@ -84,3 +89,41 @@ def redirectToSite(request):
     targetSite = PROTOCOL + computeEngineExternalIp + targetPath
 
     return redirect(targetSite)
+
+def handlePost(request):
+    targetPath = SLASH + request.args.get(TARGET_PATH_TAG, "").lstrip(SLASH)
+    targetSite = PROTOCOL + COMPUTE_ENGINE_INTERNAL_IP + targetPath
+
+    # Accept is like
+    #     Here is my request and I would like (to Accept) this response format
+    # Content-Type is like
+    #     Here is my request (or response) and this (Content-Type) is the format of the content I am
+    #     sending in my request (or response)
+    targetHeaders = {'Content-Type': 'application/json', 'Accept':'application/json'}
+
+    requestData = None
+    content_type = request.headers['content-type']
+    if content_type == 'application/json':
+        requestData = request.get_json(silent=True)
+    elif content_type == 'application/octet-stream':
+        requestData = request.data
+    elif content_type == 'text/plain':
+        requestData = request.data
+    elif content_type == 'application/x-www-form-urlencoded':
+        requestData = request.form
+    else:
+        raise ValueError("Unknown content type: {}".format(content_type))
+
+    print("handlePost content_type", content_type)
+    print("handlePost requestData", type(requestData), requestData)
+
+    response = requests.post(targetSite,
+                            params = request.args,
+                            headers = targetHeaders, # headers = request.headers,
+                            data = json.dumps(requestData))
+    # or
+    # response = requests.post(targetSite, params = request.args, headers = targetHeaders, json = requestData)
+    # or
+    # response = requests.post(targetSite, params = request.args, json = requestData)
+
+    return response.content # response.json()
