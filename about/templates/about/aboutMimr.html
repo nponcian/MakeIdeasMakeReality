@@ -63,7 +63,7 @@
                 <div id="techGimpInfo" class="collapse" aria-labelledby="techGimp" data-parent="#techStack"> <!-- class="collapse show" --> <div class="card-body bg-light text-dark">Image manipulation program<br><br>Ohh wait, did I just repeat the heading?</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
-                <div class="card-header" id="techPillow"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPillowInfo" aria-expanded="true" aria-controls="techPillowInfo">Pillow <i class="far fa-file-image mimr-text-pink"></i></button></div>
+                <div class="card-header" id="techPillow"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPillowInfo" aria-expanded="true" aria-controls="techPillowInfo">Python: Pillow <i class="far fa-file-image mimr-text-pink"></i></button></div>
                 <div id="techPillowInfo" class="collapse" aria-labelledby="techPillow" data-parent="#techStack"><div class="card-body bg-light text-dark">Python library for manipulating images<br><br>Wait, did I just reword my definition for GIMP?</div></div>
             </div>
             <!-- TODO: Esto es muy muy malo! Muchos ajustes manuales! Store all this items in a PostgreSQL database and let Django view-template do the balancing. -->
@@ -112,8 +112,12 @@
                 <div id="techFontAwesomeInfo" class="collapse" aria-labelledby="techFontAwesome" data-parent="#techStack"><div class="card-body bg-light text-dark">As the name suggests, Font Awesome. Or awesome fonts, or maybe awesome icons, or Icon Awesome?</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
+                <div class="card-header" id="techSphinx"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techSphinxInfo" aria-expanded="true" aria-controls="techSphinxInfo">Sphinx <i class="far fa-eye text-info"></i></button></div>
+                <div id="techSphinxInfo" class="collapse" aria-labelledby="techSphinx" data-parent="#techStack"><div class="card-body bg-light text-dark">Tool that translates .rst (reStructuredText) source files into .html format. Used for writing and building the documentation of the project.</div></div>
+            </div>
+            <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techPostman"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPostmanInfo" aria-expanded="true" aria-controls="techPostmanInfo">Postman <i class="fas fa-exchange-alt mimr-text-tomato"></i></button></div>
-                <div id="techPostmanInfo" class="collapse" aria-labelledby="techPostman" data-parent="#techStack"><div class="card-body bg-light text-dark">Send HTTP requests to the server via the REST APIs.<br><br>For simpler HTTP requests such as GET (list / retrieve) operations, other technologies such as curl and Python-requests are also used.</div></div>
+                <div id="techPostmanInfo" class="collapse" aria-labelledby="techPostman" data-parent="#techStack"><div class="card-body bg-light text-dark">Send HTTP requests to the server via the REST APIs.<br><br>Other tools such as curl, Python: requests, and Mozilla Firefox (of course!) are also used.</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techGcpIam"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techGcpIamInfo" aria-expanded="true" aria-controls="techGcpIamInfo">Google Cloud: IAM <i class="far fa-id-badge mimr-text-dodgerblue"></i></button></div>
@@ -153,11 +157,19 @@
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techPython3Venv"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techPython3VenvInfo" aria-expanded="true" aria-controls="techPython3VenvInfo">python3-venv <i class="fab fa-docker text-info"></i></button></div>
-                <div id="techPython3VenvInfo" class="collapse" aria-labelledby="techPython3Venv" data-parent="#techStack"><div class="card-body bg-light text-dark">Creates isolated Python virtual environments.<br><br>No, this is not Docker.</div></div>
+                <div id="techPython3VenvInfo" class="collapse" aria-labelledby="techPython3Venv" data-parent="#techStack"><div class="card-body bg-light text-dark">Can you imagine a world where you have to manually upgrade / downgrade applications based on project? A world where changes in the dependencies of 1 project affected the others? Well, not gonna happen here on Earth!<br><br>No, this is not Docker.</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
-                <div class="card-header" id="techDjango"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techDjangoInfo" aria-expanded="true" aria-controls="techDjangoInfo">django <i class="fas fa-laptop-code mimr-text-gold"></i></button></div>
-                <div id="techDjangoInfo" class="collapse" aria-labelledby="techDjango" data-parent="#techStack"><div class="card-body bg-light text-dark">Python-based web framework</div></div>
+                <div class="card-header" id="techDjango"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techDjangoInfo" aria-expanded="true" aria-controls="techDjangoInfo">Django <i class="fas fa-laptop-code mimr-text-gold"></i></button></div>
+                <div id="techDjangoInfo" class="collapse" aria-labelledby="techDjango" data-parent="#techStack"><div class="card-body bg-light text-dark">Python-based web framework. Works in the backend and performs the rendering of the dynamic web pages and processing of the HTTP requests.</div></div>
+            </div>
+            <div class="card bg-dark border border-light flex-fill">
+                <div class="card-header" id="techFlask"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techFlaskInfo" aria-expanded="true" aria-controls="techFlaskInfo">Flask <i class="fas fa-pepper-hot text-white"></i></button></div>
+                <div id="techFlaskInfo" class="collapse" aria-labelledby="techFlask" data-parent="#techStack"><div class="card-body bg-light text-dark">Python-based web framework. Used in Google Cloud Function to perform redirection of HTTP GET requests and forwarding of HTTP POST requests to the target REST APIs.</div></div>
+            </div>
+            <div class="card bg-dark border border-light flex-fill">
+                <div class="card-header" id="techDjangoRest"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techDjangoRestInfo" aria-expanded="true" aria-controls="techDjangoRestInfo">Django: restframework <i class="fas fa-bed text-danger"></i></button></div>
+                <div id="techDjangoRestInfo" class="collapse" aria-labelledby="techDjangoRest" data-parent="#techStack"><div class="card-body bg-light text-dark">What if I told you that you don't have to manually write code for each of the CRUD operations for each of your models for each type of HTTP method for each content-type available in the wild? Magical indeed!</div></div>
             </div>
             <div class="card bg-dark border border-light flex-fill">
                 <div class="card-header" id="techDjangoStorages"><button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#techDjangoStoragesInfo" aria-expanded="true" aria-controls="techDjangoStoragesInfo">django-storages <i class="fas fa-coins mimr-text-yellowgreen"></i></button></div>
