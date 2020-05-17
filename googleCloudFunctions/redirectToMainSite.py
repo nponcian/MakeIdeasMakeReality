@@ -123,12 +123,13 @@ def handleGet(request):
     computeEngineExternalIp = externalIpDict[SERVER_TAG][IP_ADDRESS_TAG]
 
     targetPath = SLASH + request.args.get(TARGET_PATH_TAG, "").lstrip(SLASH).rstrip(SLASH)
-    targetSite = PROTOCOL + computeEngineExternalIp + targetPath
+    internalSite = PROTOCOL + COMPUTE_ENGINE_INTERNAL_IP + targetPath
+    externalSite = PROTOCOL + computeEngineExternalIp + targetPath
 
-    if not targetSite.endswith(API_URL_END): return redirect(targetSite)
+    if not targetPath.endswith(API_URL_END): return redirect(externalSite)
 
     targetHeaders = {'Content-Type': 'application/json', 'Accept':'application/json'}
-    response = requests.get(targetSite,
+    response = requests.get(internalSite,
                             params = request.args,
                             headers = targetHeaders)
     return jsonify(response.json())
