@@ -43,7 +43,43 @@
 # 7. Compute Engine returns its external IP address to the Cloud Function
 # 8. Cloud Function redirects the client to the current external IP of the MakeIdeasMakeReality website
 
-from flask import redirect
+'''
+# SAMPLE TEST
+import json
+import requests
+
+url = "https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/commonword/api"
+headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
+requestData =\
+    {
+        "text":"You are/somebody that I don`t all. ..all... all know\nBut you`re takin` shots at me like./ it`s Patron;And I`m just like, .all damn, (it`s 7 AM)\nSay it:in|the_street, [that`s a knock-out]\nBut you. say (it in} a Tweet, that`s a cop-out\nAnd I`m just like, Hey,\tare you okay? {7 AM}",
+        # "urls":["https://en.wikipedia.org/wiki/Atomic_bombings_of_Hiroshima_and_Nagasaki","https://www.lyricsfreak.com/b/beatles/when+im+sixty+four_10026687.html","https://www.django-rest-framework.org/api-guide/responses/","https://www.history.com/topics/american-civil-war/gettysburg-address"],
+        "include":"letters_digits_nonsplittersymbols",
+        "order":"decreasing",
+        "ignore":["please","remove","this","__DEFAULT__","word"]
+    }
+
+response = requests.post(url, data = json.dumps(requestData), headers = headers)
+# or
+# response = requests.post(url, json = requestData)
+
+print("POST response", response.json())
+print()
+print("POST response", response.content)
+print()
+print("POST response", response.text)
+
+# Sample Output (start)
+# nponcian makeIdeasMakeReality$ python3 send.py
+# POST response [{'all': 4}, {'like': 3}, {'7': 2}, {'am': 2}, {'i`m': 2}, {'it`s': 2}, {'just': 2}, {'say': 2}, {'that`s': 2}, {'cop-out': 1}, {'damn': 1}, {'don`t': 1}, {'hey': 1}, {'knock-out': 1}, {'know': 1}, {'me': 1}, {'okay': 1}, {'patron': 1}, {'shots': 1}, {'somebody': 1}, {'takin`': 1}, {'the_street': 1}, {'tweet': 1}, {'you`re': 1}]
+#
+# POST response b'[{"all":4},{"like":3},{"7":2},{"am":2},{"i`m":2},{"it`s":2},{"just":2},{"say":2},{"that`s":2},{"cop-out":1},{"damn":1},{"don`t":1},{"hey":1},{"knock-out":1},{"know":1},{"me":1},{"okay":1},{"patron":1},{"shots":1},{"somebody":1},{"takin`":1},{"the_street":1},{"tweet":1},{"you`re":1}]\n'
+#
+# POST response [{"all":4},{"like":3},{"7":2},{"am":2},{"i`m":2},{"it`s":2},{"just":2},{"say":2},{"that`s":2},{"cop-out":1},{"damn":1},{"don`t":1},{"hey":1},{"knock-out":1},{"know":1},{"me":1},{"okay":1},{"patron":1},{"shots":1},{"somebody":1},{"takin`":1},{"the_street":1},{"tweet":1},{"you`re":1}]
+# Sample Output (end)
+'''
+
+from flask import jsonify, redirect
 
 import json
 import requests
@@ -109,7 +145,7 @@ def handlePost(request):
         requestData = request.data
     elif content_type == 'text/plain':
         requestData = request.data
-    elif content_type == 'application/x-www-form-urlencoded':
+    elif content_type == 'application/x-www-form-urlencoded' or "form-data" in content_type:
         requestData = request.form
     else:
         raise ValueError("Unknown content type: {}".format(content_type))
@@ -126,4 +162,6 @@ def handlePost(request):
     # or
     # response = requests.post(targetSite, params = request.args, json = requestData)
 
-    return response.content # response.json()
+    # return response.json() # doesn't work
+    # return response.content # works
+    return jsonify(response.json())
