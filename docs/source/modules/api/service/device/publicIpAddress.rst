@@ -14,7 +14,7 @@ Get the public IP address of your device.
 Endpoint
 --------
 
-https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/device/ipinfo/api
+<SERVER_URL>/service/device/ipinfo/api
 
 HTTP Method
 -----------
@@ -24,14 +24,36 @@ GET
 Parameters
 ----------
 
-None
+* ``who`` (optional, default is ``client``)
+
+    Type
+        string
+
+    Description
+        Whose IP address you want to get.
+
+    Supported values:
+        * client
+            Request the IP Address of the client.
+
+        * server
+            Request the IP Address of the server.
+
+    Example
+        .. code-block::
+
+            ?who=client
 
 Run
 ---
 
 **HTTP Request**::
 
-    curl https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/device/ipinfo/api
+    response=$(curl "https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/device/ipinfo/api&who=server")
+
+    serverIp=$(echo "${response}" | tr -dc '0-9.')
+
+    curl ${serverIp}/service/device/ipinfo/api?who=client # "?who=client" is optional
 
 **HTTP Response**::
 
