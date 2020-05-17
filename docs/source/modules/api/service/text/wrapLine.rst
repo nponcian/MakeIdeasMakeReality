@@ -112,7 +112,7 @@ Run
       --header "Content-Type: application/json" \
       --request POST \
       --data '{"text":"        # Enter paragraph here\n        # Sample paragraph\n        # Wrap the overflowing lines at point 11 to adjust for the indent and the tag #\n        # This is a line, containing exactly 100 characters, try to count this and you would get 100\n        # This is another line containing more than 100 characters, do not manually count it, that is time consuming, use a text editor!\n        # This is again another line, I would catch overflowing characters above, but even me would also overflow so let the next line handle me\n        # Okay fine, I would catch their overflows here. Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,thatistimeconsuming,useatexteditor!Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,thatistimeconsuming,useatexteditor!","maxLineLength":100,"rotationPoint":11,"operation":"limit"}' \
-      https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/ciphermessage/api
+      https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/wrapline/api
 
 **HTTP Response**::
 
@@ -142,7 +142,7 @@ Run
       --header "Content-Type: application/json" \
       --request POST \
       --data '{"text":"        # Enter paragraph here\n        # Sample paragraph\n        # Wrap the overflowing lines at point 11 to adjust for the indent and the tag #\n        # This is a line, containing exactly 100 characters, try to count this and you would get 100\n        # This is another line containing more than 100 characters, do not manually count it, that is time consuming, use a text editor!\n        # This is again another line, I would catch overflowing characters above, but even me would also overflow so let the next line handle me\n        # Okay fine, I would catch their overflows here. Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,thatistimeconsuming,useatexteditor!Thisisaseriesofwordscontainingmorethan100charactersWITHOUTspaces,donotmanuallycountit,thatistimeconsuming,useatexteditor!","maxLineLength":100,"rotationPoint":11,"operation":"limit_compress"}' \
-      https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/ciphermessage/api
+      https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=service/text/wrapline/api
 
 **HTTP Response**::
 
