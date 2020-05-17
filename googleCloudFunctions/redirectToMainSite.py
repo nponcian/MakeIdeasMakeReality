@@ -114,6 +114,7 @@ def handleGet(request):
     API_ENDPOINT = "/service/device/ipinfo/api/?who=server"
     SERVER_TAG = "server"
     IP_ADDRESS_TAG = "ip_addr"
+    API_URL_END = "/api"
 
     apiRequest = PROTOCOL + COMPUTE_ENGINE_INTERNAL_IP + API_ENDPOINT
     response = requests.get(apiRequest)
@@ -121,10 +122,16 @@ def handleGet(request):
     externalIpDict = json.loads(response.text)
     computeEngineExternalIp = externalIpDict[SERVER_TAG][IP_ADDRESS_TAG]
 
-    targetPath = SLASH + request.args.get(TARGET_PATH_TAG, "").lstrip(SLASH)
+    targetPath = SLASH + request.args.get(TARGET_PATH_TAG, "").lstrip(SLASH).rstrip(SLASH)
     targetSite = PROTOCOL + computeEngineExternalIp + targetPath
 
-    return redirect(targetSite)
+    if not targetSite.endswith(API_URL_END): return redirect(targetSite)
+
+    targetHeaders = {'Content-Type': 'application/json', 'Accept':'application/json'}
+    response = requests.get(targetSite,
+                            params = request.args,
+                            headers = targetHeaders)
+    return jsonify(response.json())
 
 def handlePost(request):
     targetPath = SLASH + request.args.get(TARGET_PATH_TAG, "").lstrip(SLASH)
