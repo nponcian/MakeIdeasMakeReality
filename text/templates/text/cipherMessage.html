@@ -24,7 +24,7 @@
 
 {% block body %}
 
-{% include "needHelp.html" with staticChildPath="docs/build/html/modules/api/service/text/cipherMessage.html" %}
+<div class="mt-2 text-center text-muted font-italic">Need <a href="{% static 'docs/build/html/modules/api/service/text/cipherMessage.html' %}" target="_blank">help?</a></div>
 
 <form class="m-4 serviceForm" method="POST" action="." data-url="/service/text/ciphermessage/api/" data-result="#formattedText"> {% csrf_token %}
     <div class="btn-group btn-group-lg" role="group" aria-label="Cipher method">
