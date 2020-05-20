@@ -52,7 +52,7 @@ url = "https://us-central1-makeideasmakereality.cloudfunctions.net/mimr?q=servic
 headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
 requestData =\
     {
-        "text":"You are/somebody that I don`t all. ..all... all know\nBut you`re takin` shots at me like./ it`s Patron;And I`m just like, .all damn, (it`s 7 AM)\nSay it:in|the_street, [that`s a knock-out]\nBut you. say (it in} a Tweet, that`s a cop-out\nAnd I`m just like, Hey,\tare you okay? {7 AM}",
+        "text":"You are/somebody that I don`t know\nBut you`re takin` shots at me like it`s Patron;And I`m just like, damn, (it`s 7 AM)\nSay it:in|the_street, [that`s a knock-out]\nBut you. say (it in} a Tweet, that`s a cop-out\nAnd I`m just like, Hey,\tare you okay? {7 AM}",
         # "urls":["https://en.wikipedia.org/wiki/Atomic_bombings_of_Hiroshima_and_Nagasaki","https://www.lyricsfreak.com/b/beatles/when+im+sixty+four_10026687.html","https://www.django-rest-framework.org/api-guide/responses/","https://www.history.com/topics/american-civil-war/gettysburg-address"],
         "include":"letters_digits_nonsplittersymbols",
         "order":"decreasing",

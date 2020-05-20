@@ -52,9 +52,9 @@ Parameters
     Supported file formats
         #. Plain text-based file formats such as UTF-8 and ASCII text. Examples are .txt, .py, .cpp, .gitignore, .go, .html, .css, .js, .sh, and much more.
 
-        .. note::
+        .. warning::
 
-            PDF, MS Office (DOC, PPT, XLS, etc.), images (JPEG, PNG, etc.), audio, and video are not yet supported, but there is a plan to support them! Separate dedicated services that are focused on solely getting the text from its assigned types would be used.
+            PDF, MS Office (DOC, PPT, XLS, etc.), images (JPEG, PNG, etc.), audio, and video are not yet supported, but soon they will be! Separate dedicated services that are focused on solely getting the text from its assigned types would be developed.
 
 * ``urls`` (optional, default is ``[]``)
 
