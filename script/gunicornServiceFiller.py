@@ -26,12 +26,6 @@ YES = "y"
 NO = "n"
 DISPLAY = "d"
 
-def displayEnvVariables():
-    with open(ENVIRONMENT_VARIABLES_FILE) as envVariablesFile:
-        print("Environment variables in", ENVIRONMENT_VARIABLES_FILE)
-        for line in envVariablesFile.readlines():
-            print(TAB + line.strip())
-
 def isGunicornVariable(line):
     return line.strip().startswith(GUNICORN_VARIABLE_PREFIX)
 
@@ -70,25 +64,11 @@ def updateGunicornFromEnvVariables(envVariablesDict):
 def displayChangedLines(changedPairs):
     print("Count of updated lines in", GUNICORN_SERVICE_FILE, ":", len(changedPairs))
     for ctr, pair in enumerate(changedPairs, 1):
-        print(ctr, end = ".\n")
+        print("[", ctr, "]")
         print(TAB + "From:", pair[0].strip())
         print(TAB + "To:  ", pair[1].strip())
 
-response = DISPLAY
-while response == DISPLAY:
-    print("Do you wish to update the gunicorn.service file with the values set in",
-            ENVIRONMENT_VARIABLES_FILE, "?")
-    print(YES, "- yes")
-    print(NO, "- no")
-    print(DISPLAY, "- display", ENVIRONMENT_VARIABLES_FILE)
-    print(INPUT_REQUEST_PREFIX, end = " ")
-    response = input().strip().casefold()
-
-    if response == DISPLAY:
-        displayEnvVariables()
-    elif response == YES:
-        envVariablesDict = getGunicornVariablesDict()
-        changedPairs = updateGunicornFromEnvVariables(envVariablesDict)
-        displayChangedLines(changedPairs)
-    else:
-        print("Variables left unchanged in", GUNICORN_SERVICE_FILE)
+print("Updating", GUNICORN_SERVICE_FILE, "with the values set in", ENVIRONMENT_VARIABLES_FILE)
+envVariablesDict = getGunicornVariablesDict()
+changedPairs = updateGunicornFromEnvVariables(envVariablesDict)
+displayChangedLines(changedPairs)
