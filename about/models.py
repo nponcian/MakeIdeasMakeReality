@@ -7,4 +7,4 @@ class MovieEmbed(models.Model):
     url= models.URLField(max_length=250)
 
 class TechStack(models.Model):
-    pass
+    name = models.CharField(max_length=100)
