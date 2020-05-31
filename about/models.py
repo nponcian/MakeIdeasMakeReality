@@ -8,3 +8,4 @@ class MovieEmbed(models.Model):
 
 class TechStack(models.Model):
     name = models.CharField(max_length=100)
+    description = models.TextField()
