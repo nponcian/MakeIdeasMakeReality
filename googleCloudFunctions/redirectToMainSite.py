@@ -82,6 +82,7 @@ print("POST response", response.text)
 from flask import jsonify, redirect
 
 import json
+import os
 import requests
 
 PROTOCOL = "http://"
@@ -107,8 +108,26 @@ def redirectToSite(request):
         return f'Hello World!'
     """
 
-    if request.method == "GET": return handleGet(request)
-    return handlePost(request)
+    if os.environ.get('IS_SERVER_ON') == "False":
+        return handleServerIsOff()
+
+    return handlePost(request) if request.method == "POST" else handleGet(request)
+
+def handleServerIsOff():
+    return """
+        <style>
+            .black{color:black;}
+            .red{color:red;}
+            .gold{color:gold;}
+            .overunderline{text-decoration:underline overline;}
+            .fit-image{width:75%; overflow:hidden}
+        </style>
+        <h1><em class='black'>Oooops! I temporarily turned off my web application to not incur any cost ;)</em></h1>
+        <h2><code class='red'>Maybe you're interested in the <a href="https://github.com/nponcian/makeIdeasMakeReality" target="_blank">code</a>?</code></h2>
+        <h2><strong class='gold'>If you really wish to raise the web app from the <span class="overunderline">| underworld |</span>, feel free to send <a href='https://www.linkedin.com/in/nielgodfreyponciano' target="_blank">Hades</a> a message :)</strong></h3>
+        <br>
+        <img class="fit-image" src="https://media1.tenor.com/images/cfe5abbc161a4f7e2d15afd09e51b8d0/tenor.gif?itemid=15839898">
+        """
 
 def handleGet(request):
     API_ENDPOINT = "/service/device/ipinfo/api/?who=server"
