@@ -1,8 +1,12 @@
 #!/usr/bin/bash
 
-# Remember that when copying files, retain the timestamps!
+# Notes
+# 1. Remember that when copying files, retain the timestamps!
 #     cp -p src_file dest_file
 #     cp -pr src_dir dest_dir
+# 2. For directories or files that have the same contents but different timestamps
+#     touch file1 file2
+#     touch dir1 dir2
 
 ALLOWED_COMPARISONS_COUNT=2
 
